@@ -1,6 +1,6 @@
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 
-const storyImg = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFvWRk7Lpupl4IVx8EBS0UqkrZXyls-O6d-0kAuosFAO0dHmXvbWISgs5AN55lsTi7p3WJ-K7Kxmx8-mw5ETKIoSjwRNeH77_Cbb-VYNhbNRyUm1WTo2HoAPoj8m547CAGWZ8tSBr6IH01CycEqSo0V0azZIqfmm6VS3zYy8E6j4bkfSjOjbSBTuas2Y9da78Zz3GS3SCsivX96v0buWDXI7UNWIIHgvTZDFQ5fjEzJPEMfMduz-oPg0bIbZFj0gXFBX8ETcFBNNY'
+const storyImg = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFvWRk7Lpupl4IVx8EBS0UqkrZXyls-O6d-0kAuosFAO0dHmXvbWISgs5AN55lsTi7p3WJ-K7Kxmx8-mw5ETKIoSjwRNeH77_Cbb-VYNhbNRyUm1WTo2HoAPoj8m547CAGWZ8tSBr6IH01CycEqSo0V0azZIqfmm6VS3zYy8E6j4bkfSjOjbSBTuas2Y9da78Zz3GS3SCsivX96v0buWDXI7UNWIIHgvTZDFQ5fjEzJPEMfMduz-oPg0bIbZFj0gXFBX8ETcFBNNY=s0'
 
 export default function StorySection() {
   const ref = useScrollReveal<HTMLElement>()
