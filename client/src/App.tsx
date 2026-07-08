@@ -1,11 +1,22 @@
 import { useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthStore } from './stores/authStore'
 import Layout from './components/layout/Layout'
 import AuthLayout from './components/auth/AuthLayout'
+import AdminLayout from './components/admin/AdminLayout'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import AdminDashboard from './pages/admin/AdminDashboard'
+import AdminProducts from './pages/admin/AdminProducts'
+
+function AdminGuard({ children }: { children: React.ReactNode }) {
+  const { user, isAuthenticated } = useAuthStore()
+  if (!isAuthenticated || user?.role !== 'ADMIN') {
+    return <Navigate to="/login" replace />
+  }
+  return <>{children}</>
+}
 
 function App() {
   const checkAuth = useAuthStore((s) => s.checkAuth)
@@ -23,6 +34,16 @@ function App() {
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+        </Route>
+        <Route
+          element={
+            <AdminGuard>
+              <AdminLayout />
+            </AdminGuard>
+          }
+        >
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/products" element={<AdminProducts />} />
         </Route>
       </Routes>
     </BrowserRouter>

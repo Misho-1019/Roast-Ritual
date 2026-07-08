@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Roast &amp; Ritual | Artisanal Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#48290f",
+                        "primary-fixed": "#ffddae",
+                        "mocha-text": "#B8A89A",
+                        "inverse-surface": "#e9e1dc",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#f5bd64",
+                        "on-primary-container": "#553800",
+                        "error": "#ffb4ab",
+                        "chestnut": "#7C4F34",
+                        "tertiary-fixed": "#ffdcc4",
+                        "surface-container": "#231f1c",
+                        "surface-container-low": "#1e1b18",
+                        "inverse-primary": "#7f5600",
+                        "outline": "#9c8f7e",
+                        "surface-variant": "#383431",
+                        "on-secondary": "#4b270f",
+                        "secondary-fixed": "#ffdbc9",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#57361b",
+                        "on-background": "#e9e1dc",
+                        "error-container": "#93000a",
+                        "surface-cream": "#F5F0EB",
+                        "on-primary-fixed": "#281800",
+                        "background": "#0D0A08",
+                        "tertiary-container": "#ce9f7d",
+                        "primary": "#f5bd64",
+                        "surface-tint": "#f5bd64",
+                        "secondary": "#f6b998",
+                        "outline-variant": "#4f4537",
+                        "surface-container-lowest": "#110e0b",
+                        "caramel": "#A67B5B",
+                        "espresso": "#1C1512",
+                        "surface-bright": "#3d3835",
+                        "on-tertiary-fixed-variant": "#613f24",
+                        "on-primary-fixed-variant": "#604100",
+                        "tertiary-fixed-dim": "#efbc98",
+                        "on-secondary-fixed-variant": "#663d23",
+                        "on-secondary-container": "#e6ac8b",
+                        "on-surface-variant": "#d3c4b2",
+                        "secondary-container": "#693f25",
+                        "inverse-on-surface": "#34302d",
+                        "tertiary": "#efbc98",
+                        "surface-container-high": "#2d2927",
+                        "primary-container": "#d4a04a",
+                        "secondary-fixed-dim": "#f6b998",
+                        "surface": "#0D0A08",
+                        "on-secondary-fixed": "#321301",
+                        "on-surface": "#e9e1dc",
+                        "surface-dim": "#161310",
+                        "surface-container-highest": "#383431",
+                        "on-tertiary-fixed": "#2f1501",
+                        "on-primary": "#432c00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "1.5rem",
+                        "section-gap-mobile": "4rem",
+                        "container-max": "1400px",
+                        "edge-margin": "2rem",
+                        "section-gap-desktop": "8rem"
+                    },
+                    "fontFamily": {
+                        "h1": ["Inter"],
+                        "small": ["Public Sans"],
+                        "body-bold": ["Inter"],
+                        "display": ["Inter"],
+                        "label-caps": ["Public Sans"],
+                        "display-mobile": ["Inter"],
+                        "body": ["Inter"],
+                        "h2": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "small": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "body-bold": ["16px", {"lineHeight": "1.6", "fontWeight": "700"}],
+                        "display": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.15em", "fontWeight": "500"}],
+                        "display-mobile": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0D0A08;
+            color: #F5F0EB;
+            font-family: 'Inter', sans-serif;
+        }
+        .coffee-pattern {
+            background-image: radial-gradient(#1C1512 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.2;
+        }
+        .atmospheric-glow {
+            background: radial-gradient(circle at 50% 50%, rgba(212, 160, 74, 0.05) 0%, transparent 70%);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-border {
+            box-shadow: inset -4px 0 0 0 #f5bd64;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-hidden">
+<!-- Atmospheric Layer -->
+<div class="fixed inset-0 coffee-pattern pointer-events-none"></div>
+<div class="fixed inset-0 atmospheric-glow pointer-events-none"></div>
+<div class="flex h-screen overflow-hidden relative z-10">
+<!-- SideNavBar - JSON Command Executed -->
+<aside class="bg-espresso dark:bg-espresso font-body text-body h-screen w-64 fixed left-0 top-0 bg-espresso border-r border-outline-variant flex flex-col h-full py-8 px-4">
+<div class="mb-10 px-2">
+<h1 class="font-display text-h2 text-primary">Roast &amp; Ritual</h1>
+<p class="text-mocha-text text-small uppercase tracking-widest mt-1">Artisanal Coffee</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-4 py-3 rounded-lg text-primary font-body-bold border-r-2 border-primary bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-mocha-text font-body hover:text-primary hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3">inventory_2</span>
+<span>Products</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-mocha-text font-body hover:text-primary hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3">receipt_long</span>
+<span>Orders</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-mocha-text font-body hover:text-primary hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+<span>Customers</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-mocha-text font-body hover:text-primary hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-mocha-text font-body hover:text-primary hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-8 border-t border-outline-variant space-y-1">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-body-bold mb-6 hover:brightness-110 active:scale-95 transition-all">
+                    Create Order
+                </button>
+<a class="flex items-center px-4 py-2 text-mocha-text font-body hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">help</span>
+<span>Help</span>
+</a>
+<a class="flex items-center px-4 py-2 text-mocha-text font-body hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 flex-1 flex flex-col h-full overflow-y-auto scrollbar-hide">
+<!-- TopAppBar - JSON Command Executed -->
+<header class="bg-surface/95 dark:bg-surface/95 font-body text-body docked full-width top-0 sticky backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-edge-margin h-20 z-20">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-12 pr-4 py-2.5 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all" placeholder="Search orders, rituals, or stock..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-6">
+<nav class="hidden lg:flex items-center space-x-8 mr-8 border-r border-outline-variant pr-8">
+<a class="text-on-surface-variant hover:text-primary transition-all font-medium" href="#">Inventory</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-medium" href="#">Wholesale</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-medium" href="#">Rituals</a>
+</nav>
+<button class="relative text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="flex items-center space-x-3 cursor-pointer group">
+<div class="text-right hidden sm:block">
+<p class="text-body-bold text-on-surface leading-tight">Admin</p>
+<p class="text-small text-mocha-text leading-tight">Elite Roaster</p>
+</div>
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden group-hover:border-primary transition-colors">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a sophisticated middle-aged barista or roaster in a premium dark canvas apron. They have a refined, calm expression, lit with warm side-lighting that highlights their experience and authority. The background is a blurred high-end coffee shop with dark wood textures and espresso machines, consistent with a luxury coffee brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAzvfP62RSZzgSrY8tgaMv6q34Cbvs7fp5Uz1U-8rdPMiCmSqkE_rSepWOOf0rXonYS9AWz74SlFOQfhNaAfjuAZn15PmcU7NkpMTVBh4rBywrnaeKvDVqO0-Btj7G9lxcni11ID9kq_sfwnCWcgWjfehlgkkSkVRPF031SWfPEnvlHJKcHfbgyrCAwwej2b0NC9ohqnGxjqGt8zeAGnzyfum3gKQvAm84ev4L3mBeLECI8rQxiBDUznkDJanFriZ0qiVKYKqcYc0"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<section class="p-edge-margin space-y-gutter relative">
+<!-- Background Decorative Element -->
+<div class="absolute right-0 bottom-0 opacity-[0.03] pointer-events-none select-none">
+<span class="material-symbols-outlined !text-[500px]" style="font-variation-settings: 'FILL' 1;">coffee</span>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Total Revenue -->
+<div class="bg-espresso border border-chestnut rounded-lg p-6 flex flex-col justify-between group hover:border-primary transition-colors duration-500">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container rounded-lg text-primary">
+<span class="material-symbols-outlined">local_cafe</span>
+</div>
+<span class="text-green-500 text-small font-medium">+12.5%</span>
+</div>
+<div>
+<p class="text-mocha-text text-small font-medium mb-1">Total Revenue</p>
+<h3 class="text-h2 text-primary font-bold tracking-tight">$12,450</h3>
+</div>
+</div>
+<!-- Active Orders -->
+<div class="bg-espresso border border-chestnut rounded-lg p-6 flex flex-col justify-between group hover:border-primary transition-colors duration-500">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container rounded-lg text-primary">
+<span class="material-symbols-outlined">coffee_maker</span>
+</div>
+<span class="text-mocha-text text-small font-medium">8 Pending</span>
+</div>
+<div>
+<p class="text-mocha-text text-small font-medium mb-1">Active Orders</p>
+<h3 class="text-h2 text-on-surface font-bold tracking-tight">23</h3>
+</div>
+</div>
+<!-- Total Products -->
+<div class="bg-espresso border border-chestnut rounded-lg p-6 flex flex-col justify-between group hover:border-primary transition-colors duration-500">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container rounded-lg text-primary">
+<span class="material-symbols-outlined">vibration</span>
+</div>
+<span class="text-mocha-text text-small font-medium">4 Roast Levels</span>
+</div>
+<div>
+<p class="text-mocha-text text-small font-medium mb-1">Total Products</p>
+<h3 class="text-h2 text-on-surface font-bold tracking-tight">156</h3>
+</div>
+</div>
+<!-- New Customers -->
+<div class="bg-espresso border border-chestnut rounded-lg p-6 flex flex-col justify-between group hover:border-primary transition-colors duration-500">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container rounded-lg text-primary">
+<span class="material-symbols-outlined">air</span>
+</div>
+<span class="text-green-500 text-small font-medium">+24%</span>
+</div>
+<div>
+<p class="text-mocha-text text-small font-medium mb-1">New Customers</p>
+<h3 class="text-h2 text-on-surface font-bold tracking-tight">89</h3>
+</div>
+</div>
+</div>
+<!-- Products Table Section (Bento Grid Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Top Products Table -->
+<div class="lg:col-span-2 bg-espresso border border-outline-variant rounded-lg overflow-hidden flex flex-col">
+<div class="px-6 py-5 border-b border-outline-variant flex justify-between items-center">
+<h2 class="text-body-bold text-on-surface">Premium Inventory</h2>
+<button class="text-primary text-small font-medium hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto scrollbar-hide">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-mocha-text text-label-caps uppercase">
+<tr>
+<th class="px-6 py-3">Product</th>
+<th class="px-6 py-3">Price</th>
+<th class="px-6 py-3">Stock</th>
+<th class="px-6 py-3">Status</th>
+<th class="px-6 py-3 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-lg bg-surface-variant overflow-hidden border border-outline-variant group-hover:border-primary transition-all shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLstZZkWJJSa1Hl1nnbZJglznlSOZGhyn62W2phTT4VqeG56ZjSCD1ysTyGFV02QN4oP-ThMEQZOffXzgy49zTrYR8omsHxTaK5sS87YK3sodClSLdvgizv6zdRuA1SrLw7PHWBPrq3JFTQ-seyfpLWvmhjtcHBpaVnDDH9VPdj4Qg6-HIVyetOGYeDuYd1jdYbDIIjDI3I_06JPseeCIixXgBMvWcsLF7xLeXESIdvSRQZ5zezIJKlKQqM"/>
+</div>
+<div class="min-w-0">
+<p class="text-body-bold text-on-surface truncate">Midnight Velvet Espresso</p>
+<p class="text-small text-mocha-text truncate">Dark Roast • Sumatra</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface">$28.00</td>
+<td class="px-6 py-4 text-on-surface">42 units</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-primary/10 text-primary text-[10px] uppercase font-bold tracking-wider">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-mocha-text hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-lg bg-surface-variant overflow-hidden border border-outline-variant group-hover:border-primary transition-all shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLs16r2RxDtJ6-wM8kavof-RSube-9QowOVobP5ftKbbccjx9IKdIPnvXBtSZ9OvtZBhnxLwq_6y_dmBEavdvdMQ6FCMMlPsmBuD0VurMCyGYlwHJjH1nOc5StKVdOJxIvnzlEz5L5x3YHXFdMOjDbClZjfHDndvBlXgW9b-RAkwecYa7VRRnVRTSb4eGnmdw2XTjiy--JGrNzdXb7Hhxe3ePwrVgGNk_nYSD3P626G_z_oWsmJdqIrkmkk"/>
+</div>
+<div class="min-w-0">
+<p class="text-body-bold text-on-surface truncate">Highland Ritual Gold</p>
+<p class="text-small text-mocha-text truncate">Medium Roast • Ethiopia</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface">$32.50</td>
+<td class="px-6 py-4 text-on-surface">18 units</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-primary/10 text-primary text-[10px] uppercase font-bold tracking-wider">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-mocha-text hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-lg bg-surface-variant overflow-hidden border border-outline-variant group-hover:border-primary transition-all shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up shot of aromatic roasted coffee beans inside a luxury dark matte bag with minimalist copper lettering. The texture of the beans is rich and glossy. Professional cinematic lighting in a dark room creates high contrast and emphasis on quality, following the Roast and Ritual brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1YIvDS3rK_v6CuQQaAmsoNyZd3oKZvNKSkJQjYqNrBdaIgUpbAB3NJpC0aaPfgFvQ3lv2W68llHocKQ_ZVpn-7AXMZYUQJ33oOapDChuyypKKtdq8zmOXElO9nl3ZMoH8AHVe7JJy-v0-qYQdlbVyTpoTRaLJPQfqFl2GJEvAAglgMUpiNjWDHK7WcaEfeue8OGyWsGNsJiwzlvqJzzk8dqb3jdEZa2q8cQdqufTRu6Qo7n1SEMkdKdBqX_pvZQfD_qesuSIJaeo"/>
+</div>
+<div class="min-w-0">
+<p class="text-body-bold text-on-surface truncate">Copper Creek Blend</p>
+<p class="text-small text-mocha-text truncate">Light Roast • Colombia</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface">$24.00</td>
+<td class="px-6 py-4 text-on-surface">0 units</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-surface-variant text-mocha-text text-[10px] uppercase font-bold tracking-wider">Draft</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-mocha-text hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Customer Spotlight / Small Insight Card -->
+<div class="bg-espresso border border-outline-variant rounded-lg p-6 flex flex-col">
+<h2 class="text-body-bold text-on-surface mb-6">Roasting Schedule</h2>
+<div class="space-y-6">
+<div class="flex items-start space-x-4">
+<div class="w-2 h-2 rounded-full bg-primary mt-2"></div>
+<div>
+<p class="text-body-bold text-on-surface">Batch #802 - Sumatra</p>
+<p class="text-small text-mocha-text">Completion: 14:00 today</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-2 h-2 rounded-full bg-chestnut mt-2"></div>
+<div>
+<p class="text-body-bold text-on-surface">Inventory Audit</p>
+<p class="text-small text-mocha-text">Scheduled for Monday morning</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="w-2 h-2 rounded-full bg-primary mt-2"></div>
+<div>
+<p class="text-body-bold text-on-surface">Wholesale Pickup</p>
+<p class="text-small text-mocha-text">350kg order for 'The Oak Room'</p>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-6">
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant">
+<div class="flex justify-between items-center mb-2">
+<p class="text-small font-medium text-mocha-text">Roaster Capacity</p>
+<p class="text-small font-bold text-primary">82%</p>
+</div>
+<div class="w-full bg-background h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[82%] rounded-full shadow-[0_0_10px_rgba(245,189,100,0.4)]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Orders Section -->
+<div class="bg-espresso border border-outline-variant rounded-lg overflow-hidden">
+<div class="px-6 py-5 border-b border-outline-variant flex justify-between items-center">
+<div class="flex items-center space-x-3">
+<h2 class="text-body-bold text-on-surface">Recent Orders</h2>
+<span class="bg-primary-container/20 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold">LATEST RITUALS</span>
+</div>
+<div class="flex space-x-2">
+<button class="px-3 py-1.5 border border-outline-variant rounded-lg text-small hover:bg-surface-container transition-colors">Export CSV</button>
+</div>
+</div>
+<div class="overflow-x-auto scrollbar-hide">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-mocha-text text-label-caps uppercase">
+<tr>
+<th class="px-6 py-3">Order ID</th>
+<th class="px-6 py-3">Customer</th>
+<th class="px-6 py-3">Date</th>
+<th class="px-6 py-3">Status</th>
+<th class="px-6 py-3 text-right">Total</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="px-6 py-4 font-mono text-small text-primary">#RR-9021</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-chestnut/30 flex items-center justify-center text-primary text-[10px] font-bold">JW</div>
+<span class="text-on-surface font-medium">Julian Weaver</span>
+</div>
+</td>
+<td class="px-6 py-4 text-mocha-text">Oct 12, 2023</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-blue-500/10 text-blue-400 text-[10px] uppercase font-bold tracking-wider">Processing</span>
+</td>
+<td class="px-6 py-4 text-right text-on-surface font-bold">$124.50</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="px-6 py-4 font-mono text-small text-primary">#RR-9020</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-chestnut/30 flex items-center justify-center text-primary text-[10px] font-bold">EH</div>
+<span class="text-on-surface font-medium">Elena Hayes</span>
+</div>
+</td>
+<td class="px-6 py-4 text-mocha-text">Oct 11, 2023</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-green-500/10 text-green-400 text-[10px] uppercase font-bold tracking-wider">Delivered</span>
+</td>
+<td class="px-6 py-4 text-right text-on-surface font-bold">$84.20</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors">
+<td class="px-6 py-4 font-mono text-small text-primary">#RR-9019</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-chestnut/30 flex items-center justify-center text-primary text-[10px] font-bold">MT</div>
+<span class="text-on-surface font-medium">Marcus Thorne</span>
+</div>
+</td>
+<td class="px-6 py-4 text-mocha-text">Oct 11, 2023</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-[10px] uppercase font-bold tracking-wider">Pending</span>
+</td>
+<td class="px-6 py-4 text-right text-on-surface font-bold">$345.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Footer-style credits -->
+<footer class="mt-auto p-edge-margin pt-0">
+<div class="flex justify-between items-center text-mocha-text text-small border-t border-outline-variant/30 pt-8 pb-4">
+<p>© 2023 Roast &amp; Ritual Co. All rights reserved.</p>
+<div class="flex space-x-4">
+<a class="hover:text-primary" href="#">System Status</a>
+<a class="hover:text-primary" href="#">API Docs</a>
+</div>
+</div>
+</footer>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.classList.add('scale-95');
+            });
+            el.addEventListener('mouseup', () => {
+                el.classList.remove('scale-95');
+            });
+            el.addEventListener('mouseleave', () => {
+                el.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>

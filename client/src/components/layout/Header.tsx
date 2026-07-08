@@ -44,6 +44,11 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+          {user?.role === 'ADMIN' && (
+            <Link to="/admin" className="text-primary hover:brightness-110 transition-all font-body text-body font-semibold">
+              Admin
+            </Link>
+          )}
         </nav>
         <div className="flex items-center gap-5">
           <button className="text-on-surface hover:text-primary scale-95 active:scale-90 transition-transform relative">
