@@ -25,7 +25,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   user: null,
   accessToken: null,
   isAuthenticated: false,
-  isLoading: false,
+  isLoading: true,
   error: null,
 
   login: async (email, password) => {
@@ -67,10 +67,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   checkAuth: async () => {
     set({ isLoading: true })
     try {
-      const data = await api.get<{ user: User | null }>('/auth/me')
-      const token = localStorage.getItem('accessToken')
-      if (data.user && token) {
-        set({ user: data.user, accessToken: token, isAuthenticated: true, isLoading: false })
+      const data = await api.get<{ user: User | null; accessToken: string | null }>('/auth/me')
+      if (data.user && data.accessToken) {
+        localStorage.setItem('accessToken', data.accessToken)
+        set({ user: data.user, accessToken: data.accessToken, isAuthenticated: true, isLoading: false })
       } else {
         set({ user: null, accessToken: null, isAuthenticated: false, isLoading: false })
       }

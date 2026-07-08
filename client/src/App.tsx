@@ -11,7 +11,12 @@ import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminProducts from './pages/admin/AdminProducts'
 
 function AdminGuard({ children }: { children: React.ReactNode }) {
-  const { user, isAuthenticated } = useAuthStore()
+  const { user, isAuthenticated, isLoading } = useAuthStore()
+  if (isLoading) {
+    return <div className="min-h-screen bg-background flex items-center justify-center">
+      <span className="material-symbols-outlined animate-spin text-primary">refresh</span>
+    </div>
+  }
   if (!isAuthenticated || user?.role !== 'ADMIN') {
     return <Navigate to="/login" replace />
   }

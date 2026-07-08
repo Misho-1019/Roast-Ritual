@@ -160,7 +160,7 @@ export async function me(req: AuthRequest, res: Response) {
   try {
     const token = req.cookies?.[REFRESH_COOKIE]
     if (!token) {
-      res.json({ user: null })
+      res.json({ user: null, accessToken: null })
       return
     }
 
@@ -170,11 +170,13 @@ export async function me(req: AuthRequest, res: Response) {
     })
 
     if (!stored || stored.expiresAt < new Date()) {
-      res.json({ user: null })
+      res.json({ user: null, accessToken: null })
       return
     }
 
-    res.json({ user: sanitizeUser(stored.user) })
+    const accessToken = generateAccessToken(stored.user.id)
+
+    res.json({ user: sanitizeUser(stored.user), accessToken })
   } catch (error) {
     console.error('Me error:', error)
     res.status(500).json({ message: 'Internal server error' })
