@@ -42,7 +42,7 @@ export default function ProductsTable() {
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4 text-on-surface">${product.price.toFixed(2)}</td>
+                <td className="px-6 py-4 text-on-surface">${Number(product.price).toFixed(2)}</td>
                 <td className="px-6 py-4 text-on-surface">{product.stock} units</td>
                 <td className="px-6 py-4">
                   <span className={`px-2 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ${

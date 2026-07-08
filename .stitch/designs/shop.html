@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Collection | Roast &amp; Ritual</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;family=Public+Sans:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "secondary-fixed": "#ffdbc9",
+                  "on-tertiary-fixed-variant": "#613f24",
+                  "mocha-text": "#B8A89A",
+                  "surface-bright": "#3d3835",
+                  "surface-container-highest": "#383431",
+                  "surface-container": "#231f1c",
+                  "on-secondary-container": "#e6ac8b",
+                  "surface-container-high": "#2d2927",
+                  "background": "#0D0A08", // Custom Deep Charcoal as requested
+                  "surface-tint": "#f5bd64",
+                  "on-surface": "#e9e1dc",
+                  "on-primary": "#432c00",
+                  "primary-container": "#d4a04a",
+                  "chestnut": "#7C4F34",
+                  "surface-variant": "#383431",
+                  "on-tertiary": "#48290f",
+                  "inverse-surface": "#e9e1dc",
+                  "secondary-container": "#693f25",
+                  "error": "#ffb4ab",
+                  "primary-fixed-dim": "#f5bd64",
+                  "on-tertiary-container": "#57361b",
+                  "inverse-on-surface": "#34302d",
+                  "surface-container-low": "#1e1b18",
+                  "outline": "#9c8f7e",
+                  "primary": "#d4a04a", // Warm Gold
+                  "on-surface-variant": "#d3c4b2",
+                  "outline-variant": "#4f4537",
+                  "on-secondary": "#4b270f",
+                  "on-error": "#690005",
+                  "secondary-fixed-dim": "#f6b998",
+                  "surface-dim": "#161310",
+                  "on-secondary-fixed-variant": "#663d23",
+                  "tertiary": "#efbc98",
+                  "on-primary-container": "#553800",
+                  "primary-fixed": "#ffddae",
+                  "surface": "#1C1512", // Espresso
+                  "caramel": "#A67B5B",
+                  "on-secondary-fixed": "#321301",
+                  "on-primary-fixed-variant": "#604100",
+                  "tertiary-fixed-dim": "#efbc98",
+                  "error-container": "#93000a",
+                  "surface-cream": "#F5F0EB",
+                  "tertiary-container": "#ce9f7d",
+                  "surface-container-lowest": "#110e0b",
+                  "inverse-primary": "#7f5600",
+                  "secondary": "#f6b998",
+                  "espresso": "#1C1512",
+                  "tertiary-fixed": "#ffdcc4",
+                  "on-tertiary-fixed": "#2f1501",
+                  "on-primary-fixed": "#281800",
+                  "on-error-container": "#ffdad6",
+                  "on-background": "#e9e1dc"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "gutter": "1.5rem",
+                  "section-gap-desktop": "8rem",
+                  "section-gap-mobile": "4rem",
+                  "edge-margin": "2rem",
+                  "container-max": "1400px"
+          },
+          "fontFamily": {
+                  "small": ["Public Sans"],
+                  "display-mobile": ["Inter"],
+                  "body-bold": ["Inter"],
+                  "label-caps": ["Public Sans"],
+                  "body": ["Inter"],
+                  "h1": ["Inter"],
+                  "display": ["Inter"],
+                  "h2": ["Inter"]
+          },
+          "fontSize": {
+                  "small": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                  "display-mobile": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "body-bold": ["16px", {"lineHeight": "1.6", "fontWeight": "700"}],
+                  "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.15em", "fontWeight": "500"}],
+                  "body": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "display": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #0D0A08;
+      color: #e9e1dc;
+      overflow-x: hidden;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-nav {
+      backdrop-filter: blur(12px);
+    }
+    .product-card:hover .product-img {
+      transform: scale(1.05);
+    }
+    .product-card:hover {
+      border-color: #d4a04a;
+    }
+    .glow-bg {
+      background: radial-gradient(circle at center, rgba(212, 160, 74, 0.08) 0%, rgba(13, 10, 8, 0) 70%);
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #d4a04a !important;
+      box-shadow: 0 0 0 1px #d4a04a;
+    }
+  </style>
+</head>
+<body class="font-body text-body antialiased">
+<!-- TopNavBar from JSON -->
+<header class="fixed top-0 w-full z-50 bg-background/95 dark:bg-background/95 backdrop-blur-md border-b border-outline-variant/30 transition-all duration-300">
+<div class="flex justify-between items-center px-edge-margin h-20 max-w-container-max mx-auto">
+<div class="font-h2 text-h2 font-extrabold text-primary dark:text-primary tracking-tighter">Roast &amp; Ritual</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary font-body-bold border-b-2 border-primary pb-1" href="#">Shop</a>
+<a class="text-on-surface-variant font-body hover:text-primary transition-colors" href="#">Quiz</a>
+<a class="text-on-surface-variant font-body hover:text-primary transition-colors" href="#">Brew Guides</a>
+<a class="text-on-surface-variant font-body hover:text-primary transition-colors" href="#">About</a>
+</nav>
+<div class="flex items-center gap-6">
+<div class="relative group cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">shopping_cart</span>
+<span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">2</span>
+</div>
+<div class="hidden md:flex items-center gap-4">
+<button class="font-body text-on-surface-variant hover:text-primary transition-colors">Sign In</button>
+<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-body-bold hover:brightness-110 active:scale-95 transition-all">Sign Up</button>
+</div>
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative py-24 flex flex-col items-center text-center overflow-hidden">
+<div class="absolute inset-0 glow-bg pointer-events-none"></div>
+<div class="z-10 px-edge-margin">
+<span class="font-label-caps text-primary uppercase tracking-[0.3em] mb-4 block">Curation No. 04</span>
+<h1 class="font-display text-primary mb-6 md:text-display lg:text-[90px]">Our Collection</h1>
+<p class="font-body text-mocha-text max-w-2xl mx-auto text-lg">Explore single-origin coffees from around the world, meticulously sourced and roasted for the intentional brewer.</p>
+</div>
+</section>
+<!-- Filter Bar -->
+<section class="sticky top-20 z-40 bg-background/80 backdrop-blur-sm border-b border-outline-variant/20">
+<div class="max-w-container-max mx-auto px-edge-margin py-6 flex flex-col md:flex-row gap-gutter items-center justify-between">
+<div class="relative w-full md:w-96 group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-espresso border border-outline-variant/40 rounded-lg pl-12 pr-4 py-3 text-on-surface placeholder:text-outline/60 focus:bg-background transition-all" placeholder="Search collection..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-outline">Roast:</span>
+<select class="bg-espresso border border-outline-variant/40 rounded-lg px-4 py-2 text-on-surface appearance-none pr-10 relative focus:bg-background transition-all cursor-pointer">
+<option>All Levels</option>
+<option>Light</option>
+<option>Medium</option>
+<option>Medium-Dark</option>
+<option>Dark</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-outline">Sort:</span>
+<select class="bg-espresso border border-outline-variant/40 rounded-lg px-4 py-2 text-on-surface appearance-none pr-10 focus:bg-background transition-all cursor-pointer">
+<option>Newest</option>
+<option>Price: Low-High</option>
+<option>Price: High-Low</option>
+<option>Name: A-Z</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Grid -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop max-w-container-max mx-auto px-edge-margin">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-gutter gap-y-12">
+<!-- Product Card 1 -->
+<article class="product-card flex flex-col group border border-outline-variant/10 rounded-xl overflow-hidden bg-espresso/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-[4/5] overflow-hidden">
+<img class="product-img w-full h-full object-cover transition-transform duration-700" data-alt="A professional studio product photograph of a sleek dark blue coffee bag labeled Midnight Reserve. The bag has elegant gold celestial patterns and sits on a textured slate slab in a moody, low-lit artisanal kitchen. Warm accent lighting creates a luxury atmosphere with a soft glow on the bag's metallic gold typography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC14zFGzLCl9Ozrk2ve5F3NR2t5ZcojmoqpGarCE7zay-xd9HviLM3d_aA1Gaq-3sTKgoumGjQymPzAlsI8G6blRvkmcsQnkzfLmwW37MlKEMIQGV8FdnPNnLPWov24MhO96GZtf2raKweLu53Qp7s-P6_6ibYAGJEJmTPX7vJnEyqBBNqScsAb3DhfOZZazNs9PXxELk09ev-PKt7NG0b7jDLo0APxAFec2BzxMcPa119omIV5-Go5zaf2LisBugSI4JXhPcRxxNQ"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-label-caps px-3 py-1 rounded-full shadow-lg">Medium-Dark</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h2 text-xl text-on-surface group-hover:text-primary transition-colors">Midnight Reserve</h3>
+<span class="font-body-bold text-primary">$28.00</span>
+</div>
+<p class="font-label-caps text-mocha-text mb-3">Origin: Blend</p>
+<p class="font-small text-on-surface-variant line-clamp-2 mb-6">Dark Chocolate, Molasses, Toasted Walnut. A heavy body with a long-lasting sweet finish.</p>
+<button class="mt-auto w-full border border-primary text-primary hover:bg-primary hover:text-on-primary font-body-bold py-3 rounded-lg transition-all active:scale-95">Add to Cart</button>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="product-card flex flex-col group border border-outline-variant/10 rounded-xl overflow-hidden bg-espresso/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-[4/5] overflow-hidden">
+<img class="product-img w-full h-full object-cover transition-transform duration-700" data-alt="A premium close-up of a matte black Aurora Coffee bag with golden foil accents. It stands on a dark countertop next to a perfectly pulled espresso shot in a glass cup and scattered coffee beans. The scene is shot with high-end editorial lighting, featuring deep shadows and warm highlights, suggesting a sophisticated coffee ritual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDssAuNdfbUhlEm6pg6pZmZ_UtLKrsgKgJV_aw91LdGDraAzmhNo8LD-QMsLBfjP8-6n7z8QDRc799-7zuwTLu8Cgertt0Awqu-0FWaktkwnSSWXl7JeRs4zv1-SSVJW2Nzf2m_5XCrTGBKe1UrAAI4iSW7pqRX-uuCD0QUJjURxtIXvJSHEILKfAYyHdlt6G1hUvkZ1hfLv7fGBrsSvoAK7ke0bjqQtC8iW1347kViERwqzLLVeMEkL6V0qokt7TAsJ_rROfzbk5Y"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-label-caps px-3 py-1 rounded-full shadow-lg">Dark Roast</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h2 text-xl text-on-surface group-hover:text-primary transition-colors">Obsidian Espresso</h3>
+<span class="font-body-bold text-primary">$32.00</span>
+</div>
+<p class="font-label-caps text-mocha-text mb-3">Origin: Brazil &amp; Sumatra</p>
+<p class="font-small text-on-surface-variant line-clamp-2 mb-6">Smoke, Black Currant, Syrupy. A intense, bold roast designed for the perfect crema.</p>
+<button class="mt-auto w-full border border-primary text-primary hover:bg-primary hover:text-on-primary font-body-bold py-3 rounded-lg transition-all active:scale-95">Add to Cart</button>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="product-card flex flex-col group border border-outline-variant/10 rounded-xl overflow-hidden bg-espresso/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-[4/5] overflow-hidden">
+<img class="product-img w-full h-full object-cover transition-transform duration-700" data-alt="A textured brown paper coffee bag for El Recuerdo Single Origin Espresso, featuring a gold-stamped illustration of a coffee branch. The bag sits on a black stone slab with golden spoons and coffee beans artistically scattered around. The lighting is soft and atmospheric, highlighting the premium texture and the warmth of the metallic gold lettering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcMYWho9AmC-zCs1ZrmlgbzJ1ATWTbF5jxP4s0fyNmNTY5ro7TUPidpRzx64JNTKScaM7R_tQBd72SXj4jmk02FIs7cVugzyPpn1fghFlEilEY4mwo_0DYMX-lwQNi-REKRErgOor4e4bWSXgO16fpo2wsnUoGWV5fcXgNxw4rIJbceHVBPX4GT47QQMopA3S_QmUGOC8SKqoFp7mC9BSRFpBrp33WTlwZCzxNEA5zzTPoXSbcyevny6RenskWJGIHtBMjPoCULIA"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-label-caps px-3 py-1 rounded-full shadow-lg">Medium</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h2 text-xl text-on-surface group-hover:text-primary transition-colors">Colombia Huila</h3>
+<span class="font-body-bold text-primary">$26.00</span>
+</div>
+<p class="font-label-caps text-mocha-text mb-3">Origin: Huila Region</p>
+<p class="font-small text-on-surface-variant line-clamp-2 mb-6">Caramelized Apple, Honey, Red Cherry. Balanced acidity with a velvety, smooth mouthfeel.</p>
+<button class="mt-auto w-full border border-primary text-primary hover:bg-primary hover:text-on-primary font-body-bold py-3 rounded-lg transition-all active:scale-95">Add to Cart</button>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="product-card flex flex-col group border border-outline-variant/10 rounded-xl overflow-hidden bg-espresso/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-[4/5] overflow-hidden">
+<img class="product-img w-full h-full object-cover transition-transform duration-700" data-alt="A high-end matte black coffee bag for Ethiopian Yirgacheffe coffee, standing on a rustic wooden table in a dimly lit, cozy cafe environment. The background is softly blurred with warm bokeh lights from coffee equipment. The design on the bag is minimalist with precise gold text, embodying the quiet luxury and artisanal craftsmanship of Roast &amp; Ritual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1S1wrdKKaPmNg8wWifxadqxUembnEopfjMSC_4f23TeElteHFrHrhdwOuqcf7pgbI4W7VMZZgDFxNFSikmu-dN1LXPiVnoJJ_f4cZkFgqFxErSZXc6n3vKbYFOfY8NKJzL9_SdK4WEBMCspWpxcdNkd1WRBiWHN1VdVsPDHE4ApNXHlJbJG9japllPf-IWNLrMKkGip6FAFMPROgymFQAiUzsawLkQcwilbDRX5Yt7_XIHsIqj3-7CLDxdbRsZVmKWHnTaKP0Fcg"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-label-caps px-3 py-1 rounded-full shadow-lg">Light Roast</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h2 text-xl text-on-surface group-hover:text-primary transition-colors">Yirgacheffe Bloom</h3>
+<span class="font-body-bold text-primary">$30.00</span>
+</div>
+<p class="font-label-caps text-mocha-text mb-3">Origin: Ethiopia</p>
+<p class="font-small text-on-surface-variant line-clamp-2 mb-6">Jasmine, Bergamot, Earl Grey. Bright, tea-like clarity with elegant floral high notes.</p>
+<button class="mt-auto w-full border border-primary text-primary hover:bg-primary hover:text-on-primary font-body-bold py-3 rounded-lg transition-all active:scale-95">Add to Cart</button>
+</div>
+</article>
+<!-- Repeating for 8 items as requested -->
+<!-- Card 5 -->
+<article class="product-card flex flex-col group border border-outline-variant/10 rounded-xl overflow-hidden bg-espresso/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-[4/5] overflow-hidden">
+<img class="product-img w-full h-full object-cover transition-transform duration-700" data-alt="A sophisticated shot of a specialty coffee bag with a deep navy and gold aesthetic. The bag sits on a dark, polished stone surface, illuminated by a warm spotlight that highlights the fine details of the craft paper and gold-foil branding. The surrounding environment is a minimalist, luxury kitchen setting with soft atmospheric shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMAj2FY0PjsRpXPBYkVpb5ASbg-I35pEISV3gejpWuvMm8oXz-PWUpBa3M1n1HYX4OXb7hSmjfM28bHNvXGwafP406mQdMbiMlJNApJW93wPXEme43dE8s0fh9Mqe1LSVmtSsRcBsRpvTFxa-koyzuav7NLPngkrK5V_7F4HJ9dsq2q6nQ2yrPG5rPkFtgPcblL0Zv_0tfdmcfK4pFg0jRcNHsb1QT0UQV5Gk7qIPAqXDrBfZROfvu_d25Xv0vQ3sV6Cc6ZtvC92c"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-label-caps px-3 py-1 rounded-full shadow-lg">Medium-Dark</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h2 text-xl text-on-surface group-hover:text-primary transition-colors">Sumatra Tiger</h3>
+<span class="font-body-bold text-primary">$29.00</span>
+</div>
+<p class="font-label-caps text-mocha-text mb-3">Origin: Aceh Gayo</p>
+<p class="font-small text-on-surface-variant line-clamp-2 mb-6">Earthy, Cedar, Dark Spice. A complex, low-acid coffee with a bold, herbal profile.</p>
+<button class="mt-auto w-full border border-primary text-primary hover:bg-primary hover:text-on-primary font-body-bold py-3 rounded-lg transition-all active:scale-95">Add to Cart</button>
+</div>
+</article>
+<!-- Card 6 -->
+<article class="product-card flex flex-col group border border-outline-variant/10 rounded-xl overflow-hidden bg-espresso/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-[4/5] overflow-hidden">
+<img class="product-img w-full h-full object-cover transition-transform duration-700" data-alt="Close-up of an artisan coffee bag with a minimalist design, standing in a dimly lit environment with warm light glinting off its gold embossed logo. The bag sits near a vintage manual coffee grinder on a dark wood table. The overall mood is quiet, luxury, and focused on the ritual of hand-crafted brewing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWNWxQBP9o6vspLZt4JOLEkfrHBFtLujnkCSNdthwyOF8GX-OR_mRsAFZ159rsjRLxRRGHnDrHPGHZC6rxbD5vOIYFXCgMWSzHb4vr7pKynWCJwcCc-4YWyuD6KW4wMz8AWuDoy3lJxxrbYP3qqnNp_YdeyGTIj9pLjueEdfcWGjUBO-3GWjfmIU9AxWSvQEMqVs9fovuGZ96v31B-FGuf-ggHV5XGFUmDEEjNhbxXIc-1Ze2KFQAdAvqIgmU_LpQhvUSmEHO3GR8"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-label-caps px-3 py-1 rounded-full shadow-lg">Light Roast</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h2 text-xl text-on-surface group-hover:text-primary transition-colors">Panama Gesha</h3>
+<span class="font-body-bold text-primary">$45.00</span>
+</div>
+<p class="font-label-caps text-mocha-text mb-3">Origin: Boquete</p>
+<p class="font-small text-on-surface-variant line-clamp-2 mb-6">Peach, Honeysuckle, White Grape. Rare and exquisite with unmatched floral complexity.</p>
+<button class="mt-auto w-full border border-primary text-primary hover:bg-primary hover:text-on-primary font-body-bold py-3 rounded-lg transition-all active:scale-95">Add to Cart</button>
+</div>
+</article>
+<!-- Card 7 -->
+<article class="product-card flex flex-col group border border-outline-variant/10 rounded-xl overflow-hidden bg-espresso/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-[4/5] overflow-hidden">
+<img class="product-img w-full h-full object-cover transition-transform duration-700" data-alt="A dark-themed product photo of a premium coffee bag with metallic copper and gold foiling. The bag is placed on a charcoal slate tile, surrounded by a light dusting of coffee grounds. The background is a blurred high-end coffee bar with copper kettles and subtle warm lighting, evoking an atmosphere of intentionality and craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiHSX4h6vMn_jkURJiCpqPTkXTEze5lmrXtTa1dLAMgMDQLcTCLUzinZZOpylp4U39cWlHdkkLlPgaUF3zyilcrEL0dlNlaxCA6gqwoAGNSG65XDem4f3dLpo_GdV8YKct0mkIcoNukP9_6SoI8a9ZQHgD7iMIIebvbUAy4YZh_DDee0wha4Hy8AMao7tJZ4YP1h0sDFZr_eUlDVbWVfuaoLae0bbEHavzFJW2ODRHUUT0LUT5OwjmpDK2dXb6IkE5j8uUpKTaRck"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-label-caps px-3 py-1 rounded-full shadow-lg">Medium</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h2 text-xl text-on-surface group-hover:text-primary transition-colors">Guatemala Antigua</h3>
+<span class="font-body-bold text-primary">$27.00</span>
+</div>
+<p class="font-label-caps text-mocha-text mb-3">Origin: volcanic valley</p>
+<p class="font-small text-on-surface-variant line-clamp-2 mb-6">Nutty, Milk Chocolate, Spice. A versatile roast with pleasant acidity and lingering sweetness.</p>
+<button class="mt-auto w-full border border-primary text-primary hover:bg-primary hover:text-on-primary font-body-bold py-3 rounded-lg transition-all active:scale-95">Add to Cart</button>
+</div>
+</article>
+<!-- Card 8 -->
+<article class="product-card flex flex-col group border border-outline-variant/10 rounded-xl overflow-hidden bg-espresso/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="relative aspect-[4/5] overflow-hidden">
+<img class="product-img w-full h-full object-cover transition-transform duration-700" data-alt="A moody editorial shot of a sleek black coffee bag with gold lettering, titled Ritual Blend. The bag is showcased in a dark studio setting with a singular directional light source creating dramatic shadows. Elements of wood and stone in the background ground the image in an organic yet premium aesthetic typical of a boutique roastery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPtXvmhlwba4pgFEFQgzBr1x-OqkAnb-GmhE9e4e2M4hkZepuPHreyahTbsVucN6jYIsnNxjIbF8cyemZrJskiwfo9uw8gKnUqN41TsPCpb7nrIujb_M70GFwkbjnuJB_6d95UjEnLxev1QRbX3L1f0A0zEssUyI0ou70o0IAFkGGw-R8pB4PvwoN64uy9gsDLKdsSLDfDLEhVbSyFRLXdFF3-C7bgkJjFLp84E87F-XsdtuRTRWh1EBQATm3LCOBPmm5ErhZwZ84"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-label-caps px-3 py-1 rounded-full shadow-lg">Medium-Dark</span>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-h2 text-xl text-on-surface group-hover:text-primary transition-colors">Ritual House Blend</h3>
+<span class="font-body-bold text-primary">$24.00</span>
+</div>
+<p class="font-label-caps text-mocha-text mb-3">Origin: Seasonal Mix</p>
+<p class="font-small text-on-surface-variant line-clamp-2 mb-6">Praline, Brown Sugar, Orange Zest. Our signature everyday coffee, perfect for any brew method.</p>
+<button class="mt-auto w-full border border-primary text-primary hover:bg-primary hover:text-on-primary font-body-bold py-3 rounded-lg transition-all active:scale-95">Add to Cart</button>
+</div>
+</article>
+</div>
+</section>
+<!-- Subscription CTA -->
+<section class="py-section-gap-desktop max-w-container-max mx-auto px-edge-margin">
+<div class="bg-espresso rounded-2xl p-12 md:p-20 relative overflow-hidden flex flex-col md:flex-row items-center gap-12">
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
+<svg class="w-full h-full text-primary" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-width="0.5"></circle>
+<circle cx="50" cy="50" fill="none" r="30" stroke="currentColor" stroke-width="0.5"></circle>
+<circle cx="50" cy="50" fill="none" r="20" stroke="currentColor" stroke-width="0.5"></circle>
+</svg>
+</div>
+<div class="flex-1 z-10 text-center md:text-left">
+<h2 class="font-display text-4xl md:text-5xl text-on-surface mb-6">Never Run Out of <span class="text-primary">Ritual</span>.</h2>
+<p class="font-body text-mocha-text text-lg mb-8 max-w-lg">Subscribe to our monthly curation and save 15% on every bag. Hand-selected roasts delivered to your door, exactly when you need them.</p>
+<button class="bg-primary text-on-primary font-body-bold px-10 py-4 rounded-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/10">Start Subscription</button>
+</div>
+<div class="flex-1 w-full max-w-sm">
+<div class="aspect-square rounded-xl border border-outline-variant/30 overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A beautifully styled flat lay of coffee bags, a ceramic mug, and measuring equipment on a dark slate background. The lighting is soft and directional, focusing on the textures of the materials. This image represents the convenience and luxury of a subscription service from Roast &amp; Ritual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-WzKljXUeAi39xbtQsv-kaxMZcfJ-8mekI0b9oYqbsYO7392mKQHtMZoTrnK07OawsLEbUkx03A907Xd4z18Hcm-yohQzbWhJY7nd5MXc1T5nuk6eNlIP9iIa7uenvt1r1T_lwju9Hah8jrIl51nyVSIhLhS-kohp-lve_euPGOX7HceWrNPF8CG5E68AN62WLj3Rp0YyGKxQMX8nw0hKDG91vEMTz6USuCYII_uyNqFHeNs041KUy0CigDOPOtpa69hScwe8zNY"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer from JSON -->
+<footer class="bg-espresso dark:bg-espresso border-t border-outline-variant/20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-edge-margin py-section-gap-mobile md:py-section-gap-desktop max-w-container-max mx-auto">
+<div class="md:col-span-1">
+<div class="font-h2 text-h2 text-primary mb-4">Roast &amp; Ritual</div>
+<p class="font-body text-mocha-text mb-6">© 2024 Roast &amp; Ritual. Crafted for the intentional brewer.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-mocha-text hover:text-primary cursor-pointer transition-colors">face_nod</span>
+<span class="material-symbols-outlined text-mocha-text hover:text-primary cursor-pointer transition-colors">language</span>
+<span class="material-symbols-outlined text-mocha-text hover:text-primary cursor-pointer transition-colors">video_library</span>
+</div>
+</div>
+<div>
+<h4 class="font-body-bold text-on-surface mb-6">Shop</h4>
+<ul class="space-y-3">
+<li><a class="text-mocha-text hover:text-primary transition-colors" href="#">Shop All</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors" href="#">Subscription</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors" href="#">Coffee Quiz</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors" href="#">Brew Guides</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-body-bold text-on-surface mb-6">Company</h4>
+<ul class="space-y-3">
+<li><a class="text-mocha-text hover:text-primary transition-colors" href="#">Wholesale</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors" href="#">Sustainability</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-body-bold text-on-surface mb-6">Support</h4>
+<ul class="space-y-3">
+<li><a class="text-mocha-text hover:text-primary transition-colors" href="#">Contact Support</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors" href="#">Shipping &amp; Returns</a></li>
+</ul>
+<div class="mt-8 flex items-center gap-4 text-mocha-text/50">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="material-symbols-outlined">public</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Simple micro-interaction for sticky header shadow
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 20) {
+        header.classList.add('shadow-xl', 'bg-background/95');
+        header.classList.remove('bg-background/80');
+      } else {
+        header.classList.remove('shadow-xl');
+      }
+    });
+
+    // Add to cart animation feedback
+    document.querySelectorAll('button').forEach(btn => {
+      if (btn.innerText.includes('Add to Cart')) {
+        btn.addEventListener('click', function() {
+          const originalText = this.innerText;
+          this.innerText = 'Added to Cart';
+          this.classList.add('bg-primary', 'text-on-primary');
+          setTimeout(() => {
+            this.innerText = originalText;
+            this.classList.remove('bg-primary', 'text-on-primary');
+          }, 2000);
+        });
+      }
+    });
+  </script>
+</body></html>

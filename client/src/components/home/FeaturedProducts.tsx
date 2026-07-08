@@ -45,7 +45,7 @@ export default function FeaturedProducts() {
               <h3 className="font-display text-body font-bold mb-1">{product.name}</h3>
               <p className="text-secondary-mocha font-small mb-4">{product.notes}</p>
               <div className="flex justify-between items-center">
-                <span className="text-primary font-bold text-h2">${product.price.toFixed(2)}</span>
+                <span className="text-primary font-bold text-h2">${Number(product.price).toFixed(2)}</span>
                 <button className="bg-primary text-on-primary p-2 rounded-lg hover:scale-110 active:scale-95 transition-transform">
                   <span className="material-symbols-outlined">add_shopping_cart</span>
                 </button>

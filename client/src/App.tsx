@@ -5,6 +5,8 @@ import Layout from './components/layout/Layout'
 import AuthLayout from './components/auth/AuthLayout'
 import AdminLayout from './components/admin/AdminLayout'
 import HomePage from './pages/HomePage'
+import ShopPage from './pages/ShopPage'
+import ProductDetailPage from './pages/ProductDetailPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -35,6 +37,8 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/product/:slug" element={<ProductDetailPage />} />
         </Route>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />

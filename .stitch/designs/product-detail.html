@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ethiopian Yirgacheffe | Roast &amp; Ritual</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;family=Public+Sans:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#4f4537",
+                    "on-secondary": "#4b270f",
+                    "on-error": "#690005",
+                    "surface-dim": "#161310",
+                    "on-secondary-fixed-variant": "#663d23",
+                    "secondary-fixed-dim": "#f6b998",
+                    "tertiary": "#efbc98",
+                    "on-primary-container": "#553800",
+                    "surface": "#161310",
+                    "primary-fixed": "#ffddae",
+                    "caramel": "#A67B5B",
+                    "error-container": "#93000a",
+                    "on-secondary-fixed": "#321301",
+                    "on-primary-fixed-variant": "#604100",
+                    "tertiary-fixed-dim": "#efbc98",
+                    "surface-cream": "#F5F0EB",
+                    "tertiary-container": "#ce9f7d",
+                    "surface-container-lowest": "#110e0b",
+                    "inverse-primary": "#7f5600",
+                    "espresso": "#1C1512",
+                    "secondary": "#f6b998",
+                    "on-tertiary-fixed": "#2f1501",
+                    "tertiary-fixed": "#ffdcc4",
+                    "on-primary-fixed": "#281800",
+                    "on-error-container": "#ffdad6",
+                    "on-background": "#e9e1dc",
+                    "secondary-fixed": "#ffdbc9",
+                    "on-tertiary-fixed-variant": "#613f24",
+                    "mocha-text": "#B8A89A",
+                    "surface-container-highest": "#383431",
+                    "surface-container": "#231f1c",
+                    "surface-bright": "#3d3835",
+                    "on-secondary-container": "#e6ac8b",
+                    "surface-container-high": "#2d2927",
+                    "background": "#0D0A08",
+                    "primary-container": "#d4a04a",
+                    "surface-tint": "#f5bd64",
+                    "on-surface": "#e9e1dc",
+                    "on-primary": "#432c00",
+                    "chestnut": "#7C4F34",
+                    "surface-variant": "#383431",
+                    "on-tertiary": "#48290f",
+                    "inverse-surface": "#e9e1dc",
+                    "secondary-container": "#693f25",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#f5bd64",
+                    "on-tertiary-container": "#57361b",
+                    "inverse-on-surface": "#34302d",
+                    "surface-container-low": "#1e1b18",
+                    "outline": "#9c8f7e",
+                    "primary": "#d4a04a",
+                    "on-surface-variant": "#d3c4b2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "edge-margin": "2rem",
+                    "container-max": "1400px",
+                    "section-gap-mobile": "4rem",
+                    "gutter": "1.5rem",
+                    "section-gap-desktop": "8rem"
+            },
+            "fontFamily": {
+                    "label-caps": ["Public Sans"],
+                    "small": ["Public Sans"],
+                    "display-mobile": ["Inter"],
+                    "body-bold": ["Inter"],
+                    "h2": ["Inter"],
+                    "h1": ["Inter"],
+                    "display": ["Inter"],
+                    "body": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.15em", "fontWeight": "500"}],
+                    "small": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "display-mobile": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-bold": ["16px", {"lineHeight": "1.6", "fontWeight": "700"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .radar-bar { transition: width 1s ease-out; }
+        .product-image-container:hover .main-img { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-surface/95 dark:bg-surface/95 backdrop-blur-md border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-edge-margin max-w-container-max mx-auto h-20">
+<div class="font-h2 text-h2 font-bold text-primary">Roast &amp; Ritual</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-primary font-body-bold border-b-2 border-primary pb-1" href="#">Shop</a>
+<a class="text-on-surface-variant font-body hover:text-primary transition-colors duration-300" href="#">Quiz</a>
+<a class="text-on-surface-variant font-body hover:text-primary transition-colors duration-300" href="#">Brew Guides</a>
+<a class="text-on-surface-variant font-body hover:text-primary transition-colors duration-300" href="#">About</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="hidden lg:flex items-center space-x-4">
+<button class="font-small text-small text-on-surface-variant hover:text-primary transition-colors">Sign In</button>
+<button class="bg-primary text-on-primary font-body-bold px-6 py-2 rounded-lg hover:scale-95 active:scale-90 transition-transform">Sign Up</button>
+</div>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-section-gap-desktop">
+<!-- Breadcrumb -->
+<section class="max-w-container-max mx-auto px-edge-margin py-8">
+<nav class="flex items-center space-x-2 font-small text-small text-mocha-text">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Shop</a>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary">Ethiopian Yirgacheffe</span>
+</nav>
+</section>
+<!-- Main Product Section -->
+<section class="max-w-container-max mx-auto px-edge-margin grid grid-cols-1 lg:grid-cols-2 gap-16">
+<!-- Left: Gallery -->
+<div class="space-y-6">
+<div class="product-image-container relative aspect-[4/5] overflow-hidden bg-espresso rounded-xl border border-outline-variant group">
+<img alt="Ethiopian Yirgacheffe Premium Coffee Bag" class="main-img w-full h-full object-cover transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/AP1WRLvRxQRxrgV1RuZWbSS7xe7aHpijs2KHjZB6r6aTYPRv7099PNyYTS1hrC1meQmpWMnnn8NMgryvr-10zypvdEw49Qj7foc7v_er2Uor-6VtXwqskg9pxFEuqa7KaqojAyKgPG6DXICLFpREf7d8hGV6Wuvs9iv1f5eDa8MPwhbhpvTzFDpAJ8PtpWL5-qYa9CfI19MTjly3QhHbDAC_fNf8ReWps4ILSAX_thuyP3DztQlcnKbhcz_42RQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent pointer-events-none"></div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<button class="aspect-square rounded-lg border-2 border-primary overflow-hidden bg-espresso">
+<img class="w-full h-full object-cover" data-alt="A close-up macro shot of roasted Ethiopian coffee beans with a golden-brown texture. The lighting is moody and atmospheric, with soft highlights catching the oily surface of the beans against a deep dark espresso background, maintaining the Roast &amp; Ritual luxury aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtESJ7HealZP2tdWospM3ZvZYjjB9iVqZSaE9dgMbE9YJRhoSdYbeqru0PQRRDjb9CPOXmOVEHPbSSK1GDi-vpp3ohxFt7jcZ2Z8dyHIOot2EtB1DR74jZTkdMmMWJX-3rQ1VJqFPGKzKREGyGEre-ID-Vt_ysmXZNmGc377dWYP9J2801_t0jTfxzcoA5ofIZ0PE6pPiM7ltlkMgKVLMom1Y9puNGTizX9g7Srqxotg3obOmeOV3Ot1iSxMOFQj0KtOt3ujaX8LI"/>
+</button>
+<button class="aspect-square rounded-lg border border-outline-variant overflow-hidden bg-espresso hover:border-primary transition-colors">
+<img class="w-full h-full object-cover" data-alt="A detailed artistic shot of a ceramic coffee cup filled with dark, rich espresso showing a golden crema on top. The cup is placed on a textured dark slate surface in a low-light artisanal coffee shop setting with warm metallic copper accents in the blurred background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1LuBSeYoYfPF6PLXohvXlVLpBlvYt3WcFEL1jR6Rjx_opbTVMTOlCnZjxLQQlmmr8WImfnUjui2eyw9W1d_kgzQGaUEbgJhJNqJlwP2LUssTWXAaAs9cVn4hwE_yWXUic_X-s4DnSTi-RbT0Wmow1WdCU1y_oJkkF3Vi-IBF9r03qbYdiiJajIq59ML1PLuT4kU9He7YZ-LPv894MIgNzPjH5aUfpacUaoF_mmL3z6KTZY83rhXr1jufmrlw7H1nk8Blp9EOxYJk"/>
+</button>
+<button class="aspect-square rounded-lg border border-outline-variant overflow-hidden bg-espresso hover:border-primary transition-colors">
+<img class="w-full h-full object-cover" data-alt="A lifestyle product shot showing the premium matte black coffee bag standing elegantly on a rustic wooden countertop. In the background, a high-end espresso machine and copper kettle are softly blurred, creating a sense of ceremony and quiet luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGR6krMcY3ViAyGFj6l2ZJAYoReClq08axjmM9_nXMNJlyU3Wb2Nu5zAhDsNjBhGaHr_fPk7pxce_GhfQuZCFsEeCUK-UNPrH_oeoW2hX1V1IUYVY9VNMRVt7BZlykO5e4L_WZipe59r44-wx8jOtffSKasna9K_L_7HMG_mSZ2VTxuKGUJMgQwDZVJzwyL0PQQ_dKR3e1V1PdtYzdr8rqjG96qsmw3fI3dL84GbJ6kwEDhu4Cj46LvjudZcHG_Fhu5RzcJbcM9D8"/>
+</button>
+</div>
+<div class="flex items-center justify-center space-x-2 pt-4">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-[18px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star_half" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="font-body-bold text-on-surface">4.8/5</span>
+<span class="text-mocha-text font-small">(24 reviews)</span>
+</div>
+</div>
+<!-- Right: Info -->
+<div class="flex flex-col">
+<span class="inline-block self-start px-3 py-1 bg-primary/10 border border-primary text-primary font-label-caps text-label-caps rounded-full mb-6">Medium Roast</span>
+<h1 class="font-h1 text-h1 text-on-surface mb-4">Ethiopian Yirgacheffe</h1>
+<div class="flex items-center space-x-3 mb-8">
+<span class="w-6 h-4 bg-red-600 rounded-sm relative overflow-hidden flex flex-col">
+<div class="h-1/3 bg-blue-900 flex items-center justify-center">
+<div class="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+</div>
+<div class="h-1/3 bg-yellow-400"></div>
+<div class="h-1/3 bg-red-600"></div>
+</span>
+<span class="font-body text-mocha-text">Yirgacheffe Region, Ethiopia</span>
+</div>
+<div class="flex flex-wrap gap-2 mb-10">
+<span class="px-4 py-2 bg-espresso border border-primary text-primary font-small text-small rounded-lg">Floral</span>
+<span class="px-4 py-2 bg-espresso border border-primary text-primary font-small text-small rounded-lg">Lemon</span>
+<span class="px-4 py-2 bg-espresso border border-primary text-primary font-small text-small rounded-lg">Tea-like</span>
+<span class="px-4 py-2 bg-espresso border border-primary text-primary font-small text-small rounded-lg">Jasmine</span>
+</div>
+<p class="font-body text-mocha-text leading-relaxed mb-8 max-w-prose">
+                    Renowned for its distinctive floral notes and vibrant acidity, our Yirgacheffe is a masterclass in complexity. Each small-batch roast highlights the delicate jasmine aroma and refreshing lemon finish that has made this region the crown jewel of Ethiopian specialty coffee.
+                </p>
+<div class="text-[48px] font-bold text-primary mb-8">$28.00</div>
+<div class="space-y-6">
+<div class="flex flex-col space-y-2">
+<span class="font-label-caps text-label-caps text-mocha-text uppercase">Quantity</span>
+<div class="flex items-center w-32 border border-chestnut rounded-lg bg-espresso p-1">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="remove">remove</span>
+</button>
+<span class="flex-1 text-center font-body-bold">1</span>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex-1 bg-primary text-on-primary font-body-bold py-4 rounded-lg hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span>Add to Cart</span>
+</button>
+<button class="px-6 py-4 border border-chestnut text-on-surface font-body-bold rounded-lg hover:bg-chestnut/10 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="flex items-center space-x-3 p-4 bg-espresso/50 border border-outline-variant/30 rounded-xl">
+<span class="material-symbols-outlined text-primary" data-icon="local_shipping">local_shipping</span>
+<span class="text-small font-small text-mocha-text">Complimentary shipping on orders over $50</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Flavor Profile Section -->
+<section class="mt-section-gap-desktop bg-espresso py-20 border-y border-outline-variant">
+<div class="max-w-container-max mx-auto px-edge-margin text-center">
+<h2 class="font-h2 text-h2 mb-12">Cupping Notes &amp; Profile</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-4xl mx-auto">
+<!-- Profile Item -->
+<div class="space-y-4">
+<span class="block font-label-caps text-label-caps text-mocha-text uppercase">Acidity</span>
+<div class="h-40 w-full flex items-end justify-center bg-background/50 rounded-lg p-2 overflow-hidden">
+<div class="radar-bar w-full bg-primary rounded-t-sm" style="height: 80%;"></div>
+</div>
+<span class="block font-body-bold text-primary">Level 4</span>
+</div>
+<!-- Profile Item -->
+<div class="space-y-4">
+<span class="block font-label-caps text-label-caps text-mocha-text uppercase">Body</span>
+<div class="h-40 w-full flex items-end justify-center bg-background/50 rounded-lg p-2 overflow-hidden">
+<div class="radar-bar w-full bg-primary rounded-t-sm" style="height: 40%;"></div>
+</div>
+<span class="block font-body-bold text-primary">Level 2</span>
+</div>
+<!-- Profile Item -->
+<div class="space-y-4">
+<span class="block font-label-caps text-label-caps text-mocha-text uppercase">Sweetness</span>
+<div class="h-40 w-full flex items-end justify-center bg-background/50 rounded-lg p-2 overflow-hidden">
+<div class="radar-bar w-full bg-primary rounded-t-sm" style="height: 100%;"></div>
+</div>
+<span class="block font-body-bold text-primary">Level 5</span>
+</div>
+<!-- Profile Item -->
+<div class="space-y-4">
+<span class="block font-label-caps text-label-caps text-mocha-text uppercase">Bitterness</span>
+<div class="h-40 w-full flex items-end justify-center bg-background/50 rounded-lg p-2 overflow-hidden">
+<div class="radar-bar w-full bg-primary rounded-t-sm" style="height: 20%;"></div>
+</div>
+<span class="block font-body-bold text-primary">Level 1</span>
+</div>
+<!-- Profile Item -->
+<div class="space-y-4">
+<span class="block font-label-caps text-label-caps text-mocha-text uppercase">Finish</span>
+<div class="h-40 w-full flex items-end justify-center bg-background/50 rounded-lg p-2 overflow-hidden">
+<div class="radar-bar w-full bg-primary rounded-t-sm" style="height: 80%;"></div>
+</div>
+<span class="block font-body-bold text-primary">Level 4</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Reviews Section -->
+<section class="mt-section-gap-desktop max-w-container-max mx-auto px-edge-margin">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div>
+<h2 class="font-h2 text-h2 mb-4">Customer Reviews</h2>
+<div class="flex items-center space-x-4">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-[24px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[24px]" data-icon="star_half" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="font-h2 text-[24px] text-on-surface">4.8 Average</span>
+</div>
+</div>
+<button class="px-8 py-3 border border-primary text-primary font-body-bold rounded-lg hover:bg-primary hover:text-on-primary transition-all">Write a Review</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+<!-- Review Card -->
+<div class="bg-espresso p-8 rounded-xl border border-outline-variant/30 space-y-4">
+<div class="flex justify-between items-start">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-body-bold">AM</div>
+<div>
+<div class="font-body-bold">Alexander M.</div>
+<div class="flex text-primary text-[14px]">
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<span class="text-small font-small text-mocha-text">2 days ago</span>
+</div>
+<p class="font-body text-mocha-text">"Absolutely stunning floral notes. I usually brew this with a V60 and the jasmine aroma fills the whole kitchen. Best Yirgacheffe I've had in years."</p>
+</div>
+<!-- Review Card -->
+<div class="bg-espresso p-8 rounded-xl border border-outline-variant/30 space-y-4">
+<div class="flex justify-between items-start">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-body-bold">SJ</div>
+<div>
+<div class="font-body-bold">Sarah J.</div>
+<div class="flex text-primary text-[14px]">
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<span class="text-small font-small text-mocha-text">1 week ago</span>
+</div>
+<p class="font-body text-mocha-text">"The tea-like body is so delicate and refreshing. Perfect for a morning ritual. The packaging is also beautiful and keeps it incredibly fresh."</p>
+</div>
+</div>
+<div class="text-center">
+<button class="text-primary font-body-bold hover:underline">Load more reviews</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-espresso border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-edge-margin py-gutter max-w-container-max mx-auto space-y-8 md:space-y-0">
+<div class="font-h1 text-h1 text-primary">Roast &amp; Ritual</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-small text-small text-mocha-text hover:text-tertiary transition-colors" href="#">Privacy Policy</a>
+<a class="font-small text-small text-mocha-text hover:text-tertiary transition-colors" href="#">Terms of Service</a>
+<a class="font-small text-small text-mocha-text hover:text-tertiary transition-colors" href="#">Shipping &amp; Returns</a>
+<a class="font-small text-small text-mocha-text hover:text-tertiary transition-colors" href="#">Wholesale</a>
+<a class="font-small text-small text-mocha-text hover:text-tertiary transition-colors" href="#">Contact</a>
+</div>
+<div class="font-small text-small text-mocha-text">
+                © 2024 Roast &amp; Ritual. Artisanal Coffee Curators.
+            </div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for quantity selector
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const span = btn.parentElement.querySelector('span.flex-1');
+                if(!span) return;
+                let val = parseInt(span.innerText);
+                if(btn.innerHTML.includes('remove') && val > 1) span.innerText = val - 1;
+                if(btn.innerHTML.includes('add')) span.innerText = val + 1;
+            });
+        });
+
+        // Simple thumbnail gallery switcher
+        document.querySelectorAll('.grid.grid-cols-3 button').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                const mainImg = document.querySelector('.main-img');
+                const thumbImg = thumb.querySelector('img');
+                const tempSrc = mainImg.src;
+                mainImg.src = thumbImg.src;
+                // Note: Logic for swapping alt would go here if needed for accessibility
+            });
+        });
+    </script>
+</body></html>
