@@ -1,0 +1,26 @@
+{
+  "name": "projects/2106744978611759515",
+  "projectId": "2106744978611759515",
+  "title": "Roast & Ritual",
+  "visibility": "PRIVATE",
+  "createTime": "2026-07-08T12:33:26.167772Z",
+  "updateTime": "2026-07-08T12:33:26.167772Z",
+  "projectType": "PROJECT_DESIGN",
+  "origin": "STITCH",
+  "designTheme": {
+    "colorMode": "DARK",
+    "customColor": "#D4A04A",
+    "headlineFont": "INTER",
+    "bodyFont": "INTER",
+    "roundness": "ROUND_EIGHT",
+    "overridePrimaryColor": "#D4A04A",
+    "overrideSecondaryColor": "#7C4F34",
+    "overrideTertiaryColor": "#A67B5B",
+    "overrideNeutralColor": "#0D0A08"
+  },
+  "screens": {},
+  "metadata": {
+    "userRole": "OWNER"
+  },
+  "designSystemId": "assets/5727330008518283617"
+}

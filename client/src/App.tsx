@@ -1,8 +1,16 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './components/layout/Layout'
+import HomePage from './pages/HomePage'
+
 function App() {
   return (
-    <div className="min-h-screen bg-[#0D0A08] flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-[#D4A04A]">Roast & Ritual</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
