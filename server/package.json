@@ -10,12 +10,20 @@
   "dependencies": {
     "@prisma/adapter-neon": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.3",
     "prisma": "^7.8.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.14.1",
     "tsx": "^4.19.3",
     "typescript": "~5.8.3"

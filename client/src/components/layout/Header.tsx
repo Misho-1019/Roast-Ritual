@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuthStore } from '../../stores/authStore'
 
 const navLinks = [
   { label: 'Shop', to: '/shop' },
@@ -10,6 +11,7 @@ const navLinks = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const { user, isAuthenticated, logout } = useAuthStore()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -43,16 +45,40 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5">
           <button className="text-on-surface hover:text-primary scale-95 active:scale-90 transition-transform relative">
             <span className="material-symbols-outlined">shopping_cart</span>
             <span className="absolute -top-1 -right-2 bg-primary-container text-on-primary-container text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
               2
             </span>
           </button>
-          <button className="text-on-surface hover:text-primary scale-95 active:scale-90 transition-transform">
-            <span className="material-symbols-outlined">person</span>
-          </button>
+          {isAuthenticated && user ? (
+            <div className="flex items-center gap-3">
+              <span className="text-on-surface-variant text-sm hidden sm:inline">{user.name}</span>
+              <button
+                onClick={logout}
+                className="text-on-surface-variant hover:text-primary transition-colors"
+                title="Sign out"
+              >
+                <span className="material-symbols-outlined">logout</span>
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-3">
+              <Link
+                to="/login"
+                className="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body text-sm"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/register"
+                className="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition-all"
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </header>

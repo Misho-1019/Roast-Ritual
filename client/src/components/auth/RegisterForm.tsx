@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../../stores/authStore'
 
 interface RegisterFormProps {
   onSubmit?: (data: { name: string; email: string; password: string }) => void
   isLoading?: boolean
 }
 
-export default function RegisterForm({ onSubmit, isLoading }: RegisterFormProps) {
+export default function RegisterForm({ onSubmit: externalSubmit, isLoading: externalLoading }: RegisterFormProps) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -14,11 +15,32 @@ export default function RegisterForm({ onSubmit, isLoading }: RegisterFormProps)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
   const [agreeTerms, setAgreeTerms] = useState(false)
+  const [passError, setPassError] = useState('')
+  const { register, isLoading: storeLoading, error, clearError } = useAuthStore()
+  const navigate = useNavigate()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const isLoading = externalLoading ?? storeLoading
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (password !== confirmPassword) return
-    onSubmit?.({ name, email, password })
+    clearError()
+    setPassError('')
+
+    if (password !== confirmPassword) {
+      setPassError('Passwords do not match')
+      return
+    }
+
+    try {
+      if (externalSubmit) {
+        await externalSubmit({ name, email, password })
+      } else {
+        await register(name, email, password)
+        navigate('/')
+      }
+    } catch {
+      // Error is set in the store
+    }
   }
 
   const togglePassword = (field: 'password' | 'confirm') => {
@@ -36,6 +58,11 @@ export default function RegisterForm({ onSubmit, isLoading }: RegisterFormProps)
           </p>
         </div>
         <form className="space-y-5" onSubmit={handleSubmit}>
+          {(error || passError) && (
+            <div className="bg-error/10 border border-error/30 rounded-lg p-3">
+              <p className="text-error text-sm">{passError || error}</p>
+            </div>
+          )}
           <div className="space-y-2">
             <label className="font-small text-small text-on-surface-variant block ml-1" htmlFor="name">
               Full Name
@@ -137,7 +164,7 @@ export default function RegisterForm({ onSubmit, isLoading }: RegisterFormProps)
           <button
             type="submit"
             disabled={isLoading || !agreeTerms}
-            className="btn-primary w-full py-4 rounded-lg font-bold text-body tracking-wide mt-4 flex items-center justify-center gap-2 bg-primary-container text-on-primary-container hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-70"
+            className="bg-primary-container text-on-primary-container w-full py-4 rounded-lg font-bold text-body tracking-wide mt-4 flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-70"
           >
             {isLoading ? (
               <span className="material-symbols-outlined animate-spin">refresh</span>

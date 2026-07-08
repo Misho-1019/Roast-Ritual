@@ -1,19 +1,34 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../../stores/authStore'
 
 interface LoginFormProps {
   onSubmit?: (data: { email: string; password: string }) => void
   isLoading?: boolean
 }
 
-export default function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
+export default function LoginForm({ onSubmit: externalSubmit, isLoading: externalLoading }: LoginFormProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const { login, isLoading: storeLoading, error, clearError } = useAuthStore()
+  const navigate = useNavigate()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const isLoading = externalLoading ?? storeLoading
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    onSubmit?.({ email, password })
+    clearError()
+    try {
+      if (externalSubmit) {
+        await externalSubmit({ email, password })
+      } else {
+        await login(email, password)
+        navigate('/')
+      }
+    } catch {
+      // Error is set in the store
+    }
   }
 
   return (
@@ -26,6 +41,11 @@ export default function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
           </p>
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
+          {error && (
+            <div className="bg-error/10 border border-error/30 rounded-lg p-3">
+              <p className="text-error text-sm">{error}</p>
+            </div>
+          )}
           <div className="space-y-2">
             <label className="font-small text-small text-on-surface-variant block uppercase tracking-wider" htmlFor="email">
               Email Address
