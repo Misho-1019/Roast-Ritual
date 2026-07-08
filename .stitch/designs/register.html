@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Join the Ritual | Roast & Ritual Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Public+Sans:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        body {
+            background-color: #0D0A08; /* Warm Pitch - Surface 0 */
+            color: #e9e1dc;
+            overflow-x: hidden;
+        }
+
+        .login-card {
+            background-color: #1C1512; /* Deep Espresso - Surface 1 */
+            border: 1px solid #7C4F34; /* Chestnut Border */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-field {
+            background-color: #161310;
+            border: 1px solid #4f4537; /* Outline Variant */
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #f5bd64; /* Gold */
+            box-shadow: 0 0 0 2px rgba(245, 189, 100, 0.2);
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: #d4a04a; /* Gold */
+            color: #161310;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        /* Subtle Atmosphere Overlay */
+        .coffee-grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+            z-index: 50;
+        }
+
+        .gradient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 79, 52, 0.15) 0%, rgba(13, 10, 8, 0) 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#693f25",
+                        "primary": "#f5bd64",
+                        "secondary-fixed": "#ffdbc9",
+                        "inverse-primary": "#7f5600",
+                        "on-primary-fixed-variant": "#604100",
+                        "on-error": "#690005",
+                        "surface-bright": "#3d3835",
+                        "surface-container": "#231f1c",
+                        "on-secondary-fixed-variant": "#663d23",
+                        "outline": "#9c8f7e",
+                        "on-secondary-container": "#e6ac8b",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#4b270f",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#383431",
+                        "on-surface": "#e9e1dc",
+                        "surface-tint": "#f5bd64",
+                        "on-tertiary": "#48290f",
+                        "on-primary": "#432c00",
+                        "tertiary-container": "#ce9f7d",
+                        "on-tertiary-container": "#57361b",
+                        "tertiary-fixed": "#ffdcc4",
+                        "secondary": "#f6b998",
+                        "primary-fixed": "#ffddae",
+                        "surface-variant": "#383431",
+                        "error-container": "#93000a",
+                        "background": "#161310",
+                        "on-primary-fixed": "#281800",
+                        "on-primary-container": "#553800",
+                        "primary-fixed-dim": "#f5bd64",
+                        "on-secondary-fixed": "#321301",
+                        "on-tertiary-fixed": "#2f1501",
+                        "surface": "#161310",
+                        "surface-container-high": "#2d2927",
+                        "surface-container-low": "#1e1b18",
+                        "inverse-surface": "#e9e1dc",
+                        "on-surface-variant": "#d3c4b2",
+                        "outline-variant": "#4f4537",
+                        "on-background": "#e9e1dc",
+                        "surface-dim": "#161310",
+                        "tertiary-fixed-dim": "#efbc98",
+                        "tertiary": "#efbc98",
+                        "primary-container": "#d4a04a",
+                        "inverse-on-surface": "#34302d",
+                        "secondary-fixed-dim": "#f6b998",
+                        "surface-container-lowest": "#110e0b",
+                        "on-tertiary-fixed-variant": "#613f24"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "clamp(4rem, 8vw, 8rem)",
+                        "container-padding": "2rem",
+                        "max-width": "1400px",
+                        "gutter": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "small": ["Public Sans"],
+                        "h2": ["Inter"],
+                        "display": ["Inter"],
+                        "body": ["Inter"],
+                        "h1": ["Inter"]
+                    },
+                    "fontSize": {
+                        "small": ["0.875rem", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "h2": ["2rem", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "display": ["clamp(3rem, 8vw, 5rem)", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body": ["1rem", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h1": ["2.5rem", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="flex flex-col min-h-screen items-center font-body selection:bg-primary-container selection:text-on-primary-container">
+<div class="coffee-grain-overlay"></div>
+<div class="gradient-glow top-[-10%] left-[-10%]"></div>
+<div class="gradient-glow bottom-[-10%] right-[-10%]"></div>
+<!-- Header Section -->
+<header class="w-full max-w-max-width mx-auto pt-12 pb-8 flex flex-col items-center gap-6 z-10">
+<div class="w-24 h-24 relative">
+<img alt="Roast & Ritual Logo" class="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(212,160,74,0.3)]" src="https://lh3.googleusercontent.com/aida/AP1WRLuMbavASvYkuWy9MRdKiTxZLU7OCLVk43Qc7ZaOaeIPft2FwukUSokd8RgN3QOyZur4oEE1OmXSvBA75v_hEsTxcgD90Aw6fEsasc6PfQSiwU1cnxJDpgH1aroBnDUbV__MLVZBdX4DQMHDPtfH7wHBTz_BwzqFmwmCUk-_la665IP7Wnv4tdws4-4_E0R2PzXrYscYvTSLFYDIsYmfwdQCJHitbOta0mXJ3gi-XSvW97Ju2Vg3qWANAOw"/>
+</div>
+<h1 class="font-h1 text-h1 text-primary tracking-tighter">Roast & Ritual</h1>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full flex items-center justify-center px-container-padding py-12 z-10">
+<div class="login-card w-full max-w-[480px] rounded-xl p-8 md:p-12 transition-all duration-500 hover:border-primary/40">
+<div class="text-center mb-10">
+<h2 class="font-h2 text-h2 text-on-surface mb-2">Create Your Ritual</h2>
+<p class="font-body text-on-surface-variant opacity-80">Join the community of coffee enthusiasts</p>
+</div>
+<form action="#" class="space-y-6" id="registrationForm" method="POST">
+<!-- Name Field -->
+<div class="space-y-2">
+<label class="font-small text-small text-on-surface-variant block ml-1" for="name">Full Name</label>
+<div class="relative group">
+<input class="input-field w-full rounded-lg py-3 px-4 text-on-surface placeholder:text-outline-variant font-body focus:ring-0" id="name" name="name" placeholder="Elias Thorne" required="" type="text"/>
+</div>
+</div>
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="font-small text-small text-on-surface-variant block ml-1" for="email">Email Address</label>
+<div class="relative group">
+<input class="input-field w-full rounded-lg py-3 px-4 text-on-surface placeholder:text-outline-variant font-body focus:ring-0" id="email" name="email" placeholder="ritual@coffee.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<label class="font-small text-small text-on-surface-variant block ml-1" for="password">Password</label>
+<div class="relative group">
+<input class="input-field w-full rounded-lg py-3 px-4 pr-12 text-on-surface placeholder:text-outline-variant font-body focus:ring-0" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant hover:text-primary transition-colors" onclick="togglePassword('password')" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Confirm Password Field -->
+<div class="space-y-2">
+<label class="font-small text-small text-on-surface-variant block ml-1" for="confirm-password">Confirm Password</label>
+<div class="relative group">
+<input class="input-field w-full rounded-lg py-3 px-4 pr-12 text-on-surface placeholder:text-outline-variant font-body focus:ring-0" id="confirm-password" name="confirm-password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant hover:text-primary transition-colors" onclick="togglePassword('confirm-password')" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Terms Checkbox -->
+<div class="flex items-start gap-3 pt-2">
+<input class="mt-1 rounded border-outline-variant bg-surface-container text-primary focus:ring-primary focus:ring-offset-background" id="terms" required="" type="checkbox"/>
+<label class="font-small text-on-surface-variant text-[13px] leading-tight cursor-pointer" for="terms">
+                        I agree to the <a class="text-primary hover:underline transition-all" href="#">Terms of Service</a> and <a class="text-primary hover:underline transition-all" href="#">Privacy Policy</a>.
+                    </label>
+</div>
+<!-- Submit Button -->
+<button class="btn-primary w-full py-4 rounded-lg font-bold text-body tracking-wide mt-4 flex items-center justify-center gap-2" type="submit">
+                    Create Account
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</form>
+<div class="mt-8 text-center border-t border-outline-variant/30 pt-8">
+<p class="font-body text-on-surface-variant">
+                    Already have an account? 
+                    <a class="text-primary font-bold hover:underline underline-offset-4 ml-1 transition-all" href="#">Sign In</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Footer Section -->
+<footer class="w-full max-w-max-width mx-auto px-container-padding py-12 flex flex-col md:flex-row justify-between items-center border-t border-secondary-container/30 z-10">
+<div class="mb-4 md:mb-0">
+<p class="font-small text-small text-on-surface-variant">© 2024 Roast & Ritual. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-small text-small text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="font-small text-small text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a>
+<a class="font-small text-small text-on-surface-variant hover:text-primary transition-colors" href="#">Help</a>
+</div>
+</footer>
+<script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const button = input.nextElementSibling;
+            const icon = button.querySelector('.material-symbols-outlined');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        }
+
+        // Micro-interaction for input fields
+        document.querySelectorAll('.input-field').forEach(field => {
+            field.addEventListener('focus', () => {
+                field.parentElement.parentElement.querySelector('label').classList.add('text-primary');
+            });
+            field.addEventListener('blur', () => {
+                field.parentElement.parentElement.querySelector('label').classList.remove('text-primary');
+            });
+        });
+
+        // Form submission animation mock
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Brewing your account...';
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalContent;
+                btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                alert('Welcome to the Ritual! Verification email sent.');
+            }, 2000);
+        });
+    </script>
+</body></html>
