@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Roast & Ritual | Artisanal Coffee Experience</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Public+Sans:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#ce9f7d",
+                    "on-tertiary-container": "#57361b",
+                    "tertiary-fixed": "#ffdcc4",
+                    "secondary": "#f6b998",
+                    "primary-fixed": "#ffddae",
+                    "on-primary": "#432c00",
+                    "surface-container-highest": "#383431",
+                    "on-surface": "#e9e1dc",
+                    "surface-tint": "#f5bd64",
+                    "on-tertiary": "#48290f",
+                    "error": "#ffb4ab",
+                    "on-secondary": "#4b270f",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#e6ac8b",
+                    "surface-bright": "#3d3835",
+                    "surface-container": "#231f1c",
+                    "on-secondary-fixed-variant": "#663d23",
+                    "outline": "#9c8f7e",
+                    "secondary-fixed": "#ffdbc9",
+                    "inverse-primary": "#7f5600",
+                    "on-primary-fixed-variant": "#604100",
+                    "on-error": "#690005",
+                    "secondary-container": "#693f25",
+                    "primary": "#f5bd64",
+                    "secondary-fixed-dim": "#f6b998",
+                    "surface-container-lowest": "#110e0b",
+                    "on-tertiary-fixed-variant": "#613f24",
+                    "surface-dim": "#161310",
+                    "tertiary-fixed-dim": "#efbc98",
+                    "tertiary": "#efbc98",
+                    "primary-container": "#d4a04a",
+                    "inverse-on-surface": "#34302d",
+                    "outline-variant": "#4f4537",
+                    "on-background": "#e9e1dc",
+                    "on-surface-variant": "#d3c4b2",
+                    "surface-container-high": "#2d2927",
+                    "surface-container-low": "#1e1b18",
+                    "inverse-surface": "#e9e1dc",
+                    "on-tertiary-fixed": "#2f1501",
+                    "surface": "#161310",
+                    "surface-variant": "#383431",
+                    "error-container": "#93000a",
+                    "background": "#161310",
+                    "on-primary-fixed": "#281800",
+                    "on-primary-container": "#553800",
+                    "primary-fixed-dim": "#f5bd64",
+                    "on-secondary-fixed": "#321301"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width": "1400px",
+                    "gutter": "1.5rem",
+                    "container-padding": "2rem",
+                    "section-gap": "clamp(4rem, 8vw, 8rem)"
+            },
+            "fontFamily": {
+                    "h2": ["Inter"],
+                    "display": ["Inter"],
+                    "body": ["Inter"],
+                    "h1": ["Inter"],
+                    "small": ["Public Sans"]
+            },
+            "fontSize": {
+                    "h2": ["2rem", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "display": ["clamp(3rem, 8vw, 5rem)", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body": ["1rem", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "h1": ["2.5rem", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "small": ["0.875rem", {"lineHeight": "1.4", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0D0A08; /* Warm Pitch - Surface 0 */
+            color: #e9e1dc;
+        }
+        .tonal-layer-1 {
+            background-color: #1C1512; /* Deep Espresso - Surface 1 */
+        }
+        .border-chestnut {
+            border-color: #7C4F34;
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .ritual-overlay {
+            background: linear-gradient(to right, rgba(13, 10, 8, 0.9) 20%, rgba(13, 10, 8, 0) 100%);
+        }
+    </style>
+</head>
+<body class="font-body text-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="bg-background dark:bg-background border-b border-outline-variant docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center h-20 px-gutter w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-8">
+<h1 class="font-display text-h2 font-extrabold text-primary dark:text-primary tracking-tight">Roast & Ritual</h1>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Shop</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Quiz</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Brew Guides</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">About</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container rounded-full px-4 py-2 border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-small w-48 text-on-surface" placeholder="Search Rituals..." type="text"/>
+</div>
+<button class="text-primary hover:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="text-primary hover:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section: Asymmetric Ritual -->
+<section class="relative min-h-[921px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A moody, high-contrast close-up of a slow pour-over coffee ritual. Thin wisps of steam rise from a ceramic carafe into a dark, mahogany-toned atmosphere. Warm, golden side-lighting catches the texture of freshly ground coffee and polished copper brewing equipment. The background is a deep, warm espresso black, emphasizing a sense of quiet luxury and artisanal craftsmanship." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQHjH8gv3n-7JR2-6MoXUFiCzYV-Xjg2JG-_MBBuaM7SrhCMNZhiG21lPn20tSomLZv6dJJKE_E-NXSLML73yZDomGm9_-pN5xJIlrVFeBIZnDZQ5r6iYDT1odyK5aRE8bt5EF6N4odA0P6623-2L9f2ix1fXFp0Wn83vA_l3v7XfInNyMTbyxo1Gppt3DFSiHrdh6bNxXve4jnIsB4hECjL5_RDDWzHFnM2SHVEH3e7iYhrROrWBHzFJ1siI-tl8ssCWlguWvYHQ')"></div>
+<div class="absolute inset-0 ritual-overlay"></div>
+</div>
+<div class="container-padding max-w-max-width mx-auto relative z-10 w-full">
+<div class="max-w-2xl fade-in-up">
+<span class="text-primary font-small tracking-[0.2em] uppercase mb-4 block">The Art of the Brew</span>
+<h2 class="font-display text-display text-on-surface mb-8">Turn your coffee into a ritual</h2>
+<p class="text-on-surface-variant text-lg mb-10 max-w-lg">
+                        Elevate your mornings with ethically sourced, small-batch beans roasted to highlight the complex soul of every origin.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-bold hover:scale-95 transition-transform flex items-center gap-2">
+                            Take the Quiz <span class="material-symbols-outlined">auto_awesome</span>
+</button>
+<button class="border border-chestnut text-on-surface px-8 py-4 rounded-lg font-bold hover:bg-surface-container transition-colors">
+                            Explore Collections
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Products Grid -->
+<section class="py-section-gap px-gutter max-w-max-width mx-auto">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h3 class="font-h1 text-h1 text-on-surface mb-2">Seasonal Roasts</h3>
+<p class="text-on-surface-variant">Our current curation of single-origin and signature blends.</p>
+</div>
+<a class="text-primary flex items-center gap-2 hover:underline" href="#">
+                    View All Roasts <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Card 1 -->
+<div class="tonal-layer-1 border border-chestnut p-6 rounded-xl group hover:border-primary transition-colors duration-500">
+<div class="aspect-[4/5] relative mb-6 overflow-hidden rounded-lg bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A premium matte black coffee bag with a minimalist gold foil label that says 'Ethiopia Yirgacheffe'. The bag sits on a dark stone surface with a few scattered roasted coffee beans around it. The lighting is dramatic and warm, highlighting the gold foil details and the velvety texture of the packaging against a deep mahogany background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5ohB9Rc44ajHIVJncuCgTbIif4UCN_yX1v4ihN4-h_K375Qx1Om79xl6KD4m2n1-mmDyRwOFTUOkep8tohFMAsBtTJQ0xQhO3f9efKOClIp9EFg0GxnJ0C-wfMcBqb0zrrEfx7XjhZGovHzuLXu4LRlVfTvyBF7PJSDRc0130BXSu5V1X96EsMUuszF3JCx5KNIxJA5Gncl1C7kydbYvkcr1MzcoX4VY6nLJ0e98z-1sevjS7wM4TVGj2KBbR367oxzkAPrkcGPU"/>
+<div class="absolute top-3 right-3">
+<span class="bg-primary text-on-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Featured</span>
+</div>
+</div>
+<div class="space-y-2">
+<h4 class="font-h2 text-h2 text-on-surface group-hover:text-primary transition-colors">Yirgacheffe Bloom</h4>
+<div class="flex items-center gap-2 text-small text-on-tertiary-container">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+                            Light Roast
+                        </div>
+<p class="text-small text-on-surface-variant italic">Notes: Jasmine, Bergamot, Lemon Zest</p>
+<div class="pt-4 flex justify-between items-center">
+<span class="text-h2 text-primary">$24.00</span>
+<button class="bg-surface-container-highest p-3 rounded-full hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="tonal-layer-1 border border-chestnut p-6 rounded-xl group hover:border-primary transition-colors duration-500">
+<div class="aspect-[4/5] relative mb-6 overflow-hidden rounded-lg bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A sleek coffee bag in a dark chocolate brown hue with an elegant embossed gold logo for Roast & Ritual. The label indicates 'Midnight Ritual' Blend. It is positioned asymmetrically in a moody studio setting with dark shadows and warm amber highlights, evoking a sense of luxury and deep, rich flavors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt1KC7OV_B0HWxIjqrtSPof-X8ZhOeNt7Gk_k4qmI9KxJ5ew9qlUaPzRKIgGpo8OYhPJQhCapdK-w2GGzEZhZA5vBuMPwSd07RiwQnXFAtKc0WGTWUtKvpIyoZi5ofmhg2Eqs6xwpIcmCbe3BzrrllaYpNDHrmRbW06fH1qNLlIlBWpo1Q9jydstRDycCz7UP-jeKRcZhNR9-LYT2Gr9U8RII0l6zpdWsuQCMfK1PGFGFSi-W8H0QsZ64w8LVO31ocDxA6x6qZlJY"/>
+</div>
+<div class="space-y-2">
+<h4 class="font-h2 text-h2 text-on-surface group-hover:text-primary transition-colors">Midnight Ritual</h4>
+<div class="flex items-center gap-2 text-small text-on-tertiary-container">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+                            Dark Roast
+                        </div>
+<p class="text-small text-on-surface-variant italic">Notes: Dark Chocolate, Smoke, Molasses</p>
+<div class="pt-4 flex justify-between items-center">
+<span class="text-h2 text-primary">$22.00</span>
+<button class="bg-surface-container-highest p-3 rounded-full hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="tonal-layer-1 border border-chestnut p-6 rounded-xl group hover:border-primary transition-colors duration-500">
+<div class="aspect-[4/5] relative mb-6 overflow-hidden rounded-lg bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A minimalist white and gold coffee bag labeled 'Highland Mist'. The bag is placed on a dark wooden table next to a steaming glass of coffee. The environment is a sophisticated, dimly lit modern kitchen with chestnut wood accents and soft atmospheric lighting that creates a cozy but high-end artisanal feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmFFXO-N7UGa6coY7U3KNcDJLgpbd103Q6f9jQeg2WOmG4uW_F7bXiao7QH-Kljr-RRAaI1xt39edGv8P0t6pIgpu28oobJ5UrMRWl52cCAi1tfvrd_4wSK7_7rIHRlGnPt9aZXwDAnDcRC_h8k19pD7wfXiGkQ2cdPwwgVN8JtVW1X9cvqEigq7pvryc5v4-_u7718jfgJFXSC84nWtH2E-7GXghtWl63uKMHqmXHuXqHggjzoCphZqPZ9YZYq2KITOzn8QEEb60"/>
+<div class="absolute top-3 right-3">
+<span class="bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">New</span>
+</div>
+</div>
+<div class="space-y-2">
+<h4 class="font-h2 text-h2 text-on-surface group-hover:text-primary transition-colors">Highland Mist</h4>
+<div class="flex items-center gap-2 text-small text-on-tertiary-container">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+                            Medium Roast
+                        </div>
+<p class="text-small text-on-surface-variant italic">Notes: Honey, Toasted Hazelnut, Apple</p>
+<div class="pt-4 flex justify-between items-center">
+<span class="text-h2 text-primary">$26.00</span>
+<button class="bg-surface-container-highest p-3 rounded-full hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="tonal-layer-1 border border-chestnut p-6 rounded-xl group hover:border-primary transition-colors duration-500">
+<div class="aspect-[4/5] relative mb-6 overflow-hidden rounded-lg bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="An artisanal coffee bag with a deep terracotta and gold textured finish, resting against a backdrop of antique brass coffee canisters. The label reads 'Volcano Reserve'. The composition is elegant and moody, using soft focus and warm, low-key lighting to emphasize the premium, exclusive nature of the product." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAk_ixQpjaMXHT0xeGrNdZiAi1NFHHXYBlkiqz_DWpEq3iLqcrd3VCivwgn6fbva_IALhc0v4RxpiKfRr5Q9ZOZLBnqWyfPvKaaXzdf-7ehKi8cVDpP0f9Dct9VW13LwjCDZHZ6LR9bgq4bFJmuha97uL83f-2Tpe1CCJExmjGzH-pA_CgUIGIqlxjtTdPLYeUfqJ7EB2v2l5EzMnZuIhcCrsIIEAKyDXSFFExXDLSFZQCefy0o6crnypsw1R3bq-SufQ6BNscXq_E"/>
+</div>
+<div class="space-y-2">
+<h4 class="font-h2 text-h2 text-on-surface group-hover:text-primary transition-colors">Volcano Reserve</h4>
+<div class="flex items-center gap-2 text-small text-on-tertiary-container">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+                            Medium-Dark Roast
+                        </div>
+<p class="text-small text-on-surface-variant italic">Notes: Red Fruit, Spice, Earthy Tobacco</p>
+<div class="pt-4 flex justify-between items-center">
+<span class="text-h2 text-primary">$28.00</span>
+<button class="bg-surface-container-highest p-3 rounded-full hover:bg-primary hover:text-on-primary transition-all">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Story Section: Split Layout -->
+<section class="grid grid-cols-1 md:grid-cols-2 min-h-[716px]">
+<div class="order-2 md:order-1 flex items-center justify-center p-gutter lg:p-24 tonal-layer-1">
+<div class="max-w-md">
+<span class="text-primary font-small tracking-[0.2em] uppercase mb-4 block">Our Heritage</span>
+<h2 class="font-display text-h1 text-on-surface mb-6">The Roaster's Philosophy</h2>
+<p class="text-on-surface-variant mb-8">
+                        We believe coffee is more than just a morning stimulant. It is a moment of stillness, a sensory exploration, and a ritual that connects the farmer’s toil to your quiet reflection. 
+                    </p>
+<p class="text-on-surface-variant mb-10">
+                        Our master roaster treats every batch as a unique composition, balancing heat and airflow to unlock the hidden nuances of the bean. No shortcuts, no compromises.
+                    </p>
+<button class="group flex items-center gap-4 text-primary font-bold">
+<span class="h-[1px] w-12 bg-primary transition-all group-hover:w-20"></span>
+                        Our Full Story
+                    </button>
+</div>
+</div>
+<div class="order-1 md:order-2 h-[400px] md:h-auto">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic, low-light photograph of a master coffee roaster at work. They are silhouetted against the warm orange glow of an industrial coffee roasting machine. Grains of green coffee beans are being inspected under a focused spotlight. The air is thick with a sense of focus and artisanal passion, set in a rustic workshop with dark wood and aged metal textures." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCRCL4f1sWl0ae5Dhp38eta-ei8Rb_FgnnPMlVw3imWZtsU9r-SY8-d-8JX6P3f5oKA6kjPlMdCL9BY4LFGFPgPfJA8Lz-ClTYzjc7f4WvdYKDdt0jG4hmPvkARRAhKbIkf0A9mc5FfPl64jXkVrTgKB_UCa79QykHq6Yj84Ron1go9hKHacBN-gRGJUSG3mCxvGhNfj4fMvdag1loAytK0weuu7H5A--7E_R-QZ6gs2EMnnLI4cSxLcDGvalG6-WT-DHIFiPNgr3U')"></div>
+</div>
+</section>
+<!-- Newsletter: Join the Ritual -->
+<section class="py-section-gap px-gutter bg-surface-container-lowest overflow-hidden relative">
+<!-- Atmospheric micro-interaction background element -->
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-primary/5 rounded-full blur-[100px]"></div>
+<div class="absolute -bottom-24 -left-24 w-96 h-96 bg-secondary/5 rounded-full blur-[100px]"></div>
+<div class="max-w-3xl mx-auto text-center relative z-10">
+<span class="material-symbols-outlined text-primary text-5xl mb-6">spa</span>
+<h2 class="font-display text-h1 text-on-surface mb-4">Join the Ritual</h2>
+<p class="text-on-surface-variant mb-10 text-lg">
+                    Subscribe to receive exclusive access to small-batch drops, brewing science tips, and early invitations to our tasting events.
+                </p>
+<form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto" onsubmit="event.preventDefault(); alert('Ritual joined.');">
+<input class="flex-1 bg-surface-container border border-chestnut rounded-lg px-6 py-4 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-on-surface" placeholder="Enter your email address" type="email"/>
+<button class="bg-primary-container text-on-primary-container font-bold px-8 py-4 rounded-lg hover:scale-95 transition-transform whitespace-nowrap" type="submit">
+                        Subscribe Now
+                    </button>
+</form>
+<p class="text-small text-on-surface-variant/60 mt-6">Respecting your privacy and your inbox.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-section-gap px-gutter py-20 w-full max-w-max-width mx-auto">
+<div class="space-y-6">
+<h1 class="font-display text-h1 text-primary dark:text-primary">Roast & Ritual</h1>
+<p class="text-on-surface-variant font-body text-body">
+                    Crafting the world's finest coffee rituals since 2024. Sustainably sourced, artisanally roasted.
+                </p>
+<div class="flex gap-4">
+<a class="text-primary hover:opacity-100 opacity-80 transition-opacity" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-primary hover:opacity-100 opacity-80 transition-opacity" href="#"><span class="material-symbols-outlined">filter_drama</span></a>
+<a class="text-primary hover:opacity-100 opacity-80 transition-opacity" href="#"><span class="material-symbols-outlined">camera</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-primary font-bold mb-6">Shop</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Shop All</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Single Origin</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Subscription</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Equipment</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-primary font-bold mb-6">Education</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Brewing Science</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Water Chemistry</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Grind Theory</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-primary font-bold mb-6">Support</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Contact Support</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Shipping Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Sustainability</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-max-width mx-auto px-gutter py-8 border-t border-outline-variant text-center md:text-left">
+<p class="text-on-surface-variant text-small opacity-80">
+                © 2024 Roast & Ritual. Crafted for the artisanal soul.
+            </p>
+</div>
+</footer>
+<script>
+        // Simple micro-interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+
+        // Add subtle parallax effect on hero image on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroImage = document.querySelector('[data-alt*="pour-over coffee ritual"]');
+            if(heroImage) {
+                heroImage.style.transform = `translateY(${scrolled * 0.4}px)`;
+            }
+        });
+    </script>
+</body></html>

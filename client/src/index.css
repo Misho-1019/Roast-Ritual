@@ -1,1 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Public+Sans:wght@500&family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --color-background: #0D0A08;
+  --color-surface: #161310;
+  --color-surface-container-lowest: #110e0b;
+  --color-surface-container-low: #1e1b18;
+  --color-surface-container: #231f1c;
+  --color-surface-container-high: #2d2927;
+  --color-surface-container-highest: #383431;
+  --color-surface-bright: #3d3835;
+  --color-surface-dim: #161310;
+  --color-surface-variant: #383431;
+  --color-on-surface: #e9e1dc;
+  --color-on-surface-variant: #d3c4b2;
+  --color-primary: #f5bd64;
+  --color-primary-container: #d4a04a;
+  --color-on-primary: #432c00;
+  --color-on-primary-container: #553800;
+  --color-secondary: #f6b998;
+  --color-secondary-container: #693f25;
+  --color-on-secondary-container: #e6ac8b;
+  --color-tertiary: #efbc98;
+  --color-tertiary-container: #ce9f7d;
+  --color-outline: #9c8f7e;
+  --color-outline-variant: #4f4537;
+  --color-error: #ffb4ab;
+  --color-espresso: #1C1512;
+  --color-chestnut: #7C4F34;
+  --color-caramel: #A67B5B;
+  --color-secondary-mocha: #B8A89A;
+  --font-display: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-small: 'Public Sans', sans-serif;
+  --spacing-max-width: 1400px;
+  --spacing-container-padding: 2rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-section-gap: clamp(4rem, 8vw, 8rem);
+}
+
+body {
+  background-color: #0D0A08;
+  color: #e9e1dc;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+.gallery-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-card:hover {
+  transform: translateY(-8px);
+  border-color: #f5bd64;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}

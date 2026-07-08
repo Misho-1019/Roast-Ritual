@@ -1,35 +1,45 @@
+import { useScrollReveal } from '../../hooks/useScrollReveal'
+
+const storyImg = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBFvWRk7Lpupl4IVx8EBS0UqkrZXyls-O6d-0kAuosFAO0dHmXvbWISgs5AN55lsTi7p3WJ-K7Kxmx8-mw5ETKIoSjwRNeH77_Cbb-VYNhbNRyUm1WTo2HoAPoj8m547CAGWZ8tSBr6IH01CycEqSo0V0azZIqfmm6VS3zYy8E6j4bkfSjOjbSBTuas2Y9da78Zz3GS3SCsivX96v0buWDXI7UNWIIHgvTZDFQ5fjEzJPEMfMduz-oPg0bIbZFj0gXFBX8ETcFBNNY'
+
 export default function StorySection() {
+  const ref = useScrollReveal<HTMLElement>()
+
   return (
-    <section className="py-24 bg-[#1C1512]/50">
-      <div className="max-w-[1400px] mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#F5F0EB] tracking-tight">
-              Crafted with intention, roasted with care
-            </h2>
-            <div className="space-y-4 text-[#B8A89A] leading-relaxed">
+    <section ref={ref} className="py-section-gap">
+      <div className="max-w-max-width mx-auto px-container-padding">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="order-2 md:order-1 h-[500px] rounded-2xl overflow-hidden border border-outline-variant">
+            <img
+              className="w-full h-full object-cover"
+              src={storyImg}
+              alt="Coffee roasting facility with vintage roaster and burlap sacks"
+            />
+          </div>
+          <div className="order-1 md:order-2">
+            <span className="text-primary font-small uppercase tracking-widest block mb-4">
+              The Roaster&apos;s Philosophy
+            </span>
+            <h2 className="font-display text-display mb-8">Crafting moments of quiet luxury</h2>
+            <div className="space-y-6 text-secondary-mocha font-body leading-relaxed">
               <p>
-                Every bean we source tells a story. From the highlands of Ethiopia to the
-                lush mountains of Colombia, we partner directly with farmers who share our
-                commitment to quality and sustainability.
+                At Roast &amp; Ritual, we believe coffee isn&apos;t just a caffeine delivery
+                system&mdash;it&apos;s a ceremony. We source only the top 1% of specialty-grade
+                beans, focusing on direct-trade relationships that honor the farmer&apos;s craft as
+                much as our own.
               </p>
               <p>
-                Our master roasters bring out the unique character of each origin, creating
-                a cup that is both approachable and extraordinary. This is coffee as it
-                should be — slow, intentional, and deeply satisfying.
+                Our roasting process is intentional, slow, and precise. We treat every batch as a
+                unique composition, bringing out the latent terroir and nuanced sweetness that
+                mass-produced coffee simply cannot capture.
               </p>
             </div>
-            <a
-              href="/about"
-              className="inline-flex items-center text-[#D4A04A] font-semibold hover:brightness-110 transition-all"
-            >
-              Read Our Story &rarr;
-            </a>
-          </div>
-          <div className="relative aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-[#D4A04A]/10 to-[#1C1512] border border-[#7C4F34]/30 flex items-center justify-center">
-            <svg className="w-24 h-24 text-[#D4A04A]/20" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M2 21V19H20V21H2ZM20 8V5H22V11H20V10H16V18H4V8H20ZM18 8H6V16H18V8Z" />
-            </svg>
+            <div className="mt-10">
+              <a className="inline-flex items-center gap-2 border-b-2 border-primary pb-1 text-primary font-bold hover:gap-4 transition-all" href="#">
+                Learn about our process{' '}
+                <span className="material-symbols-outlined">arrow_right_alt</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

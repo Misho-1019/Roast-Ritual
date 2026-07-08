@@ -1,81 +1,56 @@
+import { useScrollReveal } from '../../hooks/useScrollReveal'
+
+const productImages = [
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuAZcbV-rZZJqxtnNqTv30TWfrUxqeiMrSQQIP72N7NznwT7RGfwpNSQ5KIMv2PKdrcNTGpxgWfbFzLVuce4N9bic3sYQQ-w7DnCjT9v8-w9r57adnwwmWoYuZ2JzUlN1m_Bu1sgqtohJaOdih7yhCR-echybm7waPzD8ocE7FoiTJl4ma_J6gzUF3gCdVL6uYfHP-uvLwl7g6sTFPrMMaiGQkyZ85IULp3IuD7lWs3jDG9c_mUOLIFAITVbiX2hDhOEwbVGeKMRIZs',
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuB5qLIG-wEZJiYR4d5dvY6ZN7mq-fy6qOR-pLIl9K2VFRwmp8KgLiJdo62Bs57pCgt3xMgf8snJBXsvvhIjZc-hCy1ziTNPXyQEKAQ5Dupo-nJ0Wcw9M8QFpaT2_A7D8ZbyuXgFG92-qu0eVnxsBp3G0UqMFeVjx819FBlhXyuQn96UUFW4XfBR98E_BrcKpQExPgzC4rmLkphenZMhoOMrl4pJMRm5--pzGOLJDk3B4Rl7VVmHZ_n-6tAQUphIWQA7Jg3i64-0-GA',
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuAwebKEY5VrYuu7MOa6txGOsapmLcdckM4RBhcKc2WnLMtVU1XzsQAr7D0qlJczUqD2--XA-jVPYsJa0N0axP1XFhi-1oHeLQR2Ag3-1Q2ZDcNRrJkCoM_PqACDJGs1ani4d1zGh5kk_aVl16pL4tER0jJUks3i_NFyfZo5K5I0j_9MJGwjd6nAxOqxViT_6ynd7kKdse1eHVt9ruvtt8_VlHD9tBfYVgb9OI-yXUncTtVPV0NFSOUwFNwfB9UInTDP6nflD4lKg5s',
+  'https://lh3.googleusercontent.com/aida-public/AB6AXuB7qDnK5TuhnUz3FIUvJUGw9aFsSsiHptvO8YO7WBqOiaMTRFyGMtnPWhjiUANodLbDHaD5Gij1N3TY_9j5KNnHhqE7liqvyAWsD_U0Iw4VAlMMiWfw_hlZI4kiA66nE5o_6eGWXJhSDSzKE9NO3p1u8k_3B72D_AQhb6EmRW2qctUU1zcHTJgTCf4xLe1yQXpIYD-8uIhCO3Vz9VVlW6ZS4hxXSPOHhOKvfe5zu-nWG-uzOLHqqjHN7B_Mb9uF3UrWyQSZreF0h2Y',
+]
+
 const products = [
-  {
-    id: 1,
-    name: 'Ethiopian Yirgacheffe',
-    origin: 'Ethiopia',
-    roast: 'Light Roast',
-    price: 18.99,
-    image: null,
-  },
-  {
-    id: 2,
-    name: 'Colombian Supremo',
-    origin: 'Colombia',
-    roast: 'Medium Roast',
-    price: 16.99,
-    image: null,
-  },
-  {
-    id: 3,
-    name: 'Sumatra Mandheling',
-    origin: 'Indonesia',
-    roast: 'Dark Roast',
-    price: 19.99,
-    image: null,
-  },
-  {
-    id: 4,
-    name: 'Costa Rican Tarrazu',
-    origin: 'Costa Rica',
-    roast: 'Medium-Dark Roast',
-    price: 17.99,
-    image: null,
-  },
+  { name: 'Ethiopian Yirgacheffe', notes: 'Floral, Lemon, Tea-like', roast: 'Medium Roast', price: 24.00 },
+  { name: 'Colombian Huila', notes: 'Caramel, Red Apple, Nutty', roast: 'Light Roast', price: 22.50 },
+  { name: 'Midnight Sumatra', notes: 'Earthy, Dark Chocolate, Spice', roast: 'Dark Roast', price: 26.00 },
+  { name: 'Anaerobic Gesha', notes: 'Tropical Fruit, Jasmine, Winey', roast: 'Experimental', price: 38.00 },
 ]
 
 export default function FeaturedProducts() {
+  const ref = useScrollReveal<HTMLElement>()
+
   return (
-    <section className="py-24">
-      <div className="max-w-[1400px] mx-auto px-6">
-        <div className="flex items-center justify-between mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#F5F0EB] tracking-tight">
-            Our Curated Collection
-          </h2>
-          <a href="/shop" className="text-[#D4A04A] hover:brightness-110 text-sm font-semibold transition-all">
-            View All &rarr;
+    <section ref={ref} className="py-section-gap bg-surface-container-lowest">
+      <div className="max-w-max-width mx-auto px-container-padding">
+        <div className="flex justify-between items-end mb-12">
+          <div>
+            <span className="text-primary font-small uppercase tracking-widest block mb-2">Artisanal Curation</span>
+            <h2 className="font-display text-h1">Our Curated Collection</h2>
+          </div>
+          <a className="text-primary hover:underline font-bold flex items-center gap-2" href="/shop">
+            Explore All <span className="material-symbols-outlined">arrow_forward</span>
           </a>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <a
-              key={product.id}
-              href={`/product/${product.id}`}
-              className="group bg-[#1C1512] border border-[#7C4F34]/30 rounded-lg overflow-hidden hover:border-[#D4A04A]/50 transition-all"
-            >
-              <div className="aspect-square bg-gradient-to-br from-[#1C1512] to-[#0D0A08] flex items-center justify-center">
-                <svg className="w-16 h-16 text-[#7C4F34]/40" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M2 21V19H20V21H2ZM20 8V5H22V11H20V10H16V18H4V8H20ZM18 8H6V16H18V8Z" />
-                </svg>
-              </div>
-              <div className="p-4 space-y-2">
-                <span className="inline-block px-2 py-0.5 text-xs font-medium text-[#D4A04A] bg-[#D4A04A]/10 rounded">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+          {products.map((product, i) => (
+            <div key={product.name} className="gallery-card bg-espresso border border-outline-variant p-5 rounded-lg group">
+              <div className="relative aspect-[4/5] rounded-md overflow-hidden mb-4 bg-gradient-to-br from-surface-container-high to-background">
+                <img
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  src={productImages[i]}
+                  alt={`${product.name} coffee bag packaging`}
+                />
+                <span className="absolute top-3 left-3 bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
                   {product.roast}
                 </span>
-                <h3 className="text-[#F5F0EB] font-semibold group-hover:text-[#D4A04A] transition-colors">
-                  {product.name}
-                </h3>
-                <p className="text-[#B8A89A] text-sm">{product.origin}</p>
-                <p className="text-[#D4A04A] font-bold">${product.price}</p>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault()
-                  }}
-                  className="w-full py-2 text-sm font-semibold bg-[#D4A04A] text-[#0D0A08] rounded-lg hover:brightness-110 transition-all active:scale-[0.97]"
-                >
-                  Add to Cart
+              </div>
+              <h3 className="font-display text-body font-bold mb-1">{product.name}</h3>
+              <p className="text-secondary-mocha font-small mb-4">{product.notes}</p>
+              <div className="flex justify-between items-center">
+                <span className="text-primary font-bold text-h2">${product.price.toFixed(2)}</span>
+                <button className="bg-primary text-on-primary p-2 rounded-lg hover:scale-110 active:scale-95 transition-transform">
+                  <span className="material-symbols-outlined">add_shopping_cart</span>
                 </button>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>

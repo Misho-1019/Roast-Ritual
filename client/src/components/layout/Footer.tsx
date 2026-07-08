@@ -2,53 +2,61 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1C1512] border-t border-[#7C4F34]/30">
-      <div className="max-w-[1400px] mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 className="text-[#D4A04A] font-bold text-lg mb-4">Roast & Ritual</h3>
-            <p className="text-[#B8A89A] text-sm leading-relaxed">
-              Turn your coffee into a ritual. Single-origin coffees curated for the discerning palate.
-            </p>
-          </div>
-          <div>
-            <h4 className="text-[#F5F0EB] font-semibold text-sm mb-4">Shop</h4>
-            <div className="flex flex-col gap-2">
-              <Link to="/shop" className="text-[#B8A89A] hover:text-[#D4A04A] text-sm transition-colors">All Coffees</Link>
-              <Link to="/shop?roast=light" className="text-[#B8A89A] hover:text-[#D4A04A] text-sm transition-colors">Light Roast</Link>
-              <Link to="/shop?roast=medium" className="text-[#B8A89A] hover:text-[#D4A04A] text-sm transition-colors">Medium Roast</Link>
-              <Link to="/shop?roast=dark" className="text-[#B8A89A] hover:text-[#D4A04A] text-sm transition-colors">Dark Roast</Link>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-[#F5F0EB] font-semibold text-sm mb-4">Learn</h4>
-            <div className="flex flex-col gap-2">
-              <Link to="/brew-guides" className="text-[#B8A89A] hover:text-[#D4A04A] text-sm transition-colors">Brew Guides</Link>
-              <Link to="/quiz" className="text-[#B8A89A] hover:text-[#D4A04A] text-sm transition-colors">Coffee Quiz</Link>
-              <Link to="/about" className="text-[#B8A89A] hover:text-[#D4A04A] text-sm transition-colors">Our Story</Link>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-[#F5F0EB] font-semibold text-sm mb-4">Contact</h4>
-            <div className="flex flex-col gap-2 text-[#B8A89A] text-sm">
-              <span>hello@roastandritual.com</span>
-              <div className="flex gap-4 mt-2">
-                <a href="#" className="hover:text-[#D4A04A] transition-colors" aria-label="Instagram">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                </a>
-                <a href="#" className="hover:text-[#D4A04A] transition-colors" aria-label="Twitter">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-                </a>
-              </div>
-            </div>
+    <footer className="bg-surface-container-lowest border-t border-outline-variant pt-20 pb-10">
+      <div className="max-w-max-width mx-auto px-container-padding grid grid-cols-1 md:grid-cols-4 gap-gutter mb-20">
+        <div className="col-span-1 md:col-span-1">
+          <h2 className="font-display text-h2 font-bold text-primary mb-6">Roast & Ritual</h2>
+          <p className="text-on-surface-variant font-body mb-6 leading-relaxed">
+            Artisanal coffee curators dedicated to the elevation of your daily coffee experience
+            through specialty-grade sourcing and precision roasting.
+          </p>
+          <div className="flex gap-4">
+            <a className="h-10 w-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-all" href="#">
+              <span className="material-symbols-outlined text-xl">public</span>
+            </a>
+            <a className="h-10 w-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-all" href="#">
+              <span className="material-symbols-outlined text-xl">photo_camera</span>
+            </a>
+            <a className="h-10 w-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-all" href="#">
+              <span className="material-symbols-outlined text-xl">play_circle</span>
+            </a>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-[#7C4F34]/30 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[#B8A89A] text-xs">&copy; 2026 Roast & Ritual. All rights reserved.</p>
-          <div className="flex gap-6 text-xs text-[#B8A89A]">
-            <a href="#" className="hover:text-[#D4A04A] transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-[#D4A04A] transition-colors">Terms of Service</a>
-          </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="font-bold text-on-surface mb-2 uppercase tracking-widest text-[12px]">Shop</h4>
+          <Link to="/shop" className="text-on-surface-variant hover:text-primary underline transition-all font-body">All Coffees</Link>
+          <a className="text-on-surface-variant hover:text-primary underline transition-all font-body" href="#">Brewing Gear</a>
+          <a className="text-on-surface-variant hover:text-primary underline transition-all font-body" href="#">Subscriptions</a>
+          <a className="text-on-surface-variant hover:text-primary underline transition-all font-body" href="#">Gift Cards</a>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="font-bold text-on-surface mb-2 uppercase tracking-widest text-[12px]">Learn</h4>
+          <Link to="/brew-guides" className="text-on-surface-variant hover:text-primary underline transition-all font-body">Brewing Guides</Link>
+          <a className="text-on-surface-variant hover:text-primary underline transition-all font-body" href="#">Coffee Origins</a>
+          <a className="text-on-surface-variant hover:text-primary underline transition-all font-body" href="#">Roast Levels</a>
+          <a className="text-on-surface-variant hover:text-primary underline transition-all font-body" href="#">Wholesale</a>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="font-bold text-on-surface mb-2 uppercase tracking-widest text-[12px]">Support</h4>
+          <a className="text-on-surface-variant hover:text-primary underline transition-all font-body" href="#">Contact Us</a>
+          <a className="text-on-surface-variant hover:text-primary underline transition-all font-body" href="#">Shipping & Returns</a>
+          <a className="text-on-surface-variant hover:text-primary underline transition-all font-body" href="#">Privacy Policy</a>
+          <a className="text-on-surface-variant hover:text-primary underline transition-all font-body" href="#">Terms of Service</a>
+        </div>
+      </div>
+      <div className="max-w-max-width mx-auto px-container-padding border-t border-outline-variant pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p className="text-on-surface-variant font-small opacity-60">
+          &copy; 2026 Roast & Ritual. Artisanal Coffee Curators. All Rights Reserved.
+        </p>
+        <div className="flex gap-8 font-small opacity-60">
+          <span className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-[16px]">verified</span>
+            Secure Checkout
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-[16px]">local_shipping</span>
+            Global Shipping
+          </span>
         </div>
       </div>
     </footer>
