@@ -1,6 +1,10 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../../stores/authStore'
+import { useCartStore } from '../../stores/cartStore'
 
 interface ProductInfoProps {
+  id: string
   name: string
   description: string
   price: number
@@ -12,8 +16,11 @@ interface ProductInfoProps {
   reviewCount?: number
 }
 
-export default function ProductInfo({ name, description, price, roastLevel, origin, flavorNotes, stock, rating = 4.8, reviewCount = 24 }: ProductInfoProps) {
+export default function ProductInfo({ id, name, description, price, roastLevel, origin, flavorNotes, stock, rating = 4.8, reviewCount = 24 }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1)
+  const navigate = useNavigate()
+  const { isAuthenticated } = useAuthStore()
+  const addItem = useCartStore((s) => s.addItem)
 
   return (
     <div className="space-y-6">
@@ -81,6 +88,13 @@ export default function ProductInfo({ name, description, price, roastLevel, orig
 
       <button
         disabled={stock === 0}
+        onClick={() => {
+          if (!isAuthenticated) {
+            navigate(`/login?redirect=/product/${name.toLowerCase().replace(/\s+/g, '-')}`)
+            return
+          }
+          addItem(id, quantity)
+        }}
         className="w-full bg-primary-container text-on-primary-container py-4 rounded-lg font-bold text-body flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50"
       >
         <span className="material-symbols-outlined">add_shopping_cart</span>

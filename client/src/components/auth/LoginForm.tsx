@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
 
 interface LoginFormProps {
@@ -13,6 +13,8 @@ export default function LoginForm({ onSubmit: externalSubmit, isLoading: externa
   const [showPassword, setShowPassword] = useState(false)
   const { login, isLoading: storeLoading, error, clearError } = useAuthStore()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const redirectTo = searchParams.get('redirect') || '/'
 
   const isLoading = externalLoading ?? storeLoading
 
@@ -24,7 +26,7 @@ export default function LoginForm({ onSubmit: externalSubmit, isLoading: externa
         await externalSubmit({ email, password })
       } else {
         await login(email, password)
-        navigate('/')
+        navigate(redirectTo)
       }
     } catch {
       // Error is set in the store

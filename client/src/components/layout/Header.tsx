@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
+import { useCartStore } from '../../stores/cartStore'
 
 const navLinks = [
   { label: 'Shop', to: '/shop' },
@@ -12,12 +13,17 @@ const navLinks = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const { user, isAuthenticated, logout } = useAuthStore()
+  const { items, fetchCart } = useCartStore()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  useEffect(() => {
+    if (isAuthenticated) fetchCart()
+  }, [isAuthenticated, fetchCart])
 
   return (
     <header
@@ -53,9 +59,11 @@ export default function Header() {
         <div className="flex items-center gap-5">
           <Link to="/cart" className="text-on-surface hover:text-primary scale-95 active:scale-90 transition-transform relative">
             <span className="material-symbols-outlined">shopping_cart</span>
-            <span className="absolute -top-1 -right-2 bg-primary-container text-on-primary-container text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
-              0
-            </span>
+            {items.length > 0 && (
+              <span className="absolute -top-1 -right-2 bg-primary-container text-on-primary-container text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+                {items.length}
+              </span>
+            )}
           </Link>
           {isAuthenticated && user ? (
             <div className="flex items-center gap-3">

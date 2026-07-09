@@ -1,4 +1,9 @@
+import { useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../../stores/authStore'
+import { useCartStore } from '../../stores/cartStore'
+
 interface ProductCardProps {
+  id: string
   name: string
   slug: string
   origin: string
@@ -8,7 +13,20 @@ interface ProductCardProps {
   flavorNotes: string[]
 }
 
-export default function ProductCard({ name, slug, origin, roastLevel, price, imageUrl, flavorNotes }: ProductCardProps) {
+export default function ProductCard({ id, name, slug, origin, roastLevel, price, imageUrl, flavorNotes }: ProductCardProps) {
+  const navigate = useNavigate()
+  const { isAuthenticated } = useAuthStore()
+  const addItem = useCartStore((s) => s.addItem)
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (!isAuthenticated) {
+      navigate('/login?redirect=/shop')
+      return
+    }
+    addItem(id)
+  }
+
   return (
     <a
       href={`/product/${slug}`}
@@ -41,7 +59,7 @@ export default function ProductCard({ name, slug, origin, roastLevel, price, ima
         <div className="mt-auto pt-4 flex items-center justify-between">
           <span className="text-primary font-bold text-h2">${Number(price).toFixed(2)}</span>
           <button
-            onClick={(e) => { e.preventDefault() }}
+            onClick={handleAddToCart}
             className="bg-primary text-on-primary p-2.5 rounded-lg hover:scale-110 active:scale-95 transition-transform"
           >
             <span className="material-symbols-outlined">add_shopping_cart</span>

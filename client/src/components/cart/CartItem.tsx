@@ -2,13 +2,12 @@ interface CartItemProps {
   id: string
   name: string
   imageUrl: string
-  price: number
   quantity: number
   onUpdateQuantity: (id: string, quantity: number) => void
   onRemove: (id: string) => void
 }
 
-export default function CartItem({ id, name, imageUrl, price, quantity, onUpdateQuantity, onRemove }: CartItemProps) {
+export default function CartItem({ id, name, imageUrl, quantity, onUpdateQuantity, onRemove }: CartItemProps) {
   return (
     <div className="bg-espresso rounded-lg border border-chestnut/30 p-4 md:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group hover:border-primary transition-colors">
       <div className="md:col-span-6 flex items-center gap-4">
@@ -29,7 +28,6 @@ export default function CartItem({ id, name, imageUrl, price, quantity, onUpdate
           </button>
         </div>
       </div>
-      <div className="hidden md:block text-center font-body">${Number(price).toFixed(2)}</div>
       <div className="flex md:justify-center items-center gap-2">
         <div className="flex items-center border border-chestnut/50 rounded-lg">
           <button onClick={() => onUpdateQuantity(id, quantity - 1)} className="px-3 py-1.5 text-on-surface hover:text-primary transition-colors">
@@ -41,7 +39,6 @@ export default function CartItem({ id, name, imageUrl, price, quantity, onUpdate
           </button>
         </div>
       </div>
-      <div className="text-right font-bold text-on-surface">${(Number(price) * quantity).toFixed(2)}</div>
       <button onClick={() => onRemove(id)} className="hidden md:block text-mocha-text hover:text-error transition-colors absolute right-4 top-4">
         <span className="material-symbols-outlined">delete</span>
       </button>
