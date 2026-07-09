@@ -2,6 +2,7 @@ import StatCard from '../../components/admin/StatCard'
 import ProductsTable from '../../components/admin/ProductsTable'
 import RoastingSchedule from '../../components/admin/RoastingSchedule'
 import OrdersTable from '../../components/admin/OrdersTable'
+import AnalyticsCharts from '../../components/admin/AnalyticsCharts'
 
 export default function AdminDashboard() {
   return (
@@ -22,6 +23,9 @@ export default function AdminDashboard() {
 
       {/* Orders */}
       <OrdersTable />
+
+      {/* Analytics */}
+      <AnalyticsCharts />
     </>
   )
 }

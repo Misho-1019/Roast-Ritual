@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
 import { useCartStore } from '../../stores/cartStore'
+import { useSocket } from '../../hooks/useSocket'
 
 interface ProductInfoProps {
   id: string
@@ -16,11 +17,26 @@ interface ProductInfoProps {
   reviewCount?: number
 }
 
-export default function ProductInfo({ id, name, description, price, roastLevel, origin, flavorNotes, stock, rating = 4.8, reviewCount = 24 }: ProductInfoProps) {
+export default function ProductInfo({ id, name, description, price, roastLevel, origin, flavorNotes, stock: initialStock, rating = 4.8, reviewCount = 24 }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1)
+  const [liveStock, setLiveStock] = useState(initialStock)
   const navigate = useNavigate()
   const { isAuthenticated } = useAuthStore()
   const addItem = useCartStore((s) => s.addItem)
+  const { on } = useSocket()
+
+  useEffect(() => {
+    setLiveStock(initialStock)
+  }, [initialStock])
+
+  useEffect(() => {
+    const unsub = on('stockUpdate', (data: { productId: string; newStock: number }) => {
+      if (data.productId === id) setLiveStock(data.newStock)
+    })
+    return unsub
+  }, [id, on])
+
+  const stock = liveStock
 
   return (
     <div className="space-y-6">

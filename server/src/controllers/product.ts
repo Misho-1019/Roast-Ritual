@@ -2,6 +2,7 @@ import { Response } from 'express'
 import { prisma } from '../lib/db.js'
 import { AuthRequest } from '../middleware/auth.js'
 import { Prisma } from '../generated/prisma/index.js'
+import { emitStockUpdate } from '../sockets/index.js'
 
 export async function listProducts(req: AuthRequest, res: Response) {
   try {
@@ -123,6 +124,7 @@ export async function updateProduct(req: AuthRequest, res: Response) {
     if (isFeatured !== undefined) data.isFeatured = isFeatured
 
     const product = await prisma.product.update({ where: { id }, data })
+    if (stock !== undefined) emitStockUpdate(product.id, stock)
     res.json(product)
   } catch (error) {
     console.error('Update product error:', error)
