@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | Roast & Ritual</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Public+Sans:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Public+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#693f25",
+                    "inverse-on-surface": "#34302d",
+                    "espresso": "#1C1512",
+                    "surface-container-highest": "#383431",
+                    "secondary": "#f6b998",
+                    "on-tertiary-fixed": "#2f1501",
+                    "surface-container-lowest": "#110e0b",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "surface-cream": "#F5F0EB",
+                    "primary-container": "#d4a04a",
+                    "background": "#0D0A08",
+                    "on-primary": "#432c00",
+                    "surface-dim": "#161310",
+                    "secondary-fixed-dim": "#f6b998",
+                    "outline-variant": "#4f4537",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#ffddae",
+                    "surface": "#161310",
+                    "on-tertiary-container": "#57361b",
+                    "on-surface-variant": "#d3c4b2",
+                    "outline": "#9c8f7e",
+                    "surface-container-high": "#2d2927",
+                    "primary": "#f5bd64",
+                    "on-surface": "#e9e1dc",
+                    "inverse-surface": "#e9e1dc",
+                    "on-primary-fixed-variant": "#604100",
+                    "on-tertiary": "#48290f",
+                    "surface-container": "#231f1c",
+                    "on-secondary": "#4b270f",
+                    "on-secondary-fixed": "#321301",
+                    "tertiary-fixed-dim": "#efbc98",
+                    "inverse-primary": "#7f5600",
+                    "surface-bright": "#3d3835",
+                    "surface-tint": "#f5bd64",
+                    "on-secondary-fixed-variant": "#663d23",
+                    "on-background": "#e9e1dc",
+                    "on-tertiary-fixed-variant": "#613f24",
+                    "secondary-fixed": "#ffdbc9",
+                    "on-secondary-container": "#e6ac8b",
+                    "on-primary-fixed": "#281800",
+                    "error-container": "#93000a",
+                    "tertiary-fixed": "#ffdcc4",
+                    "mocha-text": "#B8A89A",
+                    "chestnut": "#7C4F34",
+                    "on-primary-container": "#553800",
+                    "primary-fixed-dim": "#f5bd64",
+                    "tertiary-container": "#ce9f7d",
+                    "surface-container-low": "#1e1b18",
+                    "tertiary": "#efbc98",
+                    "surface-variant": "#383431",
+                    "caramel": "#A67B5B"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "edge-margin": "2rem",
+                    "section-gap-desktop": "8rem",
+                    "section-gap-mobile": "4rem",
+                    "container-max": "1400px",
+                    "gutter": "1.5rem"
+            },
+            "fontFamily": {
+                    "h2": ["Inter"],
+                    "small": ["Public Sans"],
+                    "h1": ["Inter"],
+                    "display-mobile": ["Inter"],
+                    "display": ["Inter"],
+                    "body-bold": ["Inter"],
+                    "body": ["Inter"],
+                    "label-caps": ["Public Sans"]
+            },
+            "fontSize": {
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "small": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-mobile": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-bold": ["16px", {"lineHeight": "1.6", "fontWeight": "700"}],
+                    "body": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.15em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0D0A08;
+            color: #e9e1dc;
+        }
+        input::placeholder {
+            color: #9c8f7e;
+            opacity: 0.6;
+        }
+        .luxury-blur {
+            backdrop-filter: blur(12px);
+        }
+        .form-input-focus:focus {
+            outline: none;
+            border-color: #f5bd64;
+            box-shadow: 0 0 0 1px #f5bd64;
+        }
+    </style>
+</head>
+<body class="antialiased font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header (No Nav as per transactional rule) -->
+<header class="h-24 flex items-center px-edge-margin max-w-container-max mx-auto justify-between">
+<a class="font-h2 text-h2 text-primary tracking-tighter" href="/">Roast & Ritual</a>
+<div class="flex items-center gap-2 px-4 py-2 rounded-full border border-outline-variant/30 bg-surface-container-low/50">
+<span class="material-symbols-outlined text-primary text-lg">lock</span>
+<span class="font-label-caps text-on-surface-variant">Secure Checkout</span>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-edge-margin pb-section-gap-desktop mt-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Left Column: Forms -->
+<div class="lg:col-span-7 space-y-12">
+<!-- Shipping Section -->
+<section>
+<div class="flex items-center gap-4 mb-8">
+<span class="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-body-bold">1</span>
+<h2 class="font-h2 text-h2 text-on-surface">Shipping Information</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="md:col-span-2">
+<label class="block font-label-caps text-on-surface-variant mb-2">Full Name</label>
+<input class="w-full bg-espresso border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus transition-all" placeholder="Elias Thorne" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">Email Address</label>
+<input class="w-full bg-espresso border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus transition-all" placeholder="elias@ritual.com" type="email"/>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">Phone Number</label>
+<input class="w-full bg-espresso border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus transition-all" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+<div class="md:col-span-2">
+<label class="block font-label-caps text-on-surface-variant mb-2">Street Address</label>
+<input class="w-full bg-espresso border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus transition-all" placeholder="123 Artisanal Way" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">City</label>
+<input class="w-full bg-espresso border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus transition-all" placeholder="Seattle" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">State</label>
+<input class="w-full bg-espresso border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus transition-all" placeholder="WA" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">Zip</label>
+<input class="w-full bg-espresso border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus transition-all" placeholder="98101" type="text"/>
+</div>
+</div>
+<div class="md:col-span-2">
+<label class="block font-label-caps text-on-surface-variant mb-2">Country</label>
+<select class="w-full bg-espresso border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus appearance-none">
+<option>United States</option>
+<option>Canada</option>
+<option>United Kingdom</option>
+<option>Japan</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Payment Section -->
+<section>
+<div class="flex items-center gap-4 mb-8">
+<span class="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-body-bold">2</span>
+<h2 class="font-h2 text-h2 text-on-surface">Payment Information</h2>
+</div>
+<div class="bg-espresso border border-outline-variant rounded-xl p-8 space-y-6">
+<div class="flex justify-between items-center mb-2">
+<span class="font-body-bold text-on-surface">Credit or Debit Card</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-on-surface-variant/50">credit_card</span>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">Name on Card</label>
+<input class="w-full bg-background border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus transition-all" placeholder="Elias Thorne" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">Card Number</label>
+<div class="relative">
+<input class="w-full bg-background border border-outline-variant rounded-lg p-4 pr-12 text-surface-cream form-input-focus transition-all" placeholder="0000 0000 0000 0000" type="text"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">payments</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">Expiry Date</label>
+<input class="w-full bg-background border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus transition-all" placeholder="MM / YY" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-on-surface-variant mb-2">CVC</label>
+<input class="w-full bg-background border border-outline-variant rounded-lg p-4 text-surface-cream form-input-focus transition-all" placeholder="•••" type="text"/>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sidebar -->
+<aside class="lg:col-span-5 sticky top-32">
+<div class="bg-espresso border border-outline-variant/50 rounded-2xl overflow-hidden shadow-2xl">
+<div class="p-8 border-b border-outline-variant/30">
+<h3 class="font-h2 text-h2 text-on-surface">Order Summary</h3>
+</div>
+<div class="p-8 space-y-6 max-h-[400px] overflow-y-auto">
+<!-- Product Item 1 -->
+<div class="flex gap-4">
+<div class="w-20 h-24 flex-shrink-0 bg-surface-container-high rounded-lg overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="A moody, high-end editorial close-up of a bag of Ethiopian Yirgacheffe coffee beans resting on a dark walnut surface. The lighting is low-key and dramatic, with warm highlights dancing off the textured packaging and a few loose coffee beans scattered around. The color palette is dominated by deep espresso browns and rich gold accents, reflecting a luxury coffee ritual aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpNpgc3OgLnT29pFOPpZoxR_CyaeDR_ySWOHOWIQoXCnk-vbmnZKvWMFiwToiyjvllJXEPRWGaqgiPwFzITw0UTwykqNP8OuRxt4ZveV4Mo_u6-SoQCEypbSolKfRLyWVrxsmHTkxMS_PiurBqyoOTLekf7uEHNVB55fJENPMOWqoC7cRM9MGK0IfAY7XxQw1XmEFiLvaAw0qxyq9N1z6gnkPHvrryNAgBY3hAcnrOlXj8ThjpryQasAcksAaNjdLP-yBTyANLaQU"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h4 class="font-body-bold text-on-surface">Ethiopian Yirgacheffe</h4>
+<span class="text-on-surface font-body">$28.00</span>
+</div>
+<p class="text-mocha-text text-small font-small mt-1 italic">Light Roast • Whole Bean</p>
+<div class="mt-2 text-on-surface-variant text-small">Qty: 1</div>
+</div>
+</div>
+<!-- Product Item 2 -->
+<div class="flex gap-4">
+<div class="w-20 h-24 flex-shrink-0 bg-surface-container-high rounded-lg overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="A premium artisanal coffee bag labeled Midnight Reserve, positioned elegantly in a dimly lit, atmospheric coffee lounge setting. Soft directional lighting creates deep shadows and emphasizes the rich texture of the matte black packaging with gold foil typography. The background is a blurred dark marble, maintaining the sophisticated, quiet luxury brand identity of Roast and Ritual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRGEpkMrAK8a9cS2L_e6ihiuevwdANKXe221KTI-oeHXTVdovKJx0QLnLgnlAkTDAA5ZSGJz3I2YhI5NyZGJT8K9WIz3gL_5KolxG7iq2pQRX7z6LSz6O-u4l3HZVVBHuzMmsVQVudHEbQnMKmuRY6OZZLHMUHS8YAGT6HwOJD56yi0V-SeOaU-hEmIi_VQzaE9VsLdTssP6Km-OMlDlQCG4vkXqKdCiDZnQAN4TMNJfJYnoU6MEyRbF8u4x0ZsVJ-Ut492fDGw2Y"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h4 class="font-body-bold text-on-surface">Midnight Reserve</h4>
+<span class="text-on-surface font-body">$34.00</span>
+</div>
+<p class="text-mocha-text text-small font-small mt-1 italic">Dark Roast • French Press</p>
+<div class="mt-2 text-on-surface-variant text-small">Qty: 1</div>
+</div>
+</div>
+</div>
+<div class="p-8 bg-surface-container-low/50 space-y-4">
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body">Subtotal</span>
+<span class="font-body">$62.00</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body">Shipping</span>
+<span class="font-body text-primary">Free</span>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 flex justify-between items-end">
+<span class="font-h2 text-h2 text-on-surface">Total</span>
+<span class="font-h1 text-h1 text-primary">$62.00</span>
+</div>
+<button class="w-full mt-6 py-5 bg-primary text-on-primary font-body-bold text-lg rounded-xl hover:bg-primary-fixed-dim active:scale-95 transition-all flex items-center justify-center gap-3 group">
+<span>Place Order</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="mt-6 flex items-center justify-center gap-4 py-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-1.5 grayscale opacity-60">
+<span class="material-symbols-outlined text-lg" data-weight="fill">nutrition</span>
+<span class="text-label-caps text-[10px]">100% Ethical</span>
+</div>
+<div class="w-px h-4 bg-outline-variant/30"></div>
+<div class="flex items-center gap-1.5 grayscale opacity-60">
+<span class="material-symbols-outlined text-lg">local_shipping</span>
+<span class="text-label-caps text-[10px]">Secure Transit</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex items-start gap-4 p-4 border border-outline-variant/20 rounded-lg">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<div>
+<p class="text-on-surface font-body-bold text-small">Secure Transaction</p>
+<p class="text-mocha-text text-small mt-1">Your data is encrypted and handled with the utmost care according to our artisanal privacy standards.</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Simple Footer -->
+<footer class="py-12 border-t border-outline-variant/20">
+<div class="max-w-container-max mx-auto px-edge-margin flex flex-col md:flex-row justify-between items-center gap-6">
+<span class="font-small text-small text-mocha-text">© 2024 Roast & Ritual. Crafted for the intentional life.</span>
+<div class="flex gap-8">
+<a class="font-small text-small text-mocha-text hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="font-small text-small text-mocha-text hover:text-primary transition-colors" href="#">Terms</a>
+<a class="font-small text-small text-mocha-text hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interactions for input focus
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label')?.classList.add('text-primary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label')?.classList.remove('text-primary');
+            });
+        });
+    </script>
+</body></html>

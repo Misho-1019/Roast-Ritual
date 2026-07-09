@@ -51,14 +51,17 @@ export default function Header() {
           )}
         </nav>
         <div className="flex items-center gap-5">
-          <button className="text-on-surface hover:text-primary scale-95 active:scale-90 transition-transform relative">
+          <Link to="/cart" className="text-on-surface hover:text-primary scale-95 active:scale-90 transition-transform relative">
             <span className="material-symbols-outlined">shopping_cart</span>
             <span className="absolute -top-1 -right-2 bg-primary-container text-on-primary-container text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
-              2
+              0
             </span>
-          </button>
+          </Link>
           {isAuthenticated && user ? (
             <div className="flex items-center gap-3">
+              <Link to="/orders" className="text-on-surface-variant hover:text-primary transition-colors font-body text-sm hidden sm:inline">
+                Orders
+              </Link>
               <span className="text-on-surface-variant text-sm hidden sm:inline">{user.name}</span>
               <button
                 onClick={logout}
