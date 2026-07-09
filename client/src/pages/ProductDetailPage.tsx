@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import ProductImages from '../components/product/ProductImages'
 import ProductInfo from '../components/product/ProductInfo'
+import FlavorRadar from '../components/product/FlavorRadar'
 import ReviewList from '../components/product/ReviewList'
 
 interface Product {
@@ -94,6 +95,13 @@ export default function ProductDetailPage() {
         <ProductImages mainImage={product.imageUrl} productName={product.name} />
         <ProductInfo {...product} />
       </div>
+
+      {/* Flavor Profile */}
+      <section className="py-16 border-t border-outline-variant/20">
+        <div className="max-w-md mx-auto">
+          <FlavorRadar slug={product.slug} />
+        </div>
+      </section>
 
       {/* Reviews */}
       <ReviewList />
