@@ -12,6 +12,7 @@ export interface ProductMatch {
   roastLevel: string
   origin: string
   description: string
+  flavorNotes?: string[]
 }
 
 export const questions: Question[] = [
@@ -72,6 +73,7 @@ export const products: ProductMatch[] = [
     roastLevel: 'Light Roast',
     origin: 'Ethiopia',
     description: 'Bright, complex, and intensely aromatic with floral and citrus notes.',
+    flavorNotes: ['Floral', 'Lemon', 'Tea-like'],
   },
   {
     slug: 'colombian-supremo',
@@ -81,6 +83,7 @@ export const products: ProductMatch[] = [
     roastLevel: 'Medium Roast',
     origin: 'Colombia',
     description: 'Perfectly balanced with caramel sweetness and a smooth, nutty body.',
+    flavorNotes: ['Caramel', 'Nutty', 'Red Apple'],
   },
   {
     slug: 'midnight-sumatra',
@@ -90,6 +93,7 @@ export const products: ProductMatch[] = [
     roastLevel: 'Dark Roast',
     origin: 'Indonesia',
     description: 'Bold, earthy, and full-bodied with deep chocolate notes and a hint of spice.',
+    flavorNotes: ['Earthy', 'Dark Chocolate', 'Spice'],
   },
   {
     slug: 'anaerobic-gesha',
@@ -99,6 +103,7 @@ export const products: ProductMatch[] = [
     roastLevel: 'Light Roast',
     origin: 'Ethiopia',
     description: 'An explosion of tropical fruit and jasmine with an incredibly complex profile.',
+    flavorNotes: ['Tropical Fruit', 'Jasmine', 'Winey'],
   },
   {
     slug: 'costa-rican-tarrazu',
@@ -108,6 +113,7 @@ export const products: ProductMatch[] = [
     roastLevel: 'Medium-Dark Roast',
     origin: 'Costa Rica',
     description: 'Bright citrus acidity meets honey-like sweetness with a creamy body.',
+    flavorNotes: ['Citrus', 'Honey', 'Milk Chocolate'],
   },
   {
     slug: 'kenyan-aa',
@@ -117,6 +123,7 @@ export const products: ProductMatch[] = [
     roastLevel: 'Light Roast',
     origin: 'Kenya',
     description: 'Remarkably bright with grapefruit and blackcurrant notes, a wine-like body.',
+    flavorNotes: ['Grapefruit', 'Blackcurrant', 'Wine-like'],
   },
 ]
 

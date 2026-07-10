@@ -3,7 +3,7 @@ import QuizProgress from '../components/quiz/QuizProgress'
 import QuizQuestion from '../components/quiz/QuizQuestion'
 import QuizNavigation from '../components/quiz/QuizNavigation'
 import QuizResult from '../components/quiz/QuizResult'
-import { questions, calculateMatch } from '../data/quizQuestions'
+import { questions, products, calculateMatch } from '../data/quizQuestions'
 
 export default function QuizPage() {
   const [step, setStep] = useState(0)
@@ -38,19 +38,8 @@ export default function QuizPage() {
 
   if (showResult) {
     const matched = calculateMatch(answers)
-    return (
-      <div className="max-w-max-width mx-auto px-6 py-24 min-h-screen">
-        <div className="max-w-4xl mx-auto">
-          <QuizProgress current={totalQuestions} total={totalQuestions} />
-          <QuizResult product={matched} />
-          <div className="text-center mt-8">
-            <button onClick={handleRestart} className="text-mocha-text hover:text-primary text-sm transition-colors">
-              Retake Quiz
-            </button>
-          </div>
-        </div>
-      </div>
-    )
+    const otherProducts = products.filter((p) => p.slug !== matched.slug)
+    return <QuizResult product={matched} onRestart={handleRestart} otherProducts={otherProducts} />
   }
 
   return (
