@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our Story | Roast &amp; Ritual</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;family=Public+Sans:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#57361b",
+                        "on-secondary-container": "#e6ac8b",
+                        "surface-dim": "#161310",
+                        "inverse-surface": "#e9e1dc",
+                        "secondary-fixed": "#ffdbc9",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#2d2927",
+                        "on-tertiary-fixed-variant": "#613f24",
+                        "surface-container-lowest": "#110e0b",
+                        "on-secondary-fixed-variant": "#663d23",
+                        "surface-variant": "#383431",
+                        "tertiary-fixed": "#ffdcc4",
+                        "on-error-container": "#ffdad6",
+                        "espresso": "#1C1512",
+                        "outline": "#9c8f7e",
+                        "tertiary-fixed-dim": "#efbc98",
+                        "secondary-fixed-dim": "#f6b998",
+                        "on-surface-variant": "#d3c4b2",
+                        "primary-container": "#d4a04a",
+                        "inverse-primary": "#7f5600",
+                        "caramel": "#A67B5B",
+                        "surface-tint": "#f5bd64",
+                        "primary-fixed-dim": "#f5bd64",
+                        "surface-container-highest": "#383431",
+                        "surface-cream": "#F5F0EB",
+                        "on-tertiary-fixed": "#2f1501",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#ce9f7d",
+                        "on-surface": "#e9e1dc",
+                        "tertiary": "#efbc98",
+                        "on-primary-container": "#553800",
+                        "on-primary": "#432c00",
+                        "on-error": "#690005",
+                        "chestnut": "#7C4F34",
+                        "secondary-container": "#693f25",
+                        "primary": "#f5bd64",
+                        "mocha-text": "#B8A89A",
+                        "surface": "#161310",
+                        "on-background": "#e9e1dc",
+                        "on-secondary": "#4b270f",
+                        "outline-variant": "#4f4537",
+                        "on-tertiary": "#48290f",
+                        "on-primary-fixed-variant": "#604100",
+                        "secondary": "#f6b998",
+                        "surface-container-low": "#1e1b18",
+                        "on-secondary-fixed": "#321301",
+                        "surface-container": "#231f1c",
+                        "background": "#161310",
+                        "on-primary-fixed": "#281800",
+                        "surface-bright": "#3d3835",
+                        "primary-fixed": "#ffddae",
+                        "inverse-on-surface": "#34302d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap-desktop": "8rem",
+                        "edge-margin": "2rem",
+                        "gutter": "1.5rem",
+                        "section-gap-mobile": "4rem",
+                        "container-max": "1400px"
+                    },
+                    "fontFamily": {
+                        "display-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "body": ["Inter"],
+                        "small": ["Public Sans"],
+                        "body-bold": ["Inter"],
+                        "label-caps": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "display-mobile": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "display": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "small": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "body-bold": ["16px", {"lineHeight": "1.6", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.15em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0D0A08;
+            color: #e9e1dc;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .gold-glow {
+            box-shadow: 0 0 20px rgba(212, 160, 74, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #161310;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #D4A04A;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body custom-scrollbar">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/95 dark:bg-background/95 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex justify-between items-center px-edge-margin h-20 max-w-container-max mx-auto">
+<div class="font-h2 text-h2 font-extrabold text-primary dark:text-primary tracking-tighter">Roast &amp; Ritual</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface-variant font-body hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-on-surface-variant font-body hover:text-primary transition-colors" href="#">Quiz</a>
+<a class="text-on-surface-variant font-body hover:text-primary transition-colors" href="#">Brew Guides</a>
+<a class="text-primary font-body-bold border-b-2 border-primary pb-1" href="#">About</a>
+</div>
+<div class="flex items-center space-x-6">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">shopping_cart</span>
+<div class="hidden lg:flex items-center space-x-4">
+<button class="text-on-surface hover:text-primary transition-colors font-body">Sign In</button>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-body-bold active:scale-95 transition-all">Sign Up</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- 1. HERO -->
+<section class="relative min-h-[90dvh] flex items-center pt-20 px-edge-margin max-w-container-max mx-auto overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center w-full">
+<div class="space-y-8 z-10">
+<h1 class="font-display text-display leading-tight">
+<span class="italic text-primary">Our</span> Story
+                </h1>
+<p class="text-mocha-text font-body text-xl max-w-lg leading-relaxed">
+                    At Roast &amp; Ritual, we believe coffee is more than a caffeine fix. It's a sanctuary, a moment of intentional pause in a restless world. We craft experiences for the discerning palate.
+                </p>
+<div class="pt-4">
+<button class="bg-primary-container text-on-primary-container px-10 py-4 rounded-lg font-body-bold text-lg active:scale-95 transition-all gold-glow">
+                        Take the Quiz
+                    </button>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 bg-primary/5 rounded-3xl blur-2xl group-hover:bg-primary/10 transition-all duration-700"></div>
+<img alt="Morning sunrise over a lush coffee plantation in the mountains, soft golden light hitting the green coffee plants." class="w-full h-[600px] object-cover rounded-2xl relative z-10 shadow-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgkyQukLpT-YpR0AFxsvpf9WS-xrEkKCR74bp4nB_Avlbfwxz9mtGIRzHGP8jyYYzZoIJNi7a4IjTAJdyBbr8rGCvr0LaW6QqSr4Ws4FkzzQwnQzjyLqIlc58nPfugQr-AdpXjcnaNvlCe1hAk-H_405eEgFp0cczMymacnMp6YchyWKLmbWxut6n8OCJ-9PhjL8eaN_4PpaUxQykUPDGuzjZw-6nuDVw4G9sSmvp1W2frQ0K4dBHOS-V-O3tD3r18faFAoctX2GM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-20 rounded-2xl opacity-60"></div>
+</div>
+</div>
+</section>
+<!-- 2. OUR MISSION -->
+<section class="py-section-gap-desktop px-edge-margin max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="relative">
+<img alt="A professional barista performing a slow pour-over coffee extraction, capturing the steam and rich liquid in a dark, atmospheric setting." class="w-full h-[500px] object-cover rounded-lg shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwhXRdzhYB88kLbIa0rnwOTK6iPg7gDAn-jkkiR3dfPoHT203m1d_clKQ4psYdD1hvEUQHSV4vGH1L2hPSpV97k9bMqX693Nr8DR5_yyT9Pn7EWE_bfyy6JClwfba1LZ0p53iO_b4ZjHsu-n7ItJGfz-F_ujKlcxLP54HT2FcVW1QbQyZ5z19S4nd8aBDAbfC5pIU7wKE_BKgvkJCsT7APz3L9YZiHjAx1vxcG2oiUs9oa8ulLU1RYvwJp_BJbZfogDFCZrQP1sD8"/>
+<div class="absolute -bottom-8 -right-8 w-48 h-48 border-2 border-chestnut rounded-lg -z-10"></div>
+</div>
+<div class="space-y-6">
+<span class="text-primary font-label-caps tracking-widest block">OUR MISSION</span>
+<h2 class="font-h1 text-h1 text-on-surface">Crafting the perfect ritual</h2>
+<div class="space-y-4 text-mocha-text font-body text-lg">
+<p>
+                        We are dedicated to sourcing only the finest specialty-grade beans, maintaining direct relationships with farmers who share our commitment to regenerative practices and unparalleled quality.
+                    </p>
+<p>
+                        Every bag we ship is the result of thousands of hours of testing, tasting, and refining—all to ensure that your morning coffee is nothing short of a masterpiece.
+                    </p>
+</div>
+<a class="inline-flex items-center text-primary font-body-bold hover:underline group" href="#">
+                    Learn more
+                    <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 3. THE PROCESS -->
+<section class="py-section-gap-desktop bg-espresso/30">
+<div class="max-w-container-max mx-auto px-edge-margin">
+<div class="text-center mb-16">
+<span class="text-primary font-label-caps tracking-widest block mb-4">THE JOURNEY</span>
+<h2 class="font-h1 text-h1">Bean to Cup</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-espresso border border-chestnut/30 rounded-lg p-6 group hover:border-primary transition-all duration-500 overflow-hidden">
+<div class="aspect-[4/5] rounded-lg overflow-hidden mb-6 relative">
+<img alt="Fresh red coffee cherries ripening on a branch, covered in morning dew drops." class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4aTXGlW39VObGnoqrn0D4ACDJ8dcyB-U9hodBn9ar-xoUXmR3Jox5u84LNc8UGM3-4EWWJACYn6EEI85Kca9hxMV1JbC_shfVtZXinqtwW3ITqy8HmvIb9kwKg1ewhclNRho1WD4cg3WTYxINcerC4XhTRGcx-Iyky2Vu23ZVaI0BiJuY2ku5_Dj5g-Y7XsWHj_Zm-OS05FGCS_y8_1zIofaFvIJyXlfD1Pshg8JDQohJ__KMYP7ZWUUpXNYBpqWq-AcT1wKsieE"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-bold px-3 py-1 rounded-full text-sm">01</span>
+</div>
+<h3 class="font-h2 text-h2 mb-2 text-primary">Origin Selection</h3>
+<p class="text-mocha-text font-body">Sourcing only the top 1% of specialty beans from ethical farms.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-espresso border border-chestnut/30 rounded-lg p-6 group hover:border-primary transition-all duration-500 overflow-hidden">
+<div class="aspect-[4/5] rounded-lg overflow-hidden mb-6 relative">
+<img alt="Close up of coffee beans being roasted inside a vintage drum roaster, warm orange light reflecting off the beans." class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7a9phx-yi8l2n9zNObQSbKtMIqGsicsLWqG99-Hzk-nADYMB9ljKGeUg-uzWiqDF6eRtIl0Dsjw6Vn0hriMiV-F9L8BFyV59WoOLR1D37TE8OQFsIVyg-j2NQR8Iomc5Eth4AMIWyxRUvEblBrS6aB07jBIv_d16ia__T0L9xUaMYZPAkTTX-_LpvCjy8_7wBrXSvKhrkJOs0cdGdeq4KJklpuhhvglZ22_r0KPVHoCExHpb6McyNb5Ra0T9HWemJFIcuVszyJg0"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-bold px-3 py-1 rounded-full text-sm">02</span>
+</div>
+<h3 class="font-h2 text-h2 mb-2 text-primary">Artisanal Roasting</h3>
+<p class="text-mocha-text font-body">Slow, small-batch roasting to unlock the unique peak flavor of each origin.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-espresso border border-chestnut/30 rounded-lg p-6 group hover:border-primary transition-all duration-500 overflow-hidden">
+<div class="aspect-[4/5] rounded-lg overflow-hidden mb-6 relative">
+<img alt="Professional coffee cupping session with various white bowls filled with coffee and tasters with spoons in a laboratory setting." class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz0ozjbIjYu8oZe0goZ6S1_3iwxfImmUAQmfIPw4BWacT0wN97Lj6Qd5GMheywHSg-eCXqLDSc4vmiAjVy_FJWpLTvaovidhMFjvRRdMT_mq_19m1KMvlnvbWfmnLQN4XOAXEHRZjyQcJja-jPQT71PTtvLj35Ci5bjkgYQT5V3SzgoAxEA1qQywR8pWexL5elRdv1PS3PgZp9kznrOe8aLG3RJtnNCrkYOHH8mSVugoBgpbcuUL7FLJStJ_Pfz-D3RsMt9t6VVMs"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-bold px-3 py-1 rounded-full text-sm">03</span>
+</div>
+<h3 class="font-h2 text-h2 mb-2 text-primary">Flavor Profiling</h3>
+<p class="text-mocha-text font-body">Rigorous cupping sessions for every single batch to ensure ritual perfection.</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-espresso border border-chestnut/30 rounded-lg p-6 group hover:border-primary transition-all duration-500 overflow-hidden">
+<div class="aspect-[4/5] rounded-lg overflow-hidden mb-6 relative">
+<img alt="An artisan sealing a premium black coffee bag with a golden brand label in a warm lit workspace." class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEfi70ijH6LWUaaqRJmsSKn6kKUlX8wisB__g8_5B5HigyxtkaCEURDNwSoXbixanpcOmdwmEmQ3_17gg_uME_-LIFoxUAGunwPqOwLRAHcuaoLByjkNWjcyzyAimyoswTnpT2Q4c_-0uUOoonpFOvUXBzUCM2RMSXpnlq1-YwCVQ7HzSvBissYBFH8Z0XU_OxVEm1_DHzGCOTfa1kY_PVgzgWKJNIuitfsMzAQ7lA_WJwydPDO9dzF9NH3C2FL8ED2qsi66b6C0o"/>
+<span class="absolute top-4 left-4 bg-primary text-on-primary font-bold px-3 py-1 rounded-full text-sm">04</span>
+</div>
+<h3 class="font-h2 text-h2 mb-2 text-primary">Fresh Delivery</h3>
+<p class="text-mocha-text font-body">Sealed at the source and delivered rapidly to your door for maximum ritual.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. OUR ORIGINS -->
+<section class="py-section-gap-desktop px-edge-margin max-w-container-max mx-auto text-center">
+<span class="text-primary font-label-caps tracking-widest block mb-4">FROM AROUND THE WORLD</span>
+<h2 class="font-h1 text-h1 mb-12">Our Origins</h2>
+<div class="relative bg-espresso rounded-3xl border border-chestnut/20 p-8 overflow-hidden aspect-[16/9] lg:aspect-[21/9] flex items-center justify-center shadow-inner">
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#D4A04A 1px, transparent 1px); background-size: 30px 30px;"></div>
+<!-- Map Simulation -->
+<div class="relative w-full h-full flex items-center justify-center text-mocha-text/10">
+<span class="text-9xl font-extrabold select-none opacity-5">WORLD MAP</span>
+<!-- Markers -->
+<div class="absolute top-[55%] left-[62%] group cursor-pointer"> <!-- Ethiopia -->
+<div class="w-4 h-4 bg-primary rounded-full animate-pulse group-hover:scale-150 transition-all"></div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-surface p-2 rounded border border-primary scale-0 group-hover:scale-100 transition-all text-xs text-on-surface whitespace-nowrap shadow-xl">Ethiopia: The Birthplace</div>
+</div>
+<div class="absolute top-[60%] left-[28%] group cursor-pointer"> <!-- Colombia -->
+<div class="w-4 h-4 bg-primary rounded-full animate-pulse group-hover:scale-150 transition-all"></div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-surface p-2 rounded border border-primary scale-0 group-hover:scale-100 transition-all text-xs text-on-surface whitespace-nowrap shadow-xl">Colombia: High Altitude Richness</div>
+</div>
+<div class="absolute top-[70%] left-[82%] group cursor-pointer"> <!-- Indonesia -->
+<div class="w-4 h-4 bg-primary rounded-full animate-pulse group-hover:scale-150 transition-all"></div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-surface p-2 rounded border border-primary scale-0 group-hover:scale-100 transition-all text-xs text-on-surface whitespace-nowrap shadow-xl">Indonesia: Earthy Depth</div>
+</div>
+<div class="absolute top-[50%] left-[22%] group cursor-pointer"> <!-- Costa Rica -->
+<div class="w-4 h-4 bg-primary rounded-full animate-pulse group-hover:scale-150 transition-all"></div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-surface p-2 rounded border border-primary scale-0 group-hover:scale-100 transition-all text-xs text-on-surface whitespace-nowrap shadow-xl">Costa Rica: Bright Complexity</div>
+</div>
+<div class="absolute top-[60%] left-[64%] group cursor-pointer"> <!-- Kenya -->
+<div class="w-4 h-4 bg-primary rounded-full animate-pulse group-hover:scale-150 transition-all"></div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-surface p-2 rounded border border-primary scale-0 group-hover:scale-100 transition-all text-xs text-on-surface whitespace-nowrap shadow-xl">Kenya: Fruit-Forward Intensity</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. OUR VALUES -->
+<section class="py-section-gap-desktop bg-espresso/30 px-edge-margin">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+<div class="bg-espresso border border-chestnut/30 p-10 rounded-lg transform hover:-translate-y-2 transition-transform duration-300">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">eco</span>
+</div>
+<h2 class="font-h2 text-h2 mb-4">Sustainability</h2>
+<p class="text-mocha-text">Committed to carbon-neutral shipping and 100% compostable packaging. Our ritual leaves only a positive footprint.</p>
+</div>
+<div class="bg-espresso border border-chestnut/30 p-10 rounded-lg transform md:mt-12 hover:-translate-y-2 transition-transform duration-300">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">handshake</span>
+</div>
+<h2 class="font-h2 text-h2 mb-4">Direct Trade</h2>
+<p class="text-mocha-text">We pay 50% above fair-trade minimums to ensure our farmers can thrive and invest in their local communities.</p>
+</div>
+<div class="bg-espresso border border-chestnut/30 p-10 rounded-lg transform hover:-translate-y-2 transition-transform duration-300">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">verified</span>
+</div>
+<h2 class="font-h2 text-h2 mb-4">Artisanship</h2>
+<p class="text-mocha-text">Every bean is roasted by a master roaster, not a computer program. We honor the intuition of the human sense.</p>
+</div>
+</div>
+</section>
+<!-- 6. MEET THE TEAM -->
+<section class="py-section-gap-desktop px-edge-margin max-w-container-max mx-auto">
+<div class="text-center mb-16">
+<span class="text-primary font-label-caps tracking-widest block mb-4">THE FACES BEHIND THE BREW</span>
+<h2 class="font-h1 text-h1">Meet the Team</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="text-center group">
+<div class="w-48 h-48 mx-auto rounded-full border-2 border-transparent group-hover:border-primary transition-all p-2 mb-6">
+<img alt="A male head roaster smiling confidently next to a Probat roasting machine in a rustic coffee shop environment." class="w-full h-full object-cover rounded-full filter grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB06GLR0kSrwUbRw0IWDUIerbjppFWtkonPFnj-ScdDuSVQgL7yi9n1nC6rmOgKxY-M_3JB9MybPFsnAAjb6r85dFbMCAfraSEea7gUxwErJC1D1Ijr5dTiYesBeDyHxU93sYtEggHUqbEh9ppGvez2zD34js62tziU0Ab7-_E08dS3AXdWIXtcHxG9UVNJr5q7hWdXxwogsRaiWZyfscZJhx6B9T_OKgG-1dMZsXucpc4FxDSS6gBVCHHDxcPnKM3610u_SC5HlhE"/>
+</div>
+<h3 class="font-h2 text-h2 text-primary">Marcus Thorne</h3>
+<p class="text-mocha-text font-small uppercase tracking-widest mb-4">Founder &amp; Master Roaster</p>
+<p class="text-mocha-text text-sm px-4">15 years in the industry, driven by a passion for ethical sourcing and micro-lot profiles.</p>
+</div>
+<div class="text-center group">
+<div class="w-48 h-48 mx-auto rounded-full border-2 border-transparent group-hover:border-primary transition-all p-2 mb-6">
+<img alt="A female coffee sourcing specialist standing proudly in front of stacked sacks of green coffee beans in a warehouse." class="w-full h-full object-cover rounded-full filter grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7e-AnQKq8xs_pQklXolAW0hqegGMvOd4sSWWrnxBNQYGPA5OGmIKG6NhOl7CSgwNIoF00y40QBcyaNvjNhZtzA5vb92Vsb08XEBEnEHjvRjRbfL8QGjSdrfQJnqrbiIT38g-DYCTHHVcA-J4hDZoEk4RHVpFZB25LHGWz5jw5mOw_EfA2q6KQbi7pWGbHnMpdclFL6gIjaXh1cKuqEqkSMRsToTtT0wCkAF_sY80lQOd28EKiO0rE4XwnTl9JIX3up0RYrce48EM"/>
+</div>
+<h3 class="font-h2 text-h2 text-primary">Elena Rodriguez</h3>
+<p class="text-mocha-text font-small uppercase tracking-widest mb-4">Head of Sourcing</p>
+<p class="text-mocha-text text-sm px-4">Spends 8 months a year at origin, building deep personal roots with our partner farmers.</p>
+</div>
+<!-- Dummy team members -->
+<div class="text-center group">
+<div class="w-48 h-48 mx-auto rounded-full border-2 border-transparent group-hover:border-primary transition-all p-2 mb-6">
+<div class="w-full h-full bg-cover bg-center rounded-full filter grayscale hover:grayscale-0 transition-all duration-500" data-alt="A portrait of a male lead barista with tattoos, carefully looking into the camera in a moody coffee bar setting with soft lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAdtRxk-8Kch0xJ00jSpY7ZaUSCR_Ofx1VJfTTXQQo-zGvP6dkqNMkuWvLLazxGo93cOF2Anun7BFC--5YfLb2wEvtFv0FVeId8Qj5WWoCD9_x1z-pM4xuqtZGUDGlqFgndav3c4UPNSDPBhjLsFCg-bUtwQYyHS8EqM8N3MxVd6b-KO6tRGkEGbitTQ-sJmwB439Ke0GLlseDUvPAJwaGiE96xdWJPKoVz04f87zWSNOGklN4LszxDGRq_1WV13y9HQCoC3j8amOQ')"></div>
+</div>
+<h3 class="font-h2 text-h2 text-primary">Julian Vane</h3>
+<p class="text-mocha-text font-small uppercase tracking-widest mb-4">Barista Trainer</p>
+<p class="text-mocha-text text-sm px-4">An award-winning barista focused on educating our community on the ritual of the perfect cup.</p>
+</div>
+<div class="text-center group">
+<div class="w-48 h-48 mx-auto rounded-full border-2 border-transparent group-hover:border-primary transition-all p-2 mb-6">
+<div class="w-full h-full bg-cover bg-center rounded-full filter grayscale hover:grayscale-0 transition-all duration-500" data-alt="A portrait of a female creative director with glasses, smiling in a modern office with coffee design sketches on the wall behind her." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB0AXIeccajR3pE9dalsXdWpjQBGqrFHWGslovdoGL27cMWL6rcbO6jpkfLg87yRm6M2hsj4NfOkBBRgL1HJ7UIRnSzI8CSX49LAvf-1a0e9FvB3f2IWfpy1H0ZLjYMCtToUND175s4P6HkW4DOhkMJh6XO4VOUOGbs1sMc8nNURNihoDTJW7i9QUPZ59w8m9N6RfOq-9pwZLi8FQWJujCVB1fwGvkF0_Yw3WTkbn3s9CDxPx1vFYj0-jKVYAHqyJvsIxvqOQ8vRhQ')"></div>
+</div>
+<h3 class="font-h2 text-h2 text-primary">Sophie Lin</h3>
+<p class="text-mocha-text font-small uppercase tracking-widest mb-4">Experience Director</p>
+<p class="text-mocha-text text-sm px-4">Designing every touchpoint of the Roast &amp; Ritual brand to evoke peace and intentionality.</p>
+</div>
+</div>
+</section>
+<!-- 7. CTA -->
+<section class="py-section-gap-desktop bg-espresso relative overflow-hidden">
+<div class="absolute inset-0 opacity-10">
+<div class="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute bottom-0 right-0 w-96 h-96 bg-caramel rounded-full blur-[120px] translate-x-1/2 translate-y-1/2"></div>
+</div>
+<div class="max-w-container-max mx-auto px-edge-margin text-center relative z-10">
+<h2 class="font-display text-h1 md:text-display mb-8">Start your ritual</h2>
+<p class="text-mocha-text text-xl mb-12 max-w-2xl mx-auto">Not sure where to begin? Our sensory quiz helps you find the bean that matches your morning energy.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-6">
+<button class="bg-primary-container text-on-primary-container px-10 py-4 rounded-lg font-body-bold text-lg active:scale-95 transition-all gold-glow">
+                    Take the Quiz
+                </button>
+<button class="border border-primary text-primary px-10 py-4 rounded-lg font-body-bold text-lg hover:bg-primary/5 transition-all active:scale-95">
+                    Shop Collection
+                </button>
+</div>
+</div>
+</section>
+<!-- 8. FOOTER -->
+<footer class="bg-espresso dark:bg-espresso border-t border-outline-variant/20 pt-20 pb-10">
+<div class="max-w-container-max mx-auto px-edge-margin grid grid-cols-1 md:grid-cols-4 gap-gutter mb-20">
+<div class="col-span-1 md:col-span-1">
+<div class="font-h2 text-h2 text-primary mb-4">Roast &amp; Ritual</div>
+<p class="text-mocha-text font-body mb-6">Crafted for the intentional brewer. Join us in our pursuit of the perfect coffee ritual.</p>
+<div class="flex space-x-4">
+<a class="text-mocha-text hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-mocha-text hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+<div>
+<h4 class="text-on-surface font-body-bold mb-6">Explore</h4>
+<ul class="space-y-4">
+<li><a class="text-mocha-text hover:text-primary transition-colors font-body" href="#">Shop All</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors font-body" href="#">Subscription</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors font-body" href="#">Coffee Quiz</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors font-body" href="#">Brew Guides</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-on-surface font-body-bold mb-6">Company</h4>
+<ul class="space-y-4">
+<li><a class="text-mocha-text hover:text-primary transition-colors font-body" href="#">Wholesale</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors font-body" href="#">Sustainability</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors font-body" href="#">Contact Support</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors font-body" href="#">Shipping &amp; Returns</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-on-surface font-body-bold mb-6">Legal</h4>
+<ul class="space-y-4">
+<li><a class="text-mocha-text hover:text-primary transition-colors font-body" href="#">Privacy Policy</a></li>
+<li><a class="text-mocha-text hover:text-primary transition-colors font-body" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-edge-margin text-center md:text-left border-t border-outline-variant/10 pt-10">
+<p class="text-mocha-text font-small">© 2024 Roast &amp; Ritual. Crafted for the intentional brewer.</p>
+</div>
+</footer>
+<script>
+        // Micro-interactions for map pins
+        document.querySelectorAll('.group').forEach(group => {
+            group.addEventListener('mouseenter', () => {
+                // Potential for adding audio cues or additional visual pulses
+            });
+        });
+
+        // Scroll reveal logic
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

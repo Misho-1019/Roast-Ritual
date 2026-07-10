@@ -7,6 +7,7 @@ import AdminLayout from './components/admin/AdminLayout'
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import ProductDetailPage from './pages/ProductDetailPage'
+import AboutPage from './pages/AboutPage'
 import QuizPage from './pages/QuizPage'
 import BrewGuidesPage from './pages/BrewGuidesPage'
 import BrewMethodPage from './pages/BrewMethodPage'
@@ -50,6 +51,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/brew-guides" element={<BrewGuidesPage />} />
           <Route path="/brew-guides/:id" element={<BrewMethodPage />} />

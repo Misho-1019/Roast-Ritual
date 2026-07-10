@@ -75,3 +75,7 @@ body {
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
+
+.map-coffee-tint .leaflet-tile-pane {
+  filter: sepia(0.2) hue-rotate(-5deg) saturate(0.8) brightness(1.0);
+}
