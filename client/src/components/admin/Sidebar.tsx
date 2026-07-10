@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
+import HelpModal from './HelpModal'
 
 const navItems = [
   { label: 'Dashboard', icon: 'dashboard', to: '/admin' },
@@ -15,6 +17,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ collapsed }: SidebarProps) {
+  const [showHelp, setShowHelp] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
   const logout = useAuthStore((s) => s.logout)
@@ -62,14 +65,15 @@ export default function Sidebar({ collapsed }: SidebarProps) {
       </nav>
       <div className="mt-auto pt-8 px-4 border-t border-outline-variant space-y-1 pb-6">
         {!collapsed && (
-          <button className="w-full bg-primary text-on-primary py-3 rounded-lg font-bold mb-6 hover:brightness-110 active:scale-95 transition-all">
+          <Link to="/admin/create-order" className="block w-full bg-primary text-on-primary py-3 rounded-lg font-bold mb-6 hover:brightness-110 active:scale-95 transition-all text-center">
             Create Order
-          </button>
+          </Link>
         )}
-        <a className={`flex items-center text-mocha-text hover:text-primary transition-colors ${collapsed ? 'justify-center' : 'px-4 py-2'}`} href="#">
+        <button onClick={() => setShowHelp(true)} className={`flex items-center text-mocha-text hover:text-primary transition-colors w-full ${collapsed ? 'justify-center' : 'px-4 py-2'}`}>
           <span className="material-symbols-outlined">help</span>
           {!collapsed && <span className="ml-3 font-body">Help</span>}
-        </a>
+        </button>
+        {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
         <button onClick={handleLogout} className={`flex items-center text-mocha-text hover:text-primary transition-colors w-full ${collapsed ? 'justify-center' : 'px-4 py-2'}`}>
           <span className="material-symbols-outlined">logout</span>
           {!collapsed && <span className="ml-3 font-body">Sign Out</span>}

@@ -41,10 +41,10 @@ export default function EditStockModal({ product, onClose, onSaved }: EditStockM
         </div>
 
         <label className="font-small text-mocha-text block mb-2 text-sm">New Stock Quantity</label>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-center gap-2">
           <button
             onClick={() => setStock(Math.max(0, stock - 1))}
-            className="w-10 h-10 rounded-lg border border-chestnut/50 flex items-center justify-center text-on-surface hover:text-primary transition-colors"
+            className="w-10 h-10 rounded-lg border border-chestnut/50 flex items-center justify-center text-on-surface hover:text-primary transition-colors shrink-0"
           >
             <span className="material-symbols-outlined">remove</span>
           </button>
@@ -53,11 +53,11 @@ export default function EditStockModal({ product, onClose, onSaved }: EditStockM
             min="0"
             value={stock}
             onChange={(e) => setStock(Math.max(0, parseInt(e.target.value) || 0))}
-            className="flex-1 bg-background border border-chestnut/50 rounded-lg px-4 py-2.5 text-on-surface text-center text-h2 font-bold focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+            className="w-24 bg-background border border-chestnut/50 rounded-lg px-2 py-3 text-on-surface text-center text-h2 font-bold focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
           />
           <button
             onClick={() => setStock(stock + 1)}
-            className="w-10 h-10 rounded-lg border border-chestnut/50 flex items-center justify-center text-on-surface hover:text-primary transition-colors"
+            className="w-10 h-10 rounded-lg border border-chestnut/50 flex items-center justify-center text-on-surface hover:text-primary transition-colors shrink-0"
           >
             <span className="material-symbols-outlined">add</span>
           </button>

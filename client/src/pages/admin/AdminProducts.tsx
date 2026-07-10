@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import EditStockModal from '../../components/admin/EditStockModal'
 
 interface Product {
@@ -14,10 +15,17 @@ interface Product {
 type NotifType = { show: boolean; message: string }
 
 export default function AdminProducts() {
+  const [searchParams] = useSearchParams()
+  const search = searchParams.get('q')?.toLowerCase() || ''
   const [products, setProducts] = useState<Product[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
   const [notification, setNotification] = useState<NotifType>({ show: false, message: '' })
+
+  const filtered = useMemo(() => {
+    if (!search) return products
+    return products.filter((p) => p.name.toLowerCase().includes(search) || p.roastLevel.toLowerCase().includes(search))
+  }, [products, search])
 
   useEffect(() => {
     fetch('/api/products?pageSize=50')
@@ -51,7 +59,7 @@ export default function AdminProducts() {
   return (
     <div className="bg-espresso border border-outline-variant/30 rounded-lg overflow-hidden">
       <div className="px-6 py-5 border-b border-outline-variant flex justify-between items-center">
-        <h2 className="font-bold text-on-surface">All Products ({products.length})</h2>
+        <h2 className="font-bold text-on-surface">All Products ({filtered.length}{search ? ` filtered` : ''})</h2>
       </div>
 
       {notification.show && (
@@ -72,7 +80,7 @@ export default function AdminProducts() {
             </tr>
           </thead>
           <tbody className="divide-y divide-outline-variant">
-            {products.map((product) => (
+            {filtered.map((product) => (
               <tr key={product.id} className="hover:bg-surface-container/50 transition-colors group">
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">

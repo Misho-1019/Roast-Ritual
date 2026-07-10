@@ -19,6 +19,11 @@ import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminProducts from './pages/admin/AdminProducts'
+import AdminOrders from './pages/admin/AdminOrders'
+import AdminAnalytics from './pages/admin/AdminAnalytics'
+import AdminCustomers from './pages/admin/AdminCustomers'
+import AdminSettings from './pages/admin/AdminSettings'
+import AdminCreateOrder from './pages/admin/AdminCreateOrder'
 
 function AdminGuard({ children }: { children: React.ReactNode }) {
   const { user, isAuthenticated, isLoading } = useAuthStore()
@@ -69,6 +74,11 @@ function App() {
         >
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/products" element={<AdminProducts />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
+          <Route path="/admin/analytics" element={<AdminAnalytics />} />
+          <Route path="/admin/customers" element={<AdminCustomers />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
+          <Route path="/admin/create-order" element={<AdminCreateOrder />} />
         </Route>
       </Routes>
     </BrowserRouter>

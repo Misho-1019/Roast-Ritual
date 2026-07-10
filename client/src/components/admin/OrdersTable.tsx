@@ -1,20 +1,53 @@
-const orders = [
-  { id: '#RR-9021', customer: 'Julian Weaver', initials: 'JW', date: 'Oct 12, 2023', status: 'Processing' as const, total: 124.50, statusColor: 'text-blue-400 bg-blue-500/10' },
-  { id: '#RR-9020', customer: 'Elena Hayes', initials: 'EH', date: 'Oct 11, 2023', status: 'Delivered' as const, total: 84.20, statusColor: 'text-green-400 bg-green-500/10' },
-  { id: '#RR-9019', customer: 'Marcus Thorne', initials: 'MT', date: 'Oct 11, 2023', status: 'Pending' as const, total: 345.00, statusColor: 'text-yellow-400 bg-yellow-500/10' },
-  { id: '#RR-9018', customer: 'Sarah Chen', initials: 'SC', date: 'Oct 10, 2023', status: 'Shipped' as const, total: 67.50, statusColor: 'text-blue-400 bg-blue-500/10' },
-  { id: '#RR-9017', customer: 'James Whitfield', initials: 'JW', date: 'Oct 9, 2023', status: 'Delivered' as const, total: 198.00, statusColor: 'text-green-400 bg-green-500/10' },
-]
+import { useEffect, useState } from 'react'
+import { api } from '../../lib/api'
+
+interface OrderItem {
+  id: string
+  customerName: string
+  status: string
+  total: number
+  createdAt: string
+}
 
 const statusStyles: Record<string, string> = {
-  Processing: 'text-blue-400 bg-blue-500/10',
-  Delivered: 'text-green-400 bg-green-500/10',
-  Pending: 'text-yellow-400 bg-yellow-500/10',
-  Shipped: 'text-blue-400 bg-blue-500/10',
-  Cancelled: 'text-red-400 bg-red-500/10',
+  PENDING: 'text-yellow-400 bg-yellow-500/10',
+  PAID: 'text-blue-400 bg-blue-500/10',
+  PROCESSING: 'text-blue-400 bg-blue-500/10',
+  SHIPPED: 'text-purple-400 bg-purple-500/10',
+  DELIVERED: 'text-green-400 bg-green-500/10',
+  CANCELLED: 'text-red-400 bg-red-500/10',
 }
 
 export default function OrdersTable() {
+  const [orders, setOrders] = useState<OrderItem[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    api.get<OrderItem[]>('/admin/orders')
+      .then(setOrders)
+      .catch(console.error)
+      .finally(() => setIsLoading(false))
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="bg-espresso border border-outline-variant rounded-lg p-6 animate-pulse space-y-4">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <div key={i} className="h-10 bg-surface-container-high rounded" />
+        ))}
+      </div>
+    )
+  }
+
+  if (orders.length === 0) {
+    return (
+      <div className="bg-espresso border border-outline-variant rounded-lg p-12 text-center text-mocha-text">
+        <span className="material-symbols-outlined text-4xl text-primary/30 mb-2">receipt_long</span>
+        <p>No orders yet. Orders will appear here after customers complete checkout.</p>
+      </div>
+    )
+  }
+
   return (
     <div className="bg-espresso border border-outline-variant rounded-lg overflow-hidden">
       <div className="px-6 py-5 border-b border-outline-variant flex justify-between items-center">
@@ -22,9 +55,7 @@ export default function OrdersTable() {
           <h2 className="font-bold text-on-surface">Recent Orders</h2>
           <span className="bg-primary-container/20 text-primary text-[10px] px-2 py-0.5 rounded-full font-bold">LATEST RITUALS</span>
         </div>
-        <div className="flex gap-2">
-          <button className="px-3 py-1.5 border border-outline-variant rounded-lg text-xs hover:bg-surface-container transition-colors text-mocha-text">Export CSV</button>
-        </div>
+        <a href="/admin/orders" className="text-primary text-xs font-medium hover:underline">View All</a>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left">
@@ -38,24 +69,26 @@ export default function OrdersTable() {
             </tr>
           </thead>
           <tbody className="divide-y divide-outline-variant">
-            {orders.map((order) => (
+            {orders.slice(0, 8).map((order) => (
               <tr key={order.id} className="hover:bg-surface-container/50 transition-colors">
-                <td className="px-6 py-4 font-mono text-xs text-primary">{order.id}</td>
+                <td className="px-6 py-4 font-mono text-xs text-primary">#{order.id.slice(0, 8)}</td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-chestnut/30 flex items-center justify-center text-primary text-[10px] font-bold">
-                      {order.initials}
+                      {order.customerName.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()}
                     </div>
-                    <span className="text-on-surface font-medium text-sm">{order.customer}</span>
+                    <span className="text-on-surface font-medium text-sm">{order.customerName}</span>
                   </div>
                 </td>
-                <td className="px-6 py-4 text-mocha-text text-sm">{order.date}</td>
+                <td className="px-6 py-4 text-mocha-text text-sm">
+                  {new Date(order.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                </td>
                 <td className="px-6 py-4">
-                  <span className={`px-2 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ${statusStyles[order.status] || 'text-mocha-text bg-surface-variant'}`}>
+                  <span className={`px-2 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider ${statusStyles[order.status] || 'bg-surface-variant text-mocha-text'}`}>
                     {order.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-right text-on-surface font-bold">${order.total.toFixed(2)}</td>
+                <td className="px-6 py-4 text-right text-on-surface font-bold">${Number(order.total).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
