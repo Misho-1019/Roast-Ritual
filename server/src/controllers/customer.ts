@@ -5,12 +5,11 @@ import { AuthRequest } from '../middleware/auth.js'
 export async function listCustomers(req: AuthRequest, res: Response) {
   try {
     const customers = await prisma.user.findMany({
-      where: { orders: { some: {} } },
       include: {
         _count: { select: { orders: true } },
         orders: { orderBy: { createdAt: 'desc' }, take: 1, select: { createdAt: true, total: true } },
       },
-      orderBy: { orders: { _count: 'desc' } },
+      orderBy: { createdAt: 'desc' },
     })
 
     const result = customers.map((c) => ({

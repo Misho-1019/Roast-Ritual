@@ -79,3 +79,41 @@ body {
 .map-coffee-tint .leaflet-tile-pane {
   filter: sepia(0.2) hue-rotate(-5deg) saturate(0.8) brightness(1.0);
 }
+
+.light-mode body,
+body.light-mode {
+  background-color: #FAF6F1;
+  color: #2D231E;
+}
+
+.light-mode [class*="bg-background"] {
+  background-color: #FAF6F1;
+}
+
+.light-mode [class*="bg-espresso"] {
+  background-color: #F5EDE4;
+}
+
+.light-mode [class*="text-on-surface"] {
+  color: #2D231E;
+}
+
+.light-mode [class*="text-mocha-text"] {
+  color: #7A6B5E;
+}
+
+.light-mode [class*="text-on-surface-variant"] {
+  color: #7A6B5E;
+}
+
+.light-mode [class*="border-chestnut"] {
+  border-color: #D4C4B4;
+}
+
+.light-mode [class*="border-outline-variant"] {
+  border-color: #E0D6CA;
+}
+
+.light-mode [class*="bg-surface-container-high"] {
+  background-color: #E8DDD2;
+}

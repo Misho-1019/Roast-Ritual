@@ -61,6 +61,22 @@ export async function register(req: AuthRequest, res: Response) {
   }
 }
 
+const MAX_REFRESH_TOKENS = 5
+
+async function trimRefreshTokens(userId: string) {
+  const tokens = await prisma.refreshToken.findMany({
+    where: { userId },
+    orderBy: { createdAt: 'desc' },
+    skip: MAX_REFRESH_TOKENS,
+    select: { id: true },
+  })
+  if (tokens.length > 0) {
+    await prisma.refreshToken.deleteMany({
+      where: { id: { in: tokens.map((t) => t.id) } },
+    })
+  }
+}
+
 export async function login(req: AuthRequest, res: Response) {
   try {
     const email = (req.body.email || '').toLowerCase().trim()
@@ -89,6 +105,8 @@ export async function login(req: AuthRequest, res: Response) {
     await prisma.refreshToken.create({
       data: { token: refreshToken, userId: user.id, expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) },
     })
+
+    await trimRefreshTokens(user.id)
 
     setRefreshCookie(res, refreshToken)
     res.json({ user: sanitizeUser(user), accessToken })
@@ -149,6 +167,8 @@ export async function refresh(req: AuthRequest, res: Response) {
         expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       },
     })
+
+    await trimRefreshTokens(payload.userId)
 
     setRefreshCookie(res, newRefreshToken)
     res.json({ accessToken })

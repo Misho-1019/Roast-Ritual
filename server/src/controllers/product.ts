@@ -1,7 +1,7 @@
 import { Response } from 'express'
 import { prisma } from '../lib/db.js'
 import { AuthRequest } from '../middleware/auth.js'
-import { Prisma } from '../generated/prisma/index.js'
+import type { Prisma } from '../generated/prisma/index.js'
 import { emitStockUpdate } from '../sockets/index.js'
 
 export async function listProducts(req: AuthRequest, res: Response) {
@@ -21,8 +21,10 @@ export async function listProducts(req: AuthRequest, res: Response) {
     if (origin) where.origin = { contains: origin as string, mode: 'insensitive' }
     if (minPrice || maxPrice) {
       where.price = {}
-      if (minPrice) where.price.gte = parseFloat(minPrice as string)
-      if (maxPrice) where.price.lte = parseFloat(maxPrice as string)
+      const minVal = parseFloat(minPrice as string)
+      const maxVal = parseFloat(maxPrice as string)
+      if (minPrice && !isNaN(minVal)) where.price.gte = minVal
+      if (maxPrice && !isNaN(maxVal)) where.price.lte = maxVal
     }
 
     let orderBy: Prisma.ProductOrderByWithRelationInput = { createdAt: 'desc' }
@@ -110,7 +112,7 @@ export async function updateProduct(req: AuthRequest, res: Response) {
     const id = req.params.id as string
     const { name, slug, description, price, compareAtPrice, imageUrl, stock, roastLevel, origin, flavorNotes, isFeatured } = req.body
 
-    const data: any = {}
+    const data: Record<string, unknown> = {}
     if (name !== undefined) data.name = name
     if (slug !== undefined) data.slug = slug
     if (description !== undefined) data.description = description
