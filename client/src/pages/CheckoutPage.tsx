@@ -21,7 +21,9 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     if (items.length > 0) {
-      api.post<{ clientSecret: string }>('/checkout/create-payment-intent')
+      const { coupon } = useCartStore.getState()
+      const body = coupon ? { couponId: coupon.id } : {}
+      api.post<{ clientSecret: string }>('/checkout/create-payment-intent', body)
         .then((data) => setClientSecret(data.clientSecret))
         .catch(console.error)
         .finally(() => setIsLoading(false))
