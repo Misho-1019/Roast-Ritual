@@ -21,6 +21,16 @@ export async function handleWebhook(req: Request, res: Response) {
     const userId = paymentIntent.metadata?.userId
     const couponId = paymentIntent.metadata?.couponId
     const discountCents = paymentIntent.metadata?.discountCents
+    const shipping = paymentIntent.shipping
+
+    const shippingAddress: Record<string, string> = {}
+    if (shipping?.address) {
+      shippingAddress.line1 = shipping.address.line1 || ''
+      shippingAddress.city = shipping.address.city || ''
+      shippingAddress.state = shipping.address.state || ''
+      shippingAddress.zip = shipping.address.postal_code || ''
+      shippingAddress.country = shipping.address.country || ''
+    }
 
     if (userId) {
       const cart = await prisma.cart.findUnique({
@@ -44,7 +54,7 @@ export async function handleWebhook(req: Request, res: Response) {
             total,
             discountAmount,
             couponId: couponId || null,
-            shippingAddress: {},
+            shippingAddress,
             items: {
               create: cart.items.map((item) => ({
                 productId: item.productId,
@@ -59,6 +69,13 @@ export async function handleWebhook(req: Request, res: Response) {
           await prisma.coupon.update({
             where: { id: couponId },
             data: { usedCount: { increment: 1 } },
+          })
+        }
+
+        for (const item of cart.items) {
+          await prisma.product.update({
+            where: { id: item.productId },
+            data: { stock: { decrement: item.quantity } },
           })
         }
 

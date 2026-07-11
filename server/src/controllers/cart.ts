@@ -79,20 +79,30 @@ export async function updateItem(req: AuthRequest, res: Response) {
     const id = req.params.id as string
     const { quantity } = req.body
 
-    if (quantity < 1) {
-      await prisma.cartItem.delete({ where: { id } })
-    } else {
-      await prisma.cartItem.update({ where: { id }, data: { quantity } })
-    }
+    const existing = await prisma.cartItem.findUnique({
+      where: { id },
+      include: { cart: { select: { userId: true } } },
+    })
 
-    const item = await prisma.cartItem.findUnique({ where: { id }, include: { cart: true } })
-    if (!item) {
-      res.json({ message: 'Item removed' })
+    if (!existing) {
+      res.status(404).json({ message: 'Item not found' })
       return
     }
 
+    if (existing.cart.userId !== req.userId) {
+      res.status(403).json({ message: 'Not your cart item' })
+      return
+    }
+
+    if (quantity < 1) {
+      await prisma.cartItem.delete({ where: { id } })
+      return res.json({ message: 'Item removed' })
+    }
+
+    await prisma.cartItem.update({ where: { id }, data: { quantity } })
+
     const cart = await prisma.cart.findUnique({
-      where: { id: item.cartId },
+      where: { id: existing.cartId },
       include: { items: { include: { product: true } } },
     })
 
@@ -106,9 +116,18 @@ export async function updateItem(req: AuthRequest, res: Response) {
 export async function removeItem(req: AuthRequest, res: Response) {
   try {
     const id = req.params.id as string
-    const item = await prisma.cartItem.findUnique({ where: { id }, include: { cart: true } })
+    const item = await prisma.cartItem.findUnique({
+      where: { id },
+      include: { cart: { select: { userId: true } } },
+    })
+
     if (!item) {
       res.status(404).json({ message: 'Item not found' })
+      return
+    }
+
+    if (item.cart.userId !== req.userId) {
+      res.status(403).json({ message: 'Not your cart item' })
       return
     }
 

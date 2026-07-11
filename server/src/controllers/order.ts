@@ -26,8 +26,8 @@ export async function getOrder(req: AuthRequest, res: Response) {
   try {
     const id = req.params.id as string
 
-    const order = await prisma.order.findUnique({
-      where: { id },
+    const order = await prisma.order.findFirst({
+      where: { id, userId: req.userId },
       include: { items: { include: { product: { select: { id: true, name: true, imageUrl: true } } } } },
     })
 

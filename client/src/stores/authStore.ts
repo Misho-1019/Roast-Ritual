@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { api, ApiError } from '../lib/api'
+import { api, ApiError, setAccessToken } from '../lib/api'
 
 interface User {
   id: string
@@ -32,7 +32,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ isLoading: true, error: null })
     try {
       const data = await api.post<{ user: User; accessToken: string }>('/auth/login', { email, password })
-      localStorage.setItem('accessToken', data.accessToken)
+      setAccessToken(data.accessToken)
       set({ user: data.user, accessToken: data.accessToken, isAuthenticated: true, isLoading: false })
     } catch (err) {
       const message = err instanceof ApiError ? err.message : 'Login failed'
@@ -45,7 +45,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ isLoading: true, error: null })
     try {
       const data = await api.post<{ user: User; accessToken: string }>('/auth/register', { name, email, password })
-      localStorage.setItem('accessToken', data.accessToken)
+      setAccessToken(data.accessToken)
       set({ user: data.user, accessToken: data.accessToken, isAuthenticated: true, isLoading: false })
     } catch (err) {
       const message = err instanceof ApiError ? err.message : 'Registration failed'
@@ -60,7 +60,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     } catch {
       // Ignore logout errors
     }
-    localStorage.removeItem('accessToken')
+    setAccessToken(null)
     set({ user: null, accessToken: null, isAuthenticated: false })
   },
 
@@ -69,7 +69,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       const data = await api.get<{ user: User | null; accessToken: string | null }>('/auth/me')
       if (data.user && data.accessToken) {
-        localStorage.setItem('accessToken', data.accessToken)
+        setAccessToken(data.accessToken)
         set({ user: data.user, accessToken: data.accessToken, isAuthenticated: true, isLoading: false })
       } else {
         set({ user: null, accessToken: null, isAuthenticated: false, isLoading: false })

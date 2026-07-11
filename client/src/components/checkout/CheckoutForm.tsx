@@ -29,6 +29,17 @@ export default function CheckoutForm({ clientSecret }: { clientSecret: string })
           card: elements.getElement(CardElement)!,
           billing_details: { name: form.name, email: form.email },
         },
+        shipping: {
+          name: form.name,
+          phone: form.phone,
+          address: {
+            line1: form.address,
+            city: form.city,
+            state: form.state,
+            postal_code: form.zip,
+            country: form.country === 'United States' ? 'US' : form.country === 'Canada' ? 'CA' : 'GB',
+          },
+        },
       })
 
       if (stripeError) {

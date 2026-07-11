@@ -9,25 +9,68 @@ export class ApiError extends Error {
   }
 }
 
+let accessToken: string | null = null
+
+export function setAccessToken(token: string | null) {
+  accessToken = token
+}
+
+let refreshPromise: Promise<string | null> | null = null
+
+async function refreshToken(): Promise<string | null> {
+  if (refreshPromise) return refreshPromise
+
+  refreshPromise = (async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/auth/refresh`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+      })
+      if (!res.ok) return null
+      const data = await res.json()
+      return data.accessToken || null
+    } catch {
+      return null
+    } finally {
+      refreshPromise = null
+    }
+  })()
+
+  return refreshPromise
+}
+
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
-  const token = localStorage.getItem('accessToken')
-
-  const res = await fetch(`${BASE_URL}${path}`, {
-    ...options,
-    headers: {
+  const exec = (): Promise<T> => {
+    const headers: Record<string, string> = {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...options.headers,
-    },
-    credentials: 'include',
-  })
+      ...(options.headers as Record<string, string>),
+    }
+    if (accessToken) headers['Authorization'] = `Bearer ${accessToken}`
 
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({ message: 'Request failed' }))
-    throw new ApiError(res.status, body.message)
+    return fetch(`${BASE_URL}${path}`, { ...options, headers, credentials: 'include' }).then(
+      async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({ message: 'Request failed' }))
+          throw new ApiError(res.status, body.message)
+        }
+        return res.json()
+      }
+    )
   }
 
-  return res.json()
+  try {
+    return await exec()
+  } catch (err) {
+    if (err instanceof ApiError && err.statusCode === 401 && path !== '/auth/refresh') {
+      const newToken = await refreshToken()
+      if (newToken) {
+        accessToken = newToken
+        return exec()
+      }
+    }
+    throw err
+  }
 }
 
 export const api = {
