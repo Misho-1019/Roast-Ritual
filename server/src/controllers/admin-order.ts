@@ -18,7 +18,6 @@ export async function adminCreateOrder(req: AuthRequest, res: Response) {
       return
     }
 
-    let total = 0
     const orderItemsData: { productId: string; quantity: number; unitPrice: number }[] = []
 
     for (const item of items) {
@@ -32,29 +31,35 @@ export async function adminCreateOrder(req: AuthRequest, res: Response) {
         return
       }
       const unitPrice = Number(product.price)
-      total += unitPrice * item.quantity
       orderItemsData.push({ productId: item.productId, quantity: item.quantity, unitPrice })
     }
 
-    const order = await prisma.order.create({
-      data: {
-        userId: customerId,
-        status: 'PENDING',
-        total,
-        shippingAddress: shippingAddress || {},
-        items: { create: orderItemsData },
-      },
-      include: { items: { include: { product: { select: { id: true, name: true, imageUrl: true, price: true } } } } },
-    })
+    let total = orderItemsData.reduce((sum, i) => sum + i.unitPrice * i.quantity, 0)
 
-    for (const item of items) {
-      const product = await prisma.product.findUnique({ where: { id: item.productId }, select: { id: true, stock: true } })
-      if (product) {
-        const newStock = product.stock - item.quantity
-        await prisma.product.update({ where: { id: item.productId }, data: { stock: newStock } })
-        emitStockUpdate(item.productId, newStock)
+    const order = await prisma.$transaction(async (tx) => {
+      for (const item of items) {
+        const updated = await tx.product.update({
+          where: { id: item.productId, stock: { gte: item.quantity } },
+          data: { stock: { decrement: item.quantity } },
+          select: { id: true, stock: true },
+        })
+        if (!updated) {
+          throw new Error(`Insufficient stock for product ${item.productId} during order creation`)
+        }
+        emitStockUpdate(item.productId, updated.stock)
       }
-    }
+
+      return tx.order.create({
+        data: {
+          userId: customerId,
+          status: 'PENDING',
+          total,
+          shippingAddress: shippingAddress || {},
+          items: { create: orderItemsData },
+        },
+        include: { items: { include: { product: { select: { id: true, name: true, imageUrl: true, price: true } } } } },
+      })
+    })
 
     res.status(201).json(order)
   } catch (error) {

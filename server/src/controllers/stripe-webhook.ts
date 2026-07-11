@@ -39,47 +39,49 @@ export async function handleWebhook(req: Request, res: Response) {
       })
 
       if (cart && cart.items.length > 0) {
-        const subtotal = cart.items.reduce(
-          (sum, item) => sum + Number(item.product.price) * item.quantity,
-          0
-        )
+        await prisma.$transaction(async (tx) => {
+          const subtotal = cart.items.reduce(
+            (sum, item) => sum + Number(item.product.price) * item.quantity,
+            0
+          )
 
-        const discountAmount = discountCents ? Number(discountCents) / 100 : 0
-        const total = Math.max(0, subtotal - discountAmount)
+          const discountAmount = discountCents ? Number(discountCents) / 100 : 0
+          const total = Math.max(0, subtotal - discountAmount)
 
-        await prisma.order.create({
-          data: {
-            userId,
-            status: 'PAID',
-            total,
-            discountAmount,
-            couponId: couponId || null,
-            shippingAddress,
-            items: {
-              create: cart.items.map((item) => ({
-                productId: item.productId,
-                quantity: item.quantity,
-                unitPrice: Number(item.product.price),
-              })),
+          await tx.order.create({
+            data: {
+              userId,
+              status: 'PAID',
+              total,
+              discountAmount,
+              couponId: couponId || null,
+              shippingAddress,
+              items: {
+                create: cart.items.map((item) => ({
+                  productId: item.productId,
+                  quantity: item.quantity,
+                  unitPrice: Number(item.product.price),
+                })),
+              },
             },
-          },
+          })
+
+          if (couponId) {
+            await tx.coupon.update({
+              where: { id: couponId },
+              data: { usedCount: { increment: 1 } },
+            })
+          }
+
+          for (const item of cart.items) {
+            await tx.product.update({
+              where: { id: item.productId },
+              data: { stock: { decrement: item.quantity } },
+            })
+          }
+
+          await tx.cartItem.deleteMany({ where: { cartId: cart.id } })
         })
-
-        if (couponId) {
-          await prisma.coupon.update({
-            where: { id: couponId },
-            data: { usedCount: { increment: 1 } },
-          })
-        }
-
-        for (const item of cart.items) {
-          await prisma.product.update({
-            where: { id: item.productId },
-            data: { stock: { decrement: item.quantity } },
-          })
-        }
-
-        await prisma.cartItem.deleteMany({ where: { cartId: cart.id } })
       }
     }
   }

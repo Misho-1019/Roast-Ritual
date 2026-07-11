@@ -10,6 +10,7 @@ export default function CheckoutForm({ clientSecret }: { clientSecret: string })
   const { items, total, clearCart } = useCartStore()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState(false)
   const [form, setForm] = useState({
     name: '', email: '', phone: '', address: '', city: '', state: '', zip: '', country: 'United States',
   })
@@ -45,8 +46,9 @@ export default function CheckoutForm({ clientSecret }: { clientSecret: string })
       if (stripeError) {
         setError(stripeError.message || 'Payment failed')
       } else {
+        setSuccess(true)
         clearCart()
-        navigate('/orders')
+        setTimeout(() => navigate('/orders'), 2500)
       }
     } catch (err: any) {
       setError(err.message || 'Something went wrong')
@@ -60,6 +62,17 @@ export default function CheckoutForm({ clientSecret }: { clientSecret: string })
   }, [items.length, navigate])
 
   const inputClass = 'w-full bg-background border border-chestnut/50 rounded-lg px-4 py-3 text-on-surface placeholder:text-mocha-text/30 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all'
+
+  if (success) {
+    return (
+      <div className="text-center py-12">
+        <span className="material-symbols-outlined text-6xl text-green-500 mb-4">check_circle</span>
+        <h2 className="text-h2 text-on-surface mb-2">Payment Successful!</h2>
+        <p className="text-mocha-text mb-2">Thank you for your order.</p>
+        <p className="text-mocha-text text-sm">Redirecting to your orders...</p>
+      </div>
+    )
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">

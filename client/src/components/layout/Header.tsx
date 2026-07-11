@@ -12,6 +12,7 @@ const navLinks = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const { user, isAuthenticated, logout } = useAuthStore()
   const { items, fetchCart } = useCartStore()
 
@@ -40,6 +41,9 @@ export default function Header() {
             Roast & Ritual
           </span>
         </Link>
+        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-on-surface hover:text-primary transition-colors">
+          <span className="material-symbols-outlined">{menuOpen ? 'close' : 'menu'}</span>
+        </button>
         <nav className="hidden md:flex gap-8 items-center">
           {navLinks.map((link) => (
             <Link
@@ -97,6 +101,40 @@ export default function Header() {
           )}
         </div>
       </div>
+      {menuOpen && (
+        <div className="md:hidden border-t border-outline-variant bg-background/95 backdrop-blur-md">
+          <div className="max-w-max-width mx-auto px-container-padding py-4 flex flex-col gap-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setMenuOpen(false)}
+                className="text-on-surface-variant hover:text-primary transition-colors font-body text-body py-2"
+              >
+                {link.label}
+              </Link>
+            ))}
+            {user?.role === 'ADMIN' && (
+              <Link
+                to="/admin"
+                onClick={() => setMenuOpen(false)}
+                className="text-primary font-semibold py-2"
+              >
+                Admin
+              </Link>
+            )}
+            {isAuthenticated && (
+              <Link
+                to="/orders"
+                onClick={() => setMenuOpen(false)}
+                className="text-on-surface-variant hover:text-primary transition-colors font-body text-body py-2"
+              >
+                Orders
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   )
 }

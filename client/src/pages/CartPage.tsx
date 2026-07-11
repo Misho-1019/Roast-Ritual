@@ -1,12 +1,19 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useCartStore } from '../stores/cartStore'
+import { useToast } from '../components/ui/Toast'
 import CartItem from '../components/cart/CartItem'
 import CouponInput from '../components/cart/CouponInput'
 import CartSummary from '../components/cart/CartSummary'
 
 export default function CartPage() {
   const { items, isLoading, fetchCart, updateQuantity, removeItem, subtotal, discount, total } = useCartStore()
+  const { addToast } = useToast()
+
+  const handleRemove = (id: string) => {
+    removeItem(id)
+    addToast('Item removed from cart', 'info')
+  }
 
   useEffect(() => {
     fetchCart()
@@ -53,7 +60,7 @@ export default function CartPage() {
                 imageUrl={item.product.imageUrl}
                 quantity={item.quantity}
                 onUpdateQuantity={(id, qty) => updateQuantity(id, qty)}
-                onRemove={(id) => removeItem(id)}
+                onRemove={(id) => handleRemove(id)}
               />
             </div>
           ))}

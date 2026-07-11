@@ -22,6 +22,15 @@ export async function createPaymentIntent(req: AuthRequest, res: Response) {
       return
     }
 
+    for (const cartItem of cart.items) {
+      if (cartItem.product.stock < cartItem.quantity) {
+        res.status(400).json({
+          message: `Insufficient stock for ${cartItem.product.name}. Only ${cartItem.product.stock} available.`,
+        })
+        return
+      }
+    }
+
     const { couponId } = req.body
 
     const subtotalCents = cart.items.reduce(

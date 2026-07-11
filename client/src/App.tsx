@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthStore } from './stores/authStore'
+import { ErrorBoundary } from './components/ui/ErrorBoundary'
 import Layout from './components/layout/Layout'
 import AuthLayout from './components/auth/AuthLayout'
 import AdminLayout from './components/admin/AdminLayout'
@@ -48,6 +49,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ErrorBoundary>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
@@ -83,6 +85,7 @@ function App() {
           <Route path="/admin/create-order" element={<AdminCreateOrder />} />
         </Route>
       </Routes>
+      </ErrorBoundary>
     </BrowserRouter>
   )
 }
