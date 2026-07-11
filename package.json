@@ -7,8 +7,16 @@
     "shared"
   ],
   "license": "MIT",
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w server && npm run build -w client",
+    "start": "npm run start -w server"
+  },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.2",
     "tailwindcss": "^4.3.2"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
   }
 }
