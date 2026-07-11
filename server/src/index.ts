@@ -12,6 +12,7 @@ import orderRoutes from './routes/order.js'
 import adminRoutes from './routes/admin.js'
 import { handleWebhook } from './controllers/stripe-webhook.js'
 import { initSocket } from './sockets/index.js'
+import { startAbandonedCartCron } from './services/abandoned-cart.js'
 
 const app = express()
 const server = http.createServer(app)
@@ -40,6 +41,8 @@ app.use('/api/orders', orderRoutes)
 app.use('/api/admin', adminRoutes)
 
 initSocket(server)
+
+startAbandonedCartCron()
 
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
