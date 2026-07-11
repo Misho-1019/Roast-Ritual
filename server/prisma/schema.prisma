@@ -79,6 +79,11 @@ model Product {
   orderItems OrderItem[]
   cartItems  CartItem[]
   reviews    Review[]
+
+  @@index([origin])
+  @@index([roastLevel])
+  @@index([isFeatured])
+  @@index([price])
 }
 
 model Review {

@@ -10,7 +10,7 @@ interface ButtonProps {
 export function Button({ variant = 'primary', size = 'md', children, onClick, type = 'button', className = '' }: ButtonProps) {
   const base = 'inline-flex items-center justify-center font-bold rounded-lg transition-all'
   const variants = {
-    primary: 'bg-primary-container text-on-primary-container hover:brightness-110 active:scale-95',
+    primary: 'bg-primary text-on-primary hover:brightness-110 active:scale-95',
     secondary: 'border border-chestnut text-on-surface hover:bg-surface-variant active:scale-95',
     ghost: 'text-on-surface-variant hover:text-primary',
   }

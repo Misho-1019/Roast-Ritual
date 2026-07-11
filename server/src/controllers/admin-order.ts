@@ -18,10 +18,17 @@ export async function adminCreateOrder(req: AuthRequest, res: Response) {
       return
     }
 
+    const productIds = items.map((i: any) => i.productId)
+    const products = await prisma.product.findMany({
+      where: { id: { in: productIds } },
+    })
+
+    const productMap = new Map(products.map((p) => [p.id, p]))
+
     const orderItemsData: { productId: string; quantity: number; unitPrice: number }[] = []
 
     for (const item of items) {
-      const product = await prisma.product.findUnique({ where: { id: item.productId } })
+      const product = productMap.get(item.productId)
       if (!product) {
         res.status(404).json({ message: `Product ${item.productId} not found` })
         return

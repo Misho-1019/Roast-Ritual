@@ -41,7 +41,7 @@ export default function Header() {
             Roast & Ritual
           </span>
         </Link>
-        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-on-surface hover:text-primary transition-colors">
+        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-on-surface hover:text-primary transition-colors" aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
           <span className="material-symbols-outlined">{menuOpen ? 'close' : 'menu'}</span>
         </button>
         <nav className="hidden md:flex gap-8 items-center">
@@ -61,7 +61,7 @@ export default function Header() {
           )}
         </nav>
         <div className="flex items-center gap-5">
-          <Link to="/cart" className="text-on-surface hover:text-primary scale-95 active:scale-90 transition-transform relative">
+          <Link to="/cart" className="text-on-surface hover:text-primary scale-95 active:scale-90 transition-transform relative" aria-label="Shopping cart">
             <span className="material-symbols-outlined">shopping_cart</span>
             {items.length > 0 && (
               <span className="absolute -top-1 -right-2 bg-primary-container text-on-primary-container text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
@@ -78,7 +78,7 @@ export default function Header() {
               <button
                 onClick={logout}
                 className="text-on-surface-variant hover:text-primary transition-colors"
-                title="Sign out"
+                aria-label="Sign out"
               >
                 <span className="material-symbols-outlined">logout</span>
               </button>

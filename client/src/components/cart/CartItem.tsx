@@ -23,23 +23,23 @@ export default function CartItem({ id, name, imageUrl, quantity, onUpdateQuantit
         <div>
           <h3 className="font-bold text-on-surface">{name}</h3>
           <p className="font-small text-mocha-text text-xs mt-1 uppercase tracking-widest">12oz Bag</p>
-          <button onClick={() => onRemove(id)} className="md:hidden text-error font-small text-xs mt-2 flex items-center gap-1">
+          <button onClick={() => onRemove(id)} className="md:hidden text-error font-small text-xs mt-2 flex items-center gap-1" aria-label={`Remove ${name} from cart`}>
             <span className="material-symbols-outlined text-sm">delete</span> Remove
           </button>
         </div>
       </div>
       <div className="flex md:justify-center items-center gap-2">
         <div className="flex items-center border border-chestnut/50 rounded-lg">
-          <button onClick={() => onUpdateQuantity(id, quantity - 1)} className="px-3 py-1.5 text-on-surface hover:text-primary transition-colors">
+          <button onClick={() => onUpdateQuantity(id, quantity - 1)} className="px-3 py-1.5 text-on-surface hover:text-primary transition-colors" aria-label={`Decrease quantity of ${name}`}>
             <span className="material-symbols-outlined text-sm">remove</span>
           </button>
           <span className="px-3 py-1.5 text-on-surface font-bold min-w-[2rem] text-center text-sm">{quantity}</span>
-          <button onClick={() => onUpdateQuantity(id, quantity + 1)} className="px-3 py-1.5 text-on-surface hover:text-primary transition-colors">
+          <button onClick={() => onUpdateQuantity(id, quantity + 1)} className="px-3 py-1.5 text-on-surface hover:text-primary transition-colors" aria-label={`Increase quantity of ${name}`}>
             <span className="material-symbols-outlined text-sm">add</span>
           </button>
         </div>
       </div>
-      <button onClick={() => onRemove(id)} className="hidden md:block text-mocha-text hover:text-error transition-colors absolute right-4 top-4">
+      <button onClick={() => onRemove(id)} className="hidden md:block text-mocha-text hover:text-error transition-colors absolute right-4 top-4" aria-label={`Remove ${name} from cart`}>
         <span className="material-symbols-outlined">delete</span>
       </button>
     </div>

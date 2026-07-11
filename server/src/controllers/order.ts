@@ -9,13 +9,28 @@ export async function listOrders(req: AuthRequest, res: Response) {
       return
     }
 
-    const orders = await prisma.order.findMany({
-      where: { userId: req.userId },
-      include: { items: { include: { product: { select: { id: true, name: true, imageUrl: true } } } } },
-      orderBy: { createdAt: 'desc' },
-    })
+    const page = Math.max(1, parseInt(req.query.page as string) || 1)
+    const pageSize = Math.min(50, Math.max(1, parseInt(req.query.pageSize as string) || 20))
+    const skip = (page - 1) * pageSize
 
-    res.json(orders)
+    const [orders, total] = await Promise.all([
+      prisma.order.findMany({
+        where: { userId: req.userId },
+        include: { items: { include: { product: { select: { id: true, name: true, imageUrl: true } } } } },
+        orderBy: { createdAt: 'desc' },
+        skip,
+        take: pageSize,
+      }),
+      prisma.order.count({ where: { userId: req.userId } }),
+    ])
+
+    res.json({
+      data: orders,
+      total,
+      page,
+      pageSize,
+      totalPages: Math.ceil(total / pageSize),
+    })
   } catch (error) {
     console.error('List orders error:', error)
     res.status(500).json({ message: 'Internal server error' })

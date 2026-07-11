@@ -15,6 +15,7 @@ export function startAbandonedCartCron() {
       const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000)
 
       const abandonedCarts = await prisma.cart.findMany({
+        take: 100,
         where: {
           abandonedEmailSentAt: null,
           updatedAt: { lt: oneHourAgo },

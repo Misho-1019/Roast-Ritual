@@ -27,7 +27,8 @@ function sanitizeUser(user: { id: string; email: string; name: string; role: str
 
 export async function register(req: AuthRequest, res: Response) {
   try {
-    const { email, password, name } = req.body
+    const email = (req.body.email || '').toLowerCase().trim()
+    const { password, name } = req.body
 
     if (!email || !password || !name) {
       res.status(400).json({ message: 'Email, password, and name are required' })
@@ -62,7 +63,8 @@ export async function register(req: AuthRequest, res: Response) {
 
 export async function login(req: AuthRequest, res: Response) {
   try {
-    const { email, password } = req.body
+    const email = (req.body.email || '').toLowerCase().trim()
+    const { password } = req.body
 
     if (!email || !password) {
       res.status(400).json({ message: 'Email and password are required' })

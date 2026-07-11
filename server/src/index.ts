@@ -40,6 +40,11 @@ app.use('/api/checkout', checkoutRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/admin', adminRoutes)
 
+app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error('Unhandled error:', err)
+  res.status(500).json({ message: 'Internal server error' })
+})
+
 initSocket(server)
 
 startAbandonedCartCron()
