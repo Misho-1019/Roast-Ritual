@@ -50,7 +50,7 @@ export default function Header() {
             <Link
               key={link.to}
               to={link.to}
-              className="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body text-body"
+              className="text-on-surface-variant hover:text-primary transition-colors duration-300 font-body text-body nav-link"
             >
               {link.label}
             </Link>

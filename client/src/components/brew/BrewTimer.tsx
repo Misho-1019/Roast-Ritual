@@ -55,7 +55,7 @@ export default function BrewTimer({ step, totalSteps, duration, instruction, onC
       </div>
 
       {/* Circular timer */}
-      <div className="relative w-32 h-32 mx-auto mb-8">
+      <div className={`relative w-32 h-32 mx-auto mb-8 ${timeLeft <= 0 ? 'timer-glow' : ''}`}>
         <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
           <circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" className="text-surface-container-highest" strokeWidth="6" />
           {timeLeft > 0 && (

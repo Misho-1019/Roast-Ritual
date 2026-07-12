@@ -54,12 +54,12 @@ export default function ReviewForm({ productId, onSubmitted }: ReviewFormProps) 
               onMouseEnter={() => setHover(star)}
               onMouseLeave={() => setHover(0)}
               onClick={() => setRating(star)}
-              className="text-2xl transition-colors"
+              className="text-2xl transition-all hover:scale-125 active:scale-95"
             >
               <span
                 className={`material-symbols-outlined ${
                   star <= (hover || rating) ? 'text-primary' : 'text-outline/30'
-                }`}
+                } ${star <= hover ? 'star-hover' : ''}`}
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 star

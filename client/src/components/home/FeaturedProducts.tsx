@@ -27,6 +27,7 @@ export default function FeaturedProducts() {
   const { isAuthenticated } = useAuthStore()
   const addItem = useCartStore((s) => s.addItem)
   const [products, setProducts] = useState<Product[]>([])
+  const [bouncingId, setBouncingId] = useState<string | null>(null)
 
   useEffect(() => {
     fetch('/api/products?isFeatured=true')
@@ -41,7 +42,9 @@ export default function FeaturedProducts() {
       navigate('/login?redirect=/')
       return
     }
+    setBouncingId(productId)
     addItem(productId)
+    setTimeout(() => setBouncingId(null), 400)
   }
 
   if (products.length === 0) return null
@@ -63,7 +66,8 @@ export default function FeaturedProducts() {
             <a
               key={product.id}
               href={`/product/${product.slug}`}
-              className="gallery-card bg-espresso border border-outline-variant p-5 rounded-lg group"
+              className="gallery-card bg-espresso border border-outline-variant p-5 rounded-lg group stagger-enter-active"
+              style={{ transitionDelay: `${i * 80}ms` }}
             >
               <div className="relative aspect-[4/5] rounded-md overflow-hidden mb-4 bg-gradient-to-br from-surface-container-high to-background">
                 <img
@@ -81,7 +85,7 @@ export default function FeaturedProducts() {
                 <span className="text-primary font-bold text-h2">${Number(product.price).toFixed(2)}</span>
                 <button
                   onClick={(e) => handleAddToCart(e, product.id)}
-                  className="bg-primary text-on-primary p-2 rounded-lg hover:scale-110 active:scale-95 transition-transform"
+                  className={`bg-primary text-on-primary p-2 rounded-lg hover:scale-110 active:scale-95 transition-transform ${bouncingId === product.id ? 'cart-bounce' : ''}`}
                 >
                   <span className="material-symbols-outlined">add_shopping_cart</span>
                 </button>

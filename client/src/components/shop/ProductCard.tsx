@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
 import { useCartStore } from '../../stores/cartStore'
@@ -17,6 +18,7 @@ export default function ProductCard({ id, name, slug, origin, roastLevel, price,
   const navigate = useNavigate()
   const { isAuthenticated } = useAuthStore()
   const addItem = useCartStore((s) => s.addItem)
+  const [bouncing, setBouncing] = useState(false)
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -24,7 +26,9 @@ export default function ProductCard({ id, name, slug, origin, roastLevel, price,
       navigate('/login?redirect=/shop')
       return
     }
+    setBouncing(true)
     addItem(id)
+    setTimeout(() => setBouncing(false), 400)
   }
 
   return (
@@ -60,7 +64,7 @@ export default function ProductCard({ id, name, slug, origin, roastLevel, price,
           <span className="text-primary font-bold text-h2">${Number(price).toFixed(2)}</span>
           <button
             onClick={handleAddToCart}
-            className="bg-primary text-on-primary p-2.5 rounded-lg hover:scale-110 active:scale-95 transition-transform"
+            className={`bg-primary text-on-primary p-2.5 rounded-lg hover:scale-110 active:scale-95 transition-transform ${bouncing ? 'cart-bounce' : ''}`}
           >
             <span className="material-symbols-outlined">add_shopping_cart</span>
           </button>

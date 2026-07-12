@@ -36,14 +36,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`px-5 py-3.5 rounded-lg shadow-lg text-sm font-bold transition-all animate-[slideUp_0.3s_ease] ${
+            className={`px-5 py-3.5 rounded-lg shadow-lg text-sm font-bold toast-enter ${
               toast.type === 'success'
                 ? 'bg-green-700 text-white'
                 : toast.type === 'error'
                 ? 'bg-error text-white'
                 : 'bg-espresso border border-chestnut/30 text-on-surface'
             }`}
-            style={{ animation: 'slideUp 0.3s ease' }}
           >
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-sm">

@@ -22,7 +22,7 @@ export default function ProductGrid({ products, isLoading }: ProductGridProps) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-          <div key={i} className="bg-espresso/30 rounded-xl overflow-hidden animate-pulse">
+          <div key={i} className="bg-espresso/30 rounded-xl overflow-hidden shimmer-gold">
             <div className="aspect-[4/5] bg-surface-container-high" />
             <div className="p-5 space-y-3">
               <div className="h-4 bg-surface-container-high rounded w-3/4" />
@@ -51,8 +51,10 @@ export default function ProductGrid({ products, isLoading }: ProductGridProps) {
   return (
     <section className="pb-16 max-w-max-width mx-auto px-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <ProductCard key={product.id} {...product} />
+        {products.map((product, i) => (
+          <div key={product.id} className="stagger-enter-active" style={{ transitionDelay: `${i * 60}ms` }}>
+            <ProductCard {...product} />
+          </div>
         ))}
       </div>
     </section>
