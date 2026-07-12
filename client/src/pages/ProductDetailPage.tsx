@@ -4,6 +4,7 @@ import ProductImages from '../components/product/ProductImages'
 import ProductInfo from '../components/product/ProductInfo'
 import FlavorRadar from '../components/product/FlavorRadar'
 import ReviewList from '../components/product/ReviewList'
+import { mockReviewsBySlug } from '../data/mockReviews'
 
 interface Product {
   id: string
@@ -16,7 +17,7 @@ interface Product {
   roastLevel: string
   origin: string
   flavorNotes: string[]
-  rating?: number
+  avgRating?: number
   reviewCount?: number
 }
 
@@ -32,7 +33,16 @@ export default function ProductDetailPage() {
       try {
         const res = await fetch(`/api/products/${slug}`, { credentials: 'include' })
         const data = await res.json()
-        setProduct(data)
+
+        const mock = mockReviewsBySlug[slug] || []
+        const realTotalRating = (data.avgRating || 0) * (data.reviewCount || 0)
+        const mockTotalRating = mock.reduce((s: number, r: any) => s + r.rating, 0)
+        const combinedCount = (data.reviewCount || 0) + mock.length
+        const combinedRating = combinedCount > 0
+          ? Math.round(((realTotalRating + mockTotalRating) / combinedCount) * 10) / 10
+          : 0
+
+        setProduct({ ...data, avgRating: combinedRating, reviewCount: combinedCount })
       } catch (err) {
         console.error('Failed to fetch product:', err)
       } finally {
@@ -104,7 +114,7 @@ export default function ProductDetailPage() {
       </section>
 
       {/* Reviews */}
-      <ReviewList />
+      {product && <ReviewList productId={product.id} slug={product.slug} />}
     </div>
   )
 }

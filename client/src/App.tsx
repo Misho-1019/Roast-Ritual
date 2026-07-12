@@ -26,6 +26,7 @@ import AdminAnalytics from './pages/admin/AdminAnalytics'
 import AdminCustomers from './pages/admin/AdminCustomers'
 import AdminSettings from './pages/admin/AdminSettings'
 import AdminCreateOrder from './pages/admin/AdminCreateOrder'
+import AdminOrderDetail from './pages/admin/AdminOrderDetail'
 import NotFoundPage from './pages/NotFoundPage'
 
 function AdminGuard({ children }: { children: React.ReactNode }) {
@@ -84,6 +85,7 @@ function App() {
           <Route path="/admin/customers" element={<AdminCustomers />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="/admin/create-order" element={<AdminCreateOrder />} />
+          <Route path="/admin/orders/:id" element={<AdminOrderDetail />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

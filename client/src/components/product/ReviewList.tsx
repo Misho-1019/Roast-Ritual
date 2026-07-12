@@ -1,31 +1,52 @@
-const reviews = [
-  {
-    initials: 'JD',
-    name: 'James D.',
-    rating: 5,
-    title: 'Exceptional quality',
-    body: 'This is hands down the best coffee I have ever brewed at home. The flavor notes are incredibly accurate and the aroma fills the entire house.',
-    date: '2 weeks ago',
-  },
-  {
-    initials: 'SM',
-    name: 'Sarah M.',
-    rating: 4,
-    title: 'Smooth and balanced',
-    body: 'Great daily drinker. Not too acidic, with a lovely smooth finish. Will definitely order again.',
-    date: '1 month ago',
-  },
-  {
-    initials: 'AL',
-    name: 'Alex L.',
-    rating: 5,
-    title: 'Perfect for pour-over',
-    body: 'The flavor profile really shines through with a V60 pour-over. Highly recommend for specialty coffee enthusiasts.',
-    date: '1 month ago',
-  },
-]
+import { useEffect, useState } from 'react'
+import { api } from '../../lib/api'
+import ReviewForm from './ReviewForm'
 
-export default function ReviewList() {
+import { mockReviewsBySlug } from '../../data/mockReviews'
+
+interface ReviewItem {
+  id: string
+  rating: number
+  title: string | null
+  body: string | null
+  createdAt: string
+  user: { name: string }
+}
+
+interface ReviewListProps {
+  productId: string
+  slug: string
+}
+
+export default function ReviewList({ productId, slug }: ReviewListProps) {
+  const [realReviews, setRealReviews] = useState<ReviewItem[]>([])
+
+  const fetchReviews = () => {
+    api.get<ReviewItem[]>(`/reviews/${productId}`)
+      .then(setRealReviews)
+      .catch(() => {})
+  }
+
+  useEffect(() => { fetchReviews() }, [productId])
+
+  const mockReviews = mockReviewsBySlug[slug] || []
+
+  const allReviews = [
+    ...realReviews.map((r) => ({
+      initials: r.user.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase(),
+      name: r.user.name,
+      rating: r.rating,
+      title: r.title || '',
+      body: r.body || '',
+      date: new Date(r.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+    })),
+    ...mockReviews,
+  ]
+
+  const avgRating = allReviews.length > 0
+    ? (allReviews.reduce((s, r) => s + r.rating, 0) / allReviews.length).toFixed(1)
+    : '0.0'
+
   return (
     <section className="py-16 border-t border-outline-variant/20">
       <div className="max-w-max-width mx-auto px-6">
@@ -34,17 +55,15 @@ export default function ReviewList() {
             <h2 className="font-display text-h1 text-on-surface">Customer Reviews</h2>
             <div className="flex items-center gap-2 mt-2">
               <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-              <span className="text-primary font-bold text-lg">4.8</span>
-              <span className="text-mocha-text">average from 24 reviews</span>
+              <span className="text-primary font-bold text-lg">{avgRating}</span>
+              <span className="text-mocha-text">average from {allReviews.length} reviews</span>
             </div>
           </div>
-          <button className="bg-primary-container text-on-primary-container px-6 py-3 rounded-lg font-bold text-sm hover:brightness-110 active:scale-95 transition-all">
-            Write a Review
-          </button>
+          <ReviewForm productId={productId} onSubmitted={fetchReviews} />
         </div>
         <div className="space-y-6">
-          {reviews.map((review) => (
-            <div key={review.name} className="bg-espresso/30 border border-outline-variant/20 rounded-xl p-6">
+          {allReviews.map((review, i) => (
+            <div key={`${review.name}-${i}`} className="bg-espresso/30 border border-outline-variant/20 rounded-xl p-6">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-chestnut/30 flex items-center justify-center text-primary font-bold shrink-0">
                   {review.initials}
@@ -67,15 +86,12 @@ export default function ReviewList() {
                       </span>
                     ))}
                   </div>
-                  <h5 className="font-semibold text-on-surface mt-2">{review.title}</h5>
-                  <p className="text-mocha-text font-body text-sm mt-1 leading-relaxed">{review.body}</p>
+                  {review.title && <h5 className="font-semibold text-on-surface mt-2">{review.title}</h5>}
+                  {review.body && <p className="text-mocha-text font-body text-sm mt-1 leading-relaxed">{review.body}</p>}
                 </div>
               </div>
             </div>
           ))}
-        </div>
-        <div className="text-center mt-8">
-          <button className="text-primary font-bold hover:underline">Load more reviews &rarr;</button>
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
 import { useCartStore } from '../../stores/cartStore'
 
@@ -13,14 +13,9 @@ const navLinks = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [lightMode, setLightMode] = useState(() => localStorage.getItem('lightMode') === 'true')
   const { user, isAuthenticated, logout } = useAuthStore()
   const { items, fetchCart } = useCartStore()
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('light-mode', lightMode)
-    localStorage.setItem('lightMode', String(lightMode))
-  }, [lightMode])
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -67,9 +62,6 @@ export default function Header() {
           )}
         </nav>
         <div className="flex items-center gap-5">
-          <button onClick={() => setLightMode(!lightMode)} className="text-on-surface-variant hover:text-primary transition-colors" aria-label={lightMode ? 'Switch to dark mode' : 'Switch to light mode'}>
-            <span className="material-symbols-outlined">{lightMode ? 'dark_mode' : 'light_mode'}</span>
-          </button>
           <Link to="/cart" className="text-on-surface hover:text-primary scale-95 active:scale-90 transition-transform relative" aria-label="Shopping cart">
             <span className="material-symbols-outlined">shopping_cart</span>
             {items.length > 0 && (
@@ -85,7 +77,7 @@ export default function Header() {
               </Link>
               <span className="text-on-surface-variant text-sm hidden sm:inline">{user.name}</span>
               <button
-                onClick={logout}
+                onClick={() => { logout(); navigate('/') }}
                 className="text-on-surface-variant hover:text-primary transition-colors"
                 aria-label="Sign out"
               >

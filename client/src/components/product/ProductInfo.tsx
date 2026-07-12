@@ -13,11 +13,11 @@ interface ProductInfoProps {
   origin: string
   flavorNotes: string[]
   stock: number
-  rating?: number
+  avgRating?: number
   reviewCount?: number
 }
 
-export default function ProductInfo({ id, name, description, price, roastLevel, origin, flavorNotes, stock: initialStock, rating = 4.8, reviewCount = 24 }: ProductInfoProps) {
+export default function ProductInfo({ id, name, description, price, roastLevel, origin, flavorNotes, stock: initialStock, avgRating, reviewCount }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1)
   const [liveStock, setLiveStock] = useState(initialStock)
   const navigate = useNavigate()
@@ -46,9 +46,15 @@ export default function ProductInfo({ id, name, description, price, roastLevel, 
         </span>
         <h1 className="font-display text-display text-on-surface leading-tight">{name}</h1>
         <div className="flex items-center gap-2 mt-2">
-          <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-          <span className="text-primary font-bold">{rating}</span>
-          <span className="text-mocha-text">({reviewCount} reviews)</span>
+          {reviewCount && reviewCount > 0 ? (
+            <>
+              <span className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+              <span className="text-primary font-bold">{avgRating}</span>
+              <span className="text-mocha-text">({reviewCount} {reviewCount === 1 ? 'review' : 'reviews'})</span>
+            </>
+          ) : (
+            <span className="text-mocha-text text-sm">No reviews yet</span>
+          )}
         </div>
       </div>
 

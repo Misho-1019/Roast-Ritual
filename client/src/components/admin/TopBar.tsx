@@ -20,6 +20,7 @@ export default function TopBar({ onToggleSidebar }: TopBarProps) {
   const [search, setSearch] = useState('')
   const [notifOpen, setNotifOpen] = useState(false)
   const [notifs, setNotifs] = useState<{ newOrders: number; lowStockItems: number; items: NotificationItem[] }>({ newOrders: 0, lowStockItems: 0, items: [] })
+  const [lastSeen, setLastSeen] = useState(() => Number(localStorage.getItem('notifSeen') || '0'))
   const bellRef = useRef<HTMLDivElement>(null)
 
   const adminPages = ['/admin/products', '/admin/orders', '/admin/customers']
@@ -47,7 +48,7 @@ export default function TopBar({ onToggleSidebar }: TopBarProps) {
       .catch(console.error)
     const interval = setInterval(() => {
       api.get<{ newOrders: number; lowStockItems: number; items: NotificationItem[] }>('/admin/notifications')
-        .then((d) => { setNotifs(d); if (notifOpen) setNotifOpen(false) })
+        .then(setNotifs)
         .catch(console.error)
     }, 30000)
     return () => clearInterval(interval)
@@ -69,6 +70,7 @@ export default function TopBar({ onToggleSidebar }: TopBarProps) {
     .slice(0, 2) || 'A'
 
   const totalNotifs = notifs.newOrders + notifs.lowStockItems
+  const unseenNotifs = Math.max(0, totalNotifs - lastSeen)
 
   return (
     <header className="sticky top-0 z-20 bg-surface/95 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-6 h-20">
@@ -93,11 +95,11 @@ export default function TopBar({ onToggleSidebar }: TopBarProps) {
           <a className="text-on-surface-variant hover:text-primary transition-all font-medium text-sm" href="/admin/orders">Wholesale</a>
         </nav>
         <div className="relative" ref={bellRef}>
-          <button onClick={() => setNotifOpen(!notifOpen)} className="relative text-on-surface-variant hover:text-primary transition-colors">
+          <button onClick={() => { setNotifOpen(!notifOpen); if (!notifOpen) { const n = totalNotifs; setLastSeen(n); localStorage.setItem('notifSeen', String(n)) } }} className="relative text-on-surface-variant hover:text-primary transition-colors">
             <span className="material-symbols-outlined">notifications</span>
-            {totalNotifs > 0 && (
+            {unseenNotifs > 0 && (
               <span className="absolute -top-1 -right-1 bg-primary text-on-primary text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                {totalNotifs > 9 ? '9+' : totalNotifs}
+                {unseenNotifs > 9 ? '9+' : unseenNotifs}
               </span>
             )}
           </button>

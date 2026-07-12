@@ -24,8 +24,8 @@ export default function OrderHistoryPage() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    api.get<Order[]>('/orders')
-      .then(setOrders)
+    api.get<{ data: Order[] }>('/orders')
+      .then((res) => setOrders(res.data))
       .catch(console.error)
       .finally(() => setIsLoading(false))
   }, [])

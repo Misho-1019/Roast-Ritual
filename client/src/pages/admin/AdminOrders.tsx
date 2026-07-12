@@ -105,7 +105,7 @@ export default function AdminOrders() {
                 </td>
                 <td className="px-6 py-4 text-right text-primary font-bold">${Number(order.total).toFixed(2)}</td>
                 <td className="px-6 py-4 text-right">
-                  <Link to={`/orders/${order.id}`} className="text-primary hover:underline text-sm font-bold">
+                  <Link to={`/admin/orders/${order.id}`} className="text-primary hover:underline text-sm font-bold">
                     View
                   </Link>
                 </td>

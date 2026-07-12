@@ -41,8 +41,18 @@ export async function getOrder(req: AuthRequest, res: Response) {
   try {
     const id = req.params.id as string
 
+    const user = await prisma.user.findUnique({
+      where: { id: req.userId },
+      select: { role: true },
+    })
+
+    const where: Record<string, any> = { id }
+    if (!user || user.role !== 'ADMIN') {
+      where.userId = req.userId
+    }
+
     const order = await prisma.order.findFirst({
-      where: { id, userId: req.userId },
+      where,
       include: { items: { include: { product: { select: { id: true, name: true, imageUrl: true } } } } },
     })
 

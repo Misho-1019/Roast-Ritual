@@ -68,7 +68,12 @@ export async function getProduct(req: AuthRequest, res: Response) {
       return
     }
 
-    res.json(product)
+    const reviewCount = product.reviews.length
+    const avgRating = reviewCount > 0
+      ? product.reviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
+      : 0
+
+    res.json({ ...product, avgRating: Math.round(avgRating * 10) / 10, reviewCount })
   } catch (error) {
     console.error('Get product error:', error)
     res.status(500).json({ message: 'Internal server error' })
