@@ -63,7 +63,7 @@ export default function ReviewList({ productId, slug }: ReviewListProps) {
         </div>
         <div className="space-y-6">
           {allReviews.map((review, i) => (
-            <div key={`${review.name}-${i}`} className="bg-espresso/30 border border-outline-variant/20 rounded-xl p-6">
+            <div key={`${review.name}-${i}`} className="stagger-enter-active bg-espresso/30 border border-outline-variant/20 rounded-xl p-6" style={{ transitionDelay: `${i * 80}ms` }}>
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-chestnut/30 flex items-center justify-center text-primary font-bold shrink-0">
                   {review.initials}

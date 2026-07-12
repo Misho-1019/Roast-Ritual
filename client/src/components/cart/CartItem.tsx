@@ -1,3 +1,5 @@
+import { useState, useRef, useCallback } from 'react'
+
 interface CartItemProps {
   id: string
   name: string
@@ -8,8 +10,39 @@ interface CartItemProps {
 }
 
 export default function CartItem({ id, name, imageUrl, quantity, onUpdateQuantity, onRemove }: CartItemProps) {
+  const [swipeX, setSwipeX] = useState(0)
+  const touchStart = useRef(0)
+  const swiping = useRef(false)
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStart.current = e.touches[0].clientX
+    swiping.current = false
+  }, [])
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    const dx = e.touches[0].clientX - touchStart.current
+    if (Math.abs(dx) > 10) swiping.current = true
+    if (swiping.current) {
+      setSwipeX(Math.max(-80, Math.min(0, dx - 10)))
+    }
+  }, [])
+
+  const handleTouchEnd = useCallback(() => {
+    if (swipeX < -40) {
+      onRemove(id)
+    }
+    setSwipeX(0)
+    swiping.current = false
+  }, [swipeX, id, onRemove])
+
   return (
-    <div className="bg-espresso rounded-lg border border-chestnut/30 p-4 md:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group hover:border-primary transition-colors animate-[fadeIn_0.3s_ease]">
+    <div
+      className="bg-espresso rounded-lg border border-chestnut/30 p-4 md:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center group hover:border-primary transition-colors animate-[fadeIn_0.3s_ease] overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      style={{ transform: `translateX(${swipeX}px)`, transition: swiping.current ? 'none' : 'transform 0.2s ease' }}
+    >
       <div className="md:col-span-6 flex items-center gap-4">
         <div className="w-24 h-24 rounded overflow-hidden shrink-0 bg-surface-container-low border border-outline-variant">
           {imageUrl ? (

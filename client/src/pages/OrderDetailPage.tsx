@@ -28,6 +28,15 @@ const statusStyles: Record<string, string> = {
   CANCELLED: 'bg-red-500/10 text-red-400',
 }
 
+const statusFlow = ['PENDING', 'PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED']
+const statusLabels: Record<string, string> = {
+  PENDING: 'Order Placed',
+  PAID: 'Payment Confirmed',
+  PROCESSING: 'Processing',
+  SHIPPED: 'Shipped',
+  DELIVERED: 'Delivered',
+}
+
 export default function OrderDetailPage() {
   const { id } = useParams<{ id: string }>()
   const [order, setOrder] = useState<Order | null>(null)
@@ -81,6 +90,42 @@ export default function OrderDetailPage() {
           {order.status}
         </span>
       </div>
+
+      {/* Status progress bar */}
+      {order.status !== 'CANCELLED' && (
+        <div className="mb-8 bg-espresso border border-outline-variant/30 rounded-lg p-6">
+          <div className="flex items-center justify-between">
+            {statusFlow.map((s, i) => {
+              const currentIdx = statusFlow.indexOf(order.status)
+              const isActive = i <= currentIdx
+              const isLast = i === statusFlow.length - 1
+              return (
+                <div key={s} className="flex items-center flex-1">
+                  <div className="flex flex-col items-center">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 ${
+                      isActive ? 'bg-primary text-on-primary' : 'bg-surface-container-high text-mocha-text'
+                    }`}>
+                      {isActive ? (
+                        <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
+                      ) : (
+                        i + 1
+                      )}
+                    </div>
+                    <span className={`text-[10px] mt-1 font-medium ${isActive ? 'text-primary' : 'text-mocha-text'}`}>
+                      {statusLabels[s]}
+                    </span>
+                  </div>
+                  {!isLast && (
+                    <div className={`flex-1 h-0.5 mx-2 transition-all duration-500 ${
+                      i < currentIdx ? 'bg-primary' : 'bg-surface-container-high'
+                    }`} />
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
 
       <div className="bg-espresso border border-outline-variant/30 rounded-lg p-6 space-y-4">
         {order.items.map((item) => (

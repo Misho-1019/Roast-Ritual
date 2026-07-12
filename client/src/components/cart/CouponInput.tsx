@@ -4,6 +4,7 @@ import { useCartStore } from '../../stores/cartStore'
 export default function CouponInput() {
   const [code, setCode] = useState('')
   const [message, setMessage] = useState('')
+  const [animating, setAnimating] = useState(false)
   const { applyCoupon, coupon, clearCoupon } = useCartStore()
 
   const handleApply = async () => {
@@ -11,6 +12,8 @@ export default function CouponInput() {
     try {
       await applyCoupon(code.trim().toUpperCase())
       setMessage('Coupon applied!')
+      setAnimating(true)
+      setTimeout(() => setAnimating(false), 600)
     } catch {
       setMessage('Invalid coupon code')
     }
@@ -22,8 +25,11 @@ export default function CouponInput() {
         {coupon ? 'Coupon Applied' : 'Coupon Code'}
       </h4>
       {coupon ? (
-        <div className="flex items-center justify-between">
-          <span className="text-green-500 font-bold text-sm">{coupon.code}</span>
+        <div className={`flex items-center justify-between ${animating ? 'cart-bounce' : ''}`}>
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-green-500 text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+            <span className="text-green-500 font-bold text-sm">{coupon.code}</span>
+          </div>
           <button onClick={clearCoupon} className="text-mocha-text hover:text-error text-sm">Remove</button>
         </div>
       ) : (

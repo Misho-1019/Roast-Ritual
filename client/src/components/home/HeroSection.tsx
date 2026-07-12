@@ -1,9 +1,18 @@
+import { useEffect, useRef, useState } from 'react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 const heroImg = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAFwElf0hr9llpkY_vWfhBvIVTHPHsOQe35veYpDw9wGThUFZRubAfcj67G65Kq1zIz_CuCZSnvyy4ZwzhEs43X_BNGY3uuYP0NX6bR2Qwq0cpOgIz3vNUhPKfyRDPDWJEko13f7nEukbQPD5mQ64v9EzMsttVJiO9qBroTVh2b93xCZVN4GmjorvipubHBZNa58jP5lsOa2LBboR-PwozBsYyUa-SuYGIiuc_FYCMD0D12plVL4R2-4R0zwgY5GYaC4HiZ7Zuagyc=s0'
 
 export default function HeroSection() {
   const ref = useScrollReveal<HTMLElement>()
+  const imgRef = useRef<HTMLImageElement>(null)
+  const [offsetY, setOffsetY] = useState(0)
+
+  useEffect(() => {
+    const onScroll = () => setOffsetY(window.scrollY * 0.3)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <section ref={ref} className="relative min-h-[90dvh] flex items-center overflow-hidden">
@@ -27,9 +36,11 @@ export default function HeroSection() {
         </div>
         <div className="md:col-span-6 relative h-[600px] rounded-2xl overflow-hidden shadow-2xl">
           <img
-            className="w-full h-full object-cover"
+            ref={imgRef}
+            className="w-full h-full object-cover will-change-transform"
             src={heroImg}
             alt="Barista pouring latte art into a ceramic cup, warm moody lighting"
+            style={{ transform: `translateY(${offsetY * 0.15}px)` }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
         </div>
