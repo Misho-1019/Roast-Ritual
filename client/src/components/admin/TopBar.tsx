@@ -21,6 +21,8 @@ export default function TopBar({ onToggleSidebar }: TopBarProps) {
   const [notifOpen, setNotifOpen] = useState(false)
   const [notifs, setNotifs] = useState<{ newOrders: number; lowStockItems: number; items: NotificationItem[] }>({ newOrders: 0, lowStockItems: 0, items: [] })
   const [lastSeen, setLastSeen] = useState(() => Number(localStorage.getItem('notifSeen') || '0'))
+  const [bellShake, setBellShake] = useState(false)
+  const prevTotalRef = useRef(0)
   const bellRef = useRef<HTMLDivElement>(null)
 
   const adminPages = ['/admin/products', '/admin/orders', '/admin/customers']
@@ -72,6 +74,14 @@ export default function TopBar({ onToggleSidebar }: TopBarProps) {
   const totalNotifs = notifs.newOrders + notifs.lowStockItems
   const unseenNotifs = Math.max(0, totalNotifs - lastSeen)
 
+  useEffect(() => {
+    if (totalNotifs > prevTotalRef.current && prevTotalRef.current > 0) {
+      setBellShake(true)
+      setTimeout(() => setBellShake(false), 500)
+    }
+    prevTotalRef.current = totalNotifs
+  }, [totalNotifs])
+
   return (
     <header className="sticky top-0 z-20 bg-surface/95 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-6 h-20">
       <div className="flex items-center gap-4 flex-1 max-w-xl">
@@ -96,7 +106,7 @@ export default function TopBar({ onToggleSidebar }: TopBarProps) {
         </nav>
         <div className="relative" ref={bellRef}>
           <button onClick={() => { setNotifOpen(!notifOpen); if (!notifOpen) { const n = totalNotifs; setLastSeen(n); localStorage.setItem('notifSeen', String(n)) } }} className="relative text-on-surface-variant hover:text-primary transition-colors">
-            <span className="material-symbols-outlined">notifications</span>
+            <span className={`material-symbols-outlined ${bellShake ? 'bell-shake' : ''}`}>notifications</span>
             {unseenNotifs > 0 && (
               <span className="absolute -top-1 -right-1 bg-primary text-on-primary text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {unseenNotifs > 9 ? '9+' : unseenNotifs}

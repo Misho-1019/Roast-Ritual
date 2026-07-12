@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import QuizProgress from '../components/quiz/QuizProgress'
 import QuizQuestion from '../components/quiz/QuizQuestion'
 import QuizNavigation from '../components/quiz/QuizNavigation'
@@ -9,25 +9,40 @@ export default function QuizPage() {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Record<number, string>>({})
   const [showResult, setShowResult] = useState(false)
+  const animRef = useRef<HTMLDivElement>(null)
 
   const currentQuestion = questions[step]
   const totalQuestions = questions.length
   const selectedValue = answers[currentQuestion?.id]
+
+  const animate = (dir: 'next' | 'prev', cb: () => void) => {
+    const el = animRef.current
+    if (!el) { cb(); return }
+    el.classList.add(dir === 'next' ? 'animate-slide-out-left' : 'animate-slide-out-right')
+    setTimeout(() => {
+      cb()
+      el.classList.remove('animate-slide-out-left', 'animate-slide-out-right')
+    }, 200)
+  }
 
   const handleSelect = (value: string) => {
     setAnswers((prev) => ({ ...prev, [currentQuestion.id]: value }))
   }
 
   const handleNext = () => {
-    if (step < totalQuestions - 1) {
-      setStep((s) => s + 1)
-    } else {
-      setShowResult(true)
-    }
+    animate('next', () => {
+      if (step < totalQuestions - 1) {
+        setStep((s) => s + 1)
+      } else {
+        setShowResult(true)
+      }
+    })
   }
 
   const handleBack = () => {
-    if (step > 0) setStep((s) => s - 1)
+    animate('prev', () => {
+      if (step > 0) setStep((s) => s - 1)
+    })
   }
 
   const handleRestart = () => {
@@ -62,7 +77,7 @@ export default function QuizPage() {
 
       {/* Quiz Card */}
       <div className="max-w-4xl mx-auto">
-        <div className="bg-espresso border border-outline-variant/30 rounded-xl overflow-hidden shadow-2xl">
+        <div ref={animRef} className="bg-espresso border border-outline-variant/30 rounded-xl overflow-hidden shadow-2xl">
           {/* Progress bar */}
           <div className="w-full h-1 bg-surface-container-highest">
             <div

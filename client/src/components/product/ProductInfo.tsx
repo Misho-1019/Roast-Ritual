@@ -20,6 +20,7 @@ interface ProductInfoProps {
 export default function ProductInfo({ id, name, description, price, roastLevel, origin, flavorNotes, stock: initialStock, avgRating, reviewCount }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1)
   const [liveStock, setLiveStock] = useState(initialStock)
+  const [adding, setAdding] = useState<'idle' | 'loading' | 'done'>('idle')
   const navigate = useNavigate()
   const { isAuthenticated } = useAuthStore()
   const addItem = useCartStore((s) => s.addItem)
@@ -109,18 +110,27 @@ export default function ProductInfo({ id, name, description, price, roastLevel, 
       </div>
 
       <button
-        disabled={stock === 0}
-        onClick={() => {
+        disabled={stock === 0 || adding === 'loading'}
+        onClick={async () => {
           if (!isAuthenticated) {
             navigate(`/login?redirect=/product/${name.toLowerCase().replace(/\s+/g, '-')}`)
             return
           }
-          addItem(id, quantity)
+          setAdding('loading')
+          try { await addItem(id, quantity) } catch {}
+          setAdding('done')
+          setTimeout(() => setAdding('idle'), 1500)
         }}
         className="w-full bg-primary-container text-on-primary-container py-4 rounded-lg font-bold text-body flex items-center justify-center gap-2 hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50"
       >
-        <span className="material-symbols-outlined">add_shopping_cart</span>
-        Add to Cart
+        {adding === 'loading' ? (
+          <span className="material-symbols-outlined animate-spin">refresh</span>
+        ) : adding === 'done' ? (
+          <span className="material-symbols-outlined text-green-400" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+        ) : (
+          <span className="material-symbols-outlined">add_shopping_cart</span>
+        )}
+        {adding === 'loading' ? 'Adding...' : adding === 'done' ? 'Added!' : 'Add to Cart'}
       </button>
 
       <div className="flex items-center gap-2 text-mocha-text font-small text-sm justify-center">

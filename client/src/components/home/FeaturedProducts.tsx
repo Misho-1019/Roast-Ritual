@@ -74,6 +74,7 @@ export default function FeaturedProducts() {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   src={productImages[i] || product.imageUrl}
                   alt={`${product.name} coffee bag packaging`}
+                  loading="lazy"
                 />
                 <span className="absolute top-3 left-3 bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">
                   {product.roastLevel}

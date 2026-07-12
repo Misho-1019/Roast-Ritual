@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useCartStore } from '../stores/cartStore'
 import { useToast } from '../components/ui/Toast'
@@ -9,10 +9,19 @@ import CartSummary from '../components/cart/CartSummary'
 export default function CartPage() {
   const { items, isLoading, fetchCart, updateQuantity, removeItem, subtotal, discount, total } = useCartStore()
   const { addToast } = useToast()
+  const lastRemovedRef = useRef<{ id: string; productId: string } | null>(null)
 
   const handleRemove = (id: string) => {
+    const item = items.find((i) => i.id === id)
+    if (item) lastRemovedRef.current = { id: item.id, productId: item.productId }
     removeItem(id)
-    addToast('Item removed from cart', 'info')
+    addToast('Item removed', 'info', { label: 'Undo', onClick: () => {
+      const removed = lastRemovedRef.current
+      if (removed) {
+        useCartStore.getState().addItem(removed.productId)
+        lastRemovedRef.current = null
+      }
+    }})
   }
 
   useEffect(() => {

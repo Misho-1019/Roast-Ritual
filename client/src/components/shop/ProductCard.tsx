@@ -18,17 +18,18 @@ export default function ProductCard({ id, name, slug, origin, roastLevel, price,
   const navigate = useNavigate()
   const { isAuthenticated } = useAuthStore()
   const addItem = useCartStore((s) => s.addItem)
-  const [bouncing, setBouncing] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'done'>('idle')
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault()
     if (!isAuthenticated) {
       navigate('/login?redirect=/shop')
       return
     }
-    setBouncing(true)
-    addItem(id)
-    setTimeout(() => setBouncing(false), 400)
+    setStatus('loading')
+    try { await addItem(id) } catch {}
+    setStatus('done')
+    setTimeout(() => setStatus('idle'), 1500)
   }
 
   return (
@@ -39,9 +40,10 @@ export default function ProductCard({ id, name, slug, origin, roastLevel, price,
       <div className="relative aspect-[4/5] overflow-hidden">
         {imageUrl ? (
           <img
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${status === 'done' ? 'img-blur-loaded' : ''}`}
             src={imageUrl}
             alt={name}
+            loading="lazy"
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-surface-container-high to-background flex items-center justify-center">
@@ -64,7 +66,7 @@ export default function ProductCard({ id, name, slug, origin, roastLevel, price,
           <span className="text-primary font-bold text-h2">${Number(price).toFixed(2)}</span>
           <button
             onClick={handleAddToCart}
-            className={`bg-primary text-on-primary p-2.5 rounded-lg hover:scale-110 active:scale-95 transition-transform ${bouncing ? 'cart-bounce' : ''}`}
+            className={`bg-primary text-on-primary p-2.5 rounded-lg hover:scale-110 active:scale-95 transition-transform ${status !== 'idle' ? 'cart-bounce' : ''}`}
           >
             <span className="material-symbols-outlined">add_shopping_cart</span>
           </button>
