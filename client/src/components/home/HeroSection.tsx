@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 const heroImg = 'https://lh3.googleusercontent.com/aida-public/AB6AXuAFwElf0hr9llpkY_vWfhBvIVTHPHsOQe35veYpDw9wGThUFZRubAfcj67G65Kq1zIz_CuCZSnvyy4ZwzhEs43X_BNGY3uuYP0NX6bR2Qwq0cpOgIz3vNUhPKfyRDPDWJEko13f7nEukbQPD5mQ64v9EzMsttVJiO9qBroTVh2b93xCZVN4GmjorvipubHBZNa58jP5lsOa2LBboR-PwozBsYyUa-SuYGIiuc_FYCMD0D12plVL4R2-4R0zwgY5GYaC4HiZ7Zuagyc=s0'
@@ -26,12 +27,12 @@ export default function HeroSection() {
             Discover single-origin coffees curated for your unique palate and brewing style.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button className="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-bold text-body hover:brightness-110 active:scale-95 transition-all flex items-center gap-2">
+            <Link to="/quiz" className="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-bold text-body hover:brightness-110 active:scale-95 transition-all flex items-center gap-2">
               Take the Quiz <span className="material-symbols-outlined">bolt</span>
-            </button>
-            <button className="border border-chestnut text-on-surface px-8 py-4 rounded-lg font-bold text-body hover:bg-surface-variant transition-all">
+            </Link>
+            <Link to="/shop" className="border border-chestnut text-on-surface px-8 py-4 rounded-lg font-bold text-body hover:bg-surface-variant transition-all">
               View Collections
-            </button>
+            </Link>
           </div>
         </div>
         <div className="md:col-span-6 relative h-[600px] rounded-2xl overflow-hidden shadow-2xl">

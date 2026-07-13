@@ -36,6 +36,9 @@ afterAll(async () => {
     await prisma.review.deleteMany({ where: { userId } }).catch(() => {})
     await prisma.user.deleteMany({ where: { id: userId } }).catch(() => {})
   }
+
+  // Cleanup any test products created during tests
+  await prisma.product.deleteMany({ where: { name: 'Test Product' } }).catch(() => {})
 })
 
 describe('Health', () => {
