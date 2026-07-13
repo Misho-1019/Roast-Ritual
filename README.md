@@ -68,23 +68,58 @@ The system was built to simulate **real production e-commerce requirements** —
 ## 🖼️ Screenshots
 
 ![Home Page](screenshots/Screenshot%202026-07-13%20181107.png)
+<p align="center"><em>Home Page</em></p>
+
 ![Home Page](screenshots/Screenshot%202026-07-13%20181217.png)
+<p align="center"><em>Home Page</em></p>
+
 ![Shop Page](screenshots/Screenshot%202026-07-13%20181304.png)
+<p align="center"><em>Shop Page</em></p>
+
 ![Shop Page](screenshots/Screenshot%202026-07-13%20181317.png)
+<p align="center"><em>Shop Page</em></p>
+
 ![Product Detail](screenshots/Screenshot%202026-07-13%20181413.png)
+<p align="center"><em>Product Detail</em></p>
+
 ![Product Detail](screenshots/Screenshot%202026-07-13%20181453.png)
+<p align="center"><em>Product Detail</em></p>
+
 ![Coffee Quiz](screenshots/Screenshot%202026-07-13%20181603.png)
+<p align="center"><em>Coffee Quiz</em></p>
+
 ![Brew Guide](screenshots/Screenshot%202026-07-13%20181655.png)
+<p align="center"><em>Brew Guide</em></p>
+
 ![Brew Guide](screenshots/Screenshot%202026-07-13%20181707.png)
+<p align="center"><em>Brew Guide</em></p>
+
 ![Cart & Checkout](screenshots/Screenshot%202026-07-13%20181913.png)
+<p align="center"><em>Cart & Checkout</em></p>
+
 ![Cart & Checkout](screenshots/Screenshot%202026-07-13%20181945.png)
+<p align="center"><em>Cart & Checkout</em></p>
+
 ![Admin Dashboard](screenshots/Screenshot%202026-07-13%20182107.png)
+<p align="center"><em>Admin Dashboard</em></p>
+
 ![Admin Analytics](screenshots/Screenshot%202026-07-13%20182142.png)
+<p align="center"><em>Admin Analytics</em></p>
+
 ![Admin Orders](screenshots/Screenshot%202026-07-13%20182216.png)
+<p align="center"><em>Admin Orders</em></p>
+
 ![Our Story](screenshots/Screenshot%202026-07-13%20182357.png)
+<p align="center"><em>Our Story</em></p>
+
 ![About Page](screenshots/Screenshot%202026-07-13%20182410.png)
+<p align="center"><em>About Page</em></p>
+
 ![The Process](screenshots/Screenshot%202026-07-13%20182417.png)
+<p align="center"><em>The Process</em></p>
+
 ![Origin Map](screenshots/Screenshot%202026-07-13%20182428.png)
+<p align="center"><em>Origin Map</em></p>
 
 ---
 
