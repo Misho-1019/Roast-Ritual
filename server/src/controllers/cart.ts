@@ -42,6 +42,16 @@ export async function addItem(req: AuthRequest, res: Response) {
       return
     }
 
+    const product = await prisma.product.findUnique({ where: { id: productId } })
+    if (!product) {
+      res.status(404).json({ message: 'Product not found' })
+      return
+    }
+    if (product.stock < 1) {
+      res.status(400).json({ message: 'Product is out of stock' })
+      return
+    }
+
     let cart = await prisma.cart.findUnique({ where: { userId: req.userId } })
     if (!cart) {
       cart = await prisma.cart.create({ data: { userId: req.userId } })
@@ -97,6 +107,12 @@ export async function updateItem(req: AuthRequest, res: Response) {
     if (quantity < 1) {
       await prisma.cartItem.delete({ where: { id } })
       return res.json({ message: 'Item removed' })
+    }
+
+    const product = await prisma.product.findUnique({ where: { id: existing.productId } })
+    if (!product || product.stock < quantity) {
+      res.status(400).json({ message: `Insufficient stock. Only ${product?.stock || 0} available.` })
+      return
     }
 
     await prisma.cartItem.update({ where: { id }, data: { quantity } })

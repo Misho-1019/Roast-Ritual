@@ -22,6 +22,10 @@ interface CouponInfo {
   discountAmount: number
 }
 
+interface CartResponse {
+  items: CartItem[]
+}
+
 interface CartState {
   items: CartItem[]
   isLoading: boolean
@@ -46,7 +50,7 @@ export const useCartStore = create<CartState>((set, get) => ({
   fetchCart: async () => {
     set({ isLoading: true })
     try {
-      const data = await api.get<any>('/cart')
+      const data = await api.get<CartResponse>('/cart')
       set({ items: data.items || [], isLoading: false })
     } catch {
       set({ isLoading: false })
@@ -54,45 +58,28 @@ export const useCartStore = create<CartState>((set, get) => ({
   },
 
   addItem: async (productId, quantity = 1) => {
-    try {
-      const data = await api.post<any>('/cart/items', { productId, quantity })
-      set({ items: data.items || [] })
-    } catch (err) {
-      console.error('Add to cart failed:', err)
-    }
+    const data = await api.post<CartResponse>('/cart/items', { productId, quantity })
+    set({ items: data.items || [] })
   },
 
   updateQuantity: async (itemId, quantity) => {
     if (quantity < 1) {
       return get().removeItem(itemId)
     }
-    try {
-      const data = await api.put<any>(`/cart/items/${itemId}`, { quantity })
-      if (data.items) set({ items: data.items })
-    } catch (err) {
-      console.error('Update quantity failed:', err)
-    }
+    const data = await api.put<CartResponse>(`/cart/items/${itemId}`, { quantity })
+    if (data.items) set({ items: data.items })
   },
 
   removeItem: async (itemId) => {
-    try {
-      const data = await api.delete<any>(`/cart/items/${itemId}`)
-      if (data.items) set({ items: data.items })
-    } catch (err) {
-      console.error('Remove item failed:', err)
-    }
+    const data = await api.delete<CartResponse>(`/cart/items/${itemId}`)
+    if (data.items) set({ items: data.items })
   },
 
   applyCoupon: async (code) => {
     const subtotal = get().subtotal()
-    try {
-      const data = await api.post<{ valid: boolean; coupon: CouponInfo }>('/coupons/validate', { code, orderTotal: subtotal })
-      if (data.valid) {
-        set({ coupon: data.coupon })
-      }
-    } catch (err) {
-      console.error('Apply coupon failed:', err)
-      throw err
+    const data = await api.post<{ valid: boolean; coupon: CouponInfo }>('/coupons/validate', { code, orderTotal: subtotal })
+    if (data.valid) {
+      set({ coupon: data.coupon })
     }
   },
 

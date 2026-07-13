@@ -11,10 +11,11 @@ export default function CartPage() {
   const { addToast } = useToast()
   const lastRemovedRef = useRef<{ id: string; productId: string } | null>(null)
 
-  const handleRemove = (id: string) => {
+  const handleRemove = async (id: string) => {
     const item = items.find((i) => i.id === id)
-    if (item) lastRemovedRef.current = { id: item.id, productId: item.productId }
-    removeItem(id)
+    if (!item) return
+    lastRemovedRef.current = { id: item.id, productId: item.productId }
+    await removeItem(id)
     addToast('Item removed', 'info', { label: 'Undo', onClick: () => {
       const removed = lastRemovedRef.current
       if (removed) {

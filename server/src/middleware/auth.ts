@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import { Request, Response, NextFunction } from 'express'
 import { verifyAccessToken } from '../services/auth.js'
 import { prisma } from '../lib/db.js'

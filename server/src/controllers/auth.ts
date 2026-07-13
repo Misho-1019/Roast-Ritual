@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import { Response, CookieOptions } from 'express'
 import { prisma } from '../lib/db.js'
 import { hashPassword, comparePassword, generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../services/auth.js'

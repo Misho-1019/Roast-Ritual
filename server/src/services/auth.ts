@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import crypto from 'crypto'
 
 const SALT_ROUNDS = 12
 
@@ -13,13 +14,13 @@ export function comparePassword(password: string, hash: string): Promise<boolean
 
 export function generateAccessToken(userId: string): string {
   return jwt.sign({ userId }, process.env.JWT_SECRET!, {
-    expiresIn: 900, // 15 minutes
+    expiresIn: Number(process.env.JWT_ACCESS_EXPIRES_IN) || 900,
   } as jwt.SignOptions)
 }
 
 export function generateRefreshToken(userId: string): string {
-  return jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET!, {
-    expiresIn: 604800, // 7 days
+  return jwt.sign({ userId, nonce: crypto.randomUUID() }, process.env.JWT_REFRESH_SECRET!, {
+    expiresIn: Number(process.env.JWT_REFRESH_EXPIRES_IN) || 604800,
   } as jwt.SignOptions)
 }
 

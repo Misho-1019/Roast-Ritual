@@ -1,5 +1,6 @@
 import { Response } from 'express'
 import { prisma } from '../lib/db.js'
+import { Prisma } from '../generated/prisma/index.js'
 import { AuthRequest } from '../middleware/auth.js'
 
 export async function createReview(req: AuthRequest, res: Response) {
@@ -31,6 +32,10 @@ export async function createReview(req: AuthRequest, res: Response) {
 
     res.status(201).json(review)
   } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+      res.status(409).json({ message: 'You have already reviewed this product' })
+      return
+    }
     console.error('Create review error:', error)
     res.status(500).json({ message: 'Internal server error' })
   }

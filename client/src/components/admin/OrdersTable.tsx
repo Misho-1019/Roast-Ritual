@@ -23,8 +23,8 @@ export default function OrdersTable() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    api.get<OrderItem[]>('/admin/orders')
-      .then(setOrders)
+    api.get<{ data: OrderItem[] }>('/admin/orders')
+      .then((res) => setOrders(res.data))
       .catch(console.error)
       .finally(() => setIsLoading(false))
   }, [])

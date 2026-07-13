@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
 import { useCartStore } from '../../stores/cartStore'
 
@@ -33,8 +33,8 @@ export default function ProductCard({ id, name, slug, origin, roastLevel, price,
   }
 
   return (
-    <a
-      href={`/product/${slug}`}
+    <Link
+      to={`/product/${slug}`}
       className="flex flex-col group border border-outline-variant/10 rounded-xl overflow-hidden bg-espresso/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5"
     >
       <div className="relative aspect-[4/5] overflow-hidden">
@@ -72,6 +72,6 @@ export default function ProductCard({ id, name, slug, origin, roastLevel, price,
           </button>
         </div>
       </div>
-    </a>
+    </Link>
   )
 }

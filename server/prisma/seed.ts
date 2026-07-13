@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import { PrismaClient } from '../src/generated/prisma/index.js'
 import { PrismaNeon } from '@prisma/adapter-neon'
+import bcrypt from 'bcryptjs'
 
 const adapter = new PrismaNeon({
   connectionString: process.env.DATABASE_URL!,
@@ -92,7 +93,39 @@ async function main() {
       update: product,
       create: product,
     })
-    console.log(`  ✓ ${product.name}`)
+    console.log(`  ✓ Product: ${product.name}`)
+  }
+
+  const adminEmail = 'admin@roastandritual.com'
+  const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } })
+  if (!existingAdmin) {
+    await prisma.user.create({
+      data: {
+        email: adminEmail,
+        passwordHash: await bcrypt.hash('admin123', 12),
+        name: 'Admin',
+        role: 'ADMIN',
+      },
+    })
+    console.log('  ✓ Admin user created (admin@roastandritual.com / admin123)')
+  } else {
+    console.log('  - Admin user already exists')
+  }
+
+  const coupons = [
+    { code: 'RITUAL10', type: 'PERCENTAGE' as const, value: 10, description: '10% off your first order' },
+    { code: 'FREESHIP', type: 'FLAT' as const, value: 5.99, description: 'Free shipping', minOrder: 30 },
+    { code: 'WELCOME5', type: 'FLAT' as const, value: 5, description: '$5 off welcome discount' },
+  ]
+
+  for (const coupon of coupons) {
+    const { description, ...data } = coupon
+    await prisma.coupon.upsert({
+      where: { code: data.code },
+      update: data,
+      create: data,
+    })
+    console.log(`  ✓ Coupon: ${data.code} (${description})`)
   }
 
   console.log('Seeding complete!')

@@ -34,8 +34,8 @@ export default function AdminOrders() {
   }, [orders, search])
 
   useEffect(() => {
-    api.get<AdminOrder[]>('/admin/orders')
-      .then(setOrders)
+    api.get<{ data: AdminOrder[] }>('/admin/orders')
+      .then((res) => setOrders(res.data))
       .catch(console.error)
       .finally(() => setIsLoading(false))
   }, [])

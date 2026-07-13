@@ -4,6 +4,14 @@ import app from './app.js'
 import { initSocket } from './sockets/index.js'
 import { startAbandonedCartCron } from './services/abandoned-cart.js'
 
+const REQUIRED_ENV_VARS = ['DATABASE_URL', 'JWT_SECRET', 'JWT_REFRESH_SECRET']
+for (const key of REQUIRED_ENV_VARS) {
+  if (!process.env[key]) {
+    console.error(`Missing required environment variable: ${key}`)
+    process.exit(1)
+  }
+}
+
 const server = http.createServer(app)
 const PORT = process.env.PORT || 4000
 

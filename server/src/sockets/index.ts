@@ -22,7 +22,11 @@ export function emitStockUpdate(productId: string, newStock: number) {
     const message = JSON.stringify({ type: 'stockUpdate', productId, newStock })
     wss.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
-        client.send(message)
+        try {
+          client.send(message)
+        } catch (e) {
+          console.error('Socket send error:', e)
+        }
       }
     })
   }

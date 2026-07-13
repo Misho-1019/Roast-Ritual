@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
 import { useCartStore } from '../../stores/cartStore'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import { api } from '../../lib/api'
 
 interface Product {
   id: string
@@ -30,8 +31,7 @@ export default function FeaturedProducts() {
   const [bouncingId, setBouncingId] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/api/products?isFeatured=true')
-      .then(res => res.json())
+    api.get<{ data: Product[] }>('/products?isFeatured=true')
       .then(data => setProducts(data.data || []))
       .catch(console.error)
   }, [])
@@ -57,15 +57,15 @@ export default function FeaturedProducts() {
             <span className="text-primary font-small uppercase tracking-widest block mb-2">Artisanal Curation</span>
             <h2 className="font-display text-h1">Our Curated Collection</h2>
           </div>
-          <a className="text-primary hover:underline font-bold flex items-center gap-2" href="/shop">
+          <Link className="text-primary hover:underline font-bold flex items-center gap-2" to="/shop">
             Explore All <span className="material-symbols-outlined">arrow_forward</span>
-          </a>
+          </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
           {products.map((product, i) => (
-            <a
+            <Link
               key={product.id}
-              href={`/product/${product.slug}`}
+              to={`/product/${product.slug}`}
               className="gallery-card bg-espresso border border-outline-variant p-5 rounded-lg group stagger-enter-active"
               style={{ transitionDelay: `${i * 80}ms` }}
             >
@@ -91,7 +91,7 @@ export default function FeaturedProducts() {
                   <span className="material-symbols-outlined">add_shopping_cart</span>
                 </button>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

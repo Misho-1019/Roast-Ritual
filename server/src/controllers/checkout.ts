@@ -3,7 +3,15 @@ import { prisma } from '../lib/db.js'
 import { AuthRequest } from '../middleware/auth.js'
 
 import Stripe from 'stripe'
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+let _stripe: Stripe | null = null
+function getStripe(): Stripe {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY
+    if (!key) throw new Error('STRIPE_SECRET_KEY is not set')
+    _stripe = new Stripe(key)
+  }
+  return _stripe
+}
 
 export async function createPaymentIntent(req: AuthRequest, res: Response) {
   try {
@@ -76,7 +84,7 @@ export async function createPaymentIntent(req: AuthRequest, res: Response) {
 
     const amount = Math.max(0, subtotalCents - discountCents)
 
-    const paymentIntent = await stripe.paymentIntents.create({
+    const paymentIntent = await getStripe().paymentIntents.create({
       amount: Math.round(amount),
       currency: 'usd',
       metadata: {

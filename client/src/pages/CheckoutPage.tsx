@@ -7,21 +7,22 @@ import { api } from '../lib/api'
 import CheckoutForm from '../components/checkout/CheckoutForm'
 import OrderSummary from '../components/checkout/OrderSummary'
 
-const stripePromise = loadStripe('pk_test_51RvU96PW9LwsuQfOGrrdp51aO6AgDHgPR4xGsv5jwIqETmC75DAPay4RVY7gAE4Rp1qai9jcylDg49dlDvhWIamv00cn3MWbtu')
+const STRIPE_PK = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_51RvU96PW9LwsuQfOGrrdp51aO6AgDHgPR4xGsv5jwIqETmC75DAPay4RVY7gAE4Rp1qai9jcylDg49dlDvhWIamv00cn3MWbtu'
+const stripePromise = loadStripe(STRIPE_PK)
 
 export default function CheckoutPage() {
   const navigate = useNavigate()
-  const { items, fetchCart } = useCartStore()
+  const { items, fetchCart, coupon } = useCartStore()
   const [clientSecret, setClientSecret] = useState('')
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     fetchCart()
+      .catch(() => {})
   }, [fetchCart])
 
   useEffect(() => {
     if (items.length > 0) {
-      const { coupon } = useCartStore.getState()
       const body = coupon ? { couponId: coupon.id } : {}
       api.post<{ clientSecret: string }>('/checkout/create-payment-intent', body)
         .then((data) => setClientSecret(data.clientSecret))
@@ -30,7 +31,7 @@ export default function CheckoutPage() {
     } else if (!isLoading) {
       navigate('/cart')
     }
-  }, [items.length])
+  }, [items.length, isLoading, navigate, coupon])
 
   if (isLoading || !clientSecret) {
     return (

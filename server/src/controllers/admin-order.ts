@@ -1,5 +1,6 @@
 import { Response } from 'express'
 import { prisma } from '../lib/db.js'
+import { Prisma } from '../generated/prisma/index.js'
 import { AuthRequest } from '../middleware/auth.js'
 import { emitStockUpdate } from '../sockets/index.js'
 
@@ -18,7 +19,7 @@ export async function adminCreateOrder(req: AuthRequest, res: Response) {
       return
     }
 
-    const productIds = items.map((i: any) => i.productId)
+    const productIds = items.map((i: { productId: string }) => i.productId)
     const products = await prisma.product.findMany({
       where: { id: { in: productIds } },
     })
@@ -45,15 +46,15 @@ export async function adminCreateOrder(req: AuthRequest, res: Response) {
 
     const order = await prisma.$transaction(async (tx) => {
       for (const item of items) {
-        const updated = await tx.product.update({
+        const result = await tx.product.updateMany({
           where: { id: item.productId, stock: { gte: item.quantity } },
           data: { stock: { decrement: item.quantity } },
-          select: { id: true, stock: true },
         })
-        if (!updated) {
+        if (result.count === 0) {
           throw new Error(`Insufficient stock for product ${item.productId} during order creation`)
         }
-        emitStockUpdate(item.productId, updated.stock)
+        const updated = await tx.product.findUnique({ where: { id: item.productId }, select: { id: true, stock: true } })
+        if (updated) emitStockUpdate(item.productId, updated.stock)
       }
 
       return tx.order.create({

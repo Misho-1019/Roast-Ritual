@@ -11,7 +11,9 @@
     "dev": "concurrently \"npm run dev -w server\" \"npm run dev -w client\"",
     "build": "npm run build -w server && npm run build -w client",
     "start": "npm run start -w server",
-    "test": "vitest run",
+    "test": "npm run test:server && npm run test:client",
+    "test:client": "npm -w client exec vitest run",
+    "test:server": "npm -w server exec vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {

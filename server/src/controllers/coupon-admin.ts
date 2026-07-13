@@ -1,5 +1,6 @@
 import { Response } from 'express'
 import { prisma } from '../lib/db.js'
+import { Prisma } from '../generated/prisma/index.js'
 import { AuthRequest } from '../middleware/auth.js'
 
 export async function listCoupons(req: AuthRequest, res: Response) {
@@ -27,6 +28,12 @@ export async function createCoupon(req: AuthRequest, res: Response) {
       return
     }
 
+    let parsedExpiresAt: Date | null = null
+    if (expiresAt) {
+      const d = new Date(expiresAt)
+      if (!isNaN(d.getTime())) parsedExpiresAt = d
+    }
+
     const coupon = await prisma.coupon.create({
       data: {
         code: code.toUpperCase(),
@@ -34,7 +41,7 @@ export async function createCoupon(req: AuthRequest, res: Response) {
         value: parseFloat(value),
         minOrder: minOrder ? parseFloat(minOrder) : null,
         maxUses: maxUses ? parseInt(maxUses) : null,
-        expiresAt: expiresAt ? new Date(expiresAt) : null,
+        expiresAt: parsedExpiresAt,
       },
     })
 
@@ -70,6 +77,10 @@ export async function deleteCoupon(req: AuthRequest, res: Response) {
     await prisma.coupon.delete({ where: { id } })
     res.json({ message: 'Coupon deleted' })
   } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+      res.status(404).json({ message: 'Coupon not found' })
+      return
+    }
     console.error('Delete coupon error:', error)
     res.status(500).json({ message: 'Internal server error' })
   }

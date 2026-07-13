@@ -7,19 +7,30 @@ export async function listCustomers(req: AuthRequest, res: Response) {
     const customers = await prisma.user.findMany({
       include: {
         _count: { select: { orders: true } },
-        orders: { orderBy: { createdAt: 'desc' }, take: 1, select: { createdAt: true, total: true } },
       },
       orderBy: { createdAt: 'desc' },
     })
 
-    const result = customers.map((c) => ({
-      id: c.id,
-      name: c.name,
-      email: c.email,
-      orderCount: c._count.orders,
-      totalSpent: c.orders.reduce((sum, o) => sum + Number(o.total), 0),
-      lastOrderDate: c.orders[0]?.createdAt || null,
-    }))
+    const userIds = customers.map((c) => c.id)
+    const orderAggs = await prisma.order.groupBy({
+      by: ['userId'],
+      _sum: { total: true },
+      _max: { createdAt: true },
+      where: { userId: { in: userIds } },
+    })
+    const aggMap = new Map(orderAggs.map((a) => [a.userId, { totalSpent: a._sum.total, lastOrderDate: a._max.createdAt }]))
+
+    const result = customers.map((c) => {
+      const agg = aggMap.get(c.id)
+      return {
+        id: c.id,
+        name: c.name,
+        email: c.email,
+        orderCount: c._count.orders,
+        totalSpent: Number(agg?.totalSpent || 0),
+        lastOrderDate: agg?.lastOrderDate || null,
+      }
+    })
 
     res.json(result)
   } catch (error) {

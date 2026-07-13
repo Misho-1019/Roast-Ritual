@@ -13,7 +13,16 @@ interface Coupon {
   isActive: boolean
 }
 
-const emptyForm = { code: '', type: 'PERCENTAGE', value: '', minOrder: '', maxUses: '', expiresAt: '' }
+interface CouponForm {
+  code: string
+  type: string
+  value: string
+  minOrder: string
+  maxUses: string
+  expiresAt: string
+}
+
+const emptyForm: CouponForm = { code: '', type: 'PERCENTAGE', value: '', minOrder: '', maxUses: '', expiresAt: '' }
 
 export default function AdminSettings() {
   const [coupons, setCoupons] = useState<Coupon[]>([])
@@ -41,14 +50,22 @@ export default function AdminSettings() {
   const handleCreate = async () => {
     setSaving(true)
     try {
-      await api.post('/admin/coupons', form)
+      const payload = {
+        code: form.code,
+        type: form.type,
+        value: form.value ? parseFloat(form.value) : 0,
+        minOrder: form.minOrder ? parseFloat(form.minOrder) : null,
+        maxUses: form.maxUses ? parseInt(form.maxUses) : null,
+        expiresAt: form.expiresAt || null,
+      }
+      await api.post('/admin/coupons', payload)
       setShowForm(false)
       setForm(emptyForm)
       setNotif('Coupon created!')
       setTimeout(() => setNotif(''), 3000)
       fetchCoupons()
-    } catch (err: any) {
-      setNotif(err.message || 'Failed to create coupon')
+    } catch (err: unknown) {
+      setNotif(err instanceof Error ? err.message : 'Failed to create coupon')
     } finally {
       setSaving(false)
     }

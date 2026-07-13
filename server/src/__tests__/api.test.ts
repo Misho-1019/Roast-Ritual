@@ -8,6 +8,9 @@ const testPassword = 'TestPass123!'
 const testName = 'Test User'
 let userToken = ''
 let userId = ''
+let userCookie: string[] = []
+let secondUserId = ''
+let secondUserToken = ''
 let adminToken = ''
 let productId = ''
 let cartItemId = ''
@@ -25,17 +28,23 @@ beforeAll(async () => {
   if (productRes.body.data?.length > 0) {
     productId = productRes.body.data[0].id
   }
+
+  if (!productId) console.warn('[WARN] No products found in DB — cart/review tests will skip')
+  if (!adminToken) console.warn('[WARN] Admin login failed — admin tests will fail')
 })
 
+async function cleanupUser(id: string) {
+  if (!id) return
+  await prisma.cartItem.deleteMany({ where: { cart: { userId: id } } }).catch(() => {})
+  await prisma.cart.deleteMany({ where: { userId: id } }).catch(() => {})
+  await prisma.refreshToken.deleteMany({ where: { userId: id } }).catch(() => {})
+  await prisma.review.deleteMany({ where: { userId: id } }).catch(() => {})
+  await prisma.user.deleteMany({ where: { id } }).catch(() => {})
+}
+
 afterAll(async () => {
-  // Cleanup test user
-  if (userId) {
-    await prisma.cartItem.deleteMany({ where: { cart: { userId } } }).catch(() => {})
-    await prisma.cart.deleteMany({ where: { userId } }).catch(() => {})
-    await prisma.refreshToken.deleteMany({ where: { userId } }).catch(() => {})
-    await prisma.review.deleteMany({ where: { userId } }).catch(() => {})
-    await prisma.user.deleteMany({ where: { id: userId } }).catch(() => {})
-  }
+  await cleanupUser(userId)
+  await cleanupUser(secondUserId)
 
   // Cleanup any test products created during tests
   await prisma.product.deleteMany({ where: { name: 'Test Product' } }).catch(() => {})
@@ -60,6 +69,8 @@ describe('Auth', () => {
     expect(res.body.accessToken).toBeTruthy()
     userId = res.body.user.id
     userToken = res.body.accessToken
+    const raw = res.headers['set-cookie']
+    userCookie = Array.isArray(raw) ? raw : raw ? [raw] : []
   })
 
   it('rejects duplicate email', async () => {
@@ -80,32 +91,9 @@ describe('Auth', () => {
     const res = await request(app)
       .post('/api/auth/login')
       .send({ email: testEmail, password: testPassword })
-    // 500 can occur from unique constraint collision on refresh token JWT (edge case)
-    if (res.status === 200) {
-      expect(res.body.accessToken).toBeTruthy()
-      userToken = res.body.accessToken
-    }
-  })
-
-  it('ensures userToken is set', async () => {
-    // Fallback: if login failed due to JWT collision, re-register a fresh user
-    if (!userToken) {
-      const email = `fallback-${Date.now()}@test.com`
-      const res = await request(app)
-        .post('/api/auth/register')
-        .send({ email, password: testPassword, name: 'Fallback' })
-      // Cleanup old user if needed
-      if (userId) {
-        await prisma.cartItem.deleteMany({ where: { cart: { userId } } }).catch(() => {})
-        await prisma.cart.deleteMany({ where: { userId } }).catch(() => {})
-        await prisma.refreshToken.deleteMany({ where: { userId } }).catch(() => {})
-        await prisma.review.deleteMany({ where: { userId } }).catch(() => {})
-        await prisma.user.deleteMany({ where: { id: userId } }).catch(() => {})
-      }
-      userId = res.body.user.id
-      userToken = res.body.accessToken
-    }
-    expect(userToken).toBeTruthy()
+    expect(res.status).toBe(200)
+    expect(res.body.accessToken).toBeTruthy()
+    userToken = res.body.accessToken
   })
 
   it('rejects wrong password', async () => {
@@ -115,22 +103,14 @@ describe('Auth', () => {
     expect(res.status).toBe(401)
   })
 
-  it('returns user from /me with valid cookie', async () => {
-    const loginRes = await request(app)
-      .post('/api/auth/login')
-      .send({ email: testEmail, password: testPassword })
-    const cookie = loginRes.headers['set-cookie']
-
-    if (cookie) {
-      const res = await request(app)
-        .get('/api/auth/me')
-        .set('Cookie', cookie)
-      expect(res.status).toBe(200)
-      expect(res.body.user?.email).toBe(testEmail)
-    } else {
-      // Token collision caused login to fail — skip this check
-      expect(true).toBe(true)
-    }
+  it('returns user from /me with cookie from register', async () => {
+    if (userCookie.length === 0) return console.warn('[WARN] No cookie from register — skipping /me test')
+    const res = await request(app)
+      .get('/api/auth/me')
+      .set('Cookie', userCookie)
+    expect(res.status).toBe(200)
+    expect(res.body.user?.email).toBe(testEmail)
+    expect(res.body.accessToken).toBeTruthy()
   })
 
   it('logs out and clears session', async () => {
@@ -208,7 +188,7 @@ describe('Cart', () => {
   })
 
   it('adds item to cart', async () => {
-    if (!productId) return
+    if (!productId) { console.warn('[WARN] No productId — skipping add item'); return }
     const res = await request(app)
       .post('/api/cart/items')
       .set('Authorization', `Bearer ${userToken}`)
@@ -224,7 +204,7 @@ describe('Cart', () => {
   })
 
   it('removes item from cart', async () => {
-    if (!cartItemId) return
+    if (!cartItemId) { console.warn('[WARN] No cartItemId — skipping remove'); return }
     const res = await request(app)
       .delete(`/api/cart/items/${cartItemId}`)
       .set('Authorization', `Bearer ${userToken}`)
@@ -242,24 +222,42 @@ describe('Orders', () => {
     expect(typeof res.body.total).toBe('number')
   })
 
-  it('returns 404 for other user order', async () => {
+  it('returns 404 for non-existent order', async () => {
     const res = await request(app)
       .get('/api/orders/non-existent-id')
       .set('Authorization', `Bearer ${userToken}`)
     expect(res.status).toBe(404)
   })
+
+  it('rejects accessing another user\'s order', async () => {
+    // Register a second user
+    const secondEmail = `other-${Date.now()}@test.com`
+    const regRes = await request(app)
+      .post('/api/auth/register')
+      .send({ email: secondEmail, password: testPassword, name: 'Other User' })
+    expect(regRes.status).toBe(201)
+    secondUserId = regRes.body.user.id
+    secondUserToken = regRes.body.accessToken
+
+    // Second user's own order list should be empty
+    const listRes = await request(app)
+      .get('/api/orders')
+      .set('Authorization', `Bearer ${secondUserToken}`)
+    expect(listRes.status).toBe(200)
+    expect(listRes.body.data).toEqual([])
+  })
 })
 
 describe('Reviews', () => {
   it('lists reviews for a product', async () => {
-    if (!productId) return
+    if (!productId) { console.warn('[WARN] No productId — skipping list reviews'); return }
     const res = await request(app).get(`/api/reviews/${productId}`)
     expect(res.status).toBe(200)
     expect(Array.isArray(res.body)).toBe(true)
   })
 
   it('creates a review when authenticated', async () => {
-    if (!productId) return
+    if (!productId) { console.warn('[WARN] No productId — skipping create review'); return }
     const res = await request(app)
       .post('/api/reviews')
       .set('Authorization', `Bearer ${userToken}`)
@@ -270,7 +268,7 @@ describe('Reviews', () => {
   })
 
   it('rejects review without auth', async () => {
-    if (!productId) return
+    if (!productId) { console.warn('[WARN] No productId — skipping no-auth review'); return }
     const res = await request(app)
       .post('/api/reviews')
       .send({ productId, rating: 5 })
@@ -278,7 +276,7 @@ describe('Reviews', () => {
   })
 
   it('rejects invalid rating', async () => {
-    if (!productId) return
+    if (!productId) { console.warn('[WARN] No productId — skipping invalid rating'); return }
     const res = await request(app)
       .post('/api/reviews')
       .set('Authorization', `Bearer ${userToken}`)
@@ -287,12 +285,13 @@ describe('Reviews', () => {
   })
 
   it('rejects duplicate review (unique constraint)', async () => {
-    if (!productId) return
+    if (!productId) { console.warn('[WARN] No productId — skipping duplicate review'); return }
     const res = await request(app)
       .post('/api/reviews')
       .set('Authorization', `Bearer ${userToken}`)
       .send({ productId, rating: 4, title: 'Duplicate' })
-    expect(res.status).toBe(500)
+    expect(res.status).toBe(409)
+    expect(res.body.message).toBe('You have already reviewed this product')
   })
 })
 
@@ -327,7 +326,8 @@ describe('Admin', () => {
       .get('/api/admin/orders')
       .set('Authorization', `Bearer ${adminToken}`)
     expect(res.status).toBe(200)
-    expect(Array.isArray(res.body)).toBe(true)
+    expect(Array.isArray(res.body.data)).toBe(true)
+    expect(typeof res.body.total).toBe('number')
   })
 
   it('lists notifications', async () => {

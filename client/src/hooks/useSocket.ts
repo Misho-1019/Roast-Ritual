@@ -1,13 +1,18 @@
 import { useEffect, useRef, useCallback } from 'react'
 
-const WS_URL = import.meta.env.VITE_WS_URL || `ws://${window.location.hostname}:4000`
+function getWsUrl() {
+  if (typeof window !== 'undefined') {
+    return import.meta.env.VITE_WS_URL || `ws://${window.location.hostname}:4000`
+  }
+  return 'ws://localhost:4000'
+}
 
 export function useSocket() {
   const wsRef = useRef<WebSocket | null>(null)
   const listenersRef = useRef<Map<string, Set<(data: any) => void>>>(new Map())
 
   useEffect(() => {
-    const ws = new WebSocket(WS_URL)
+    const ws = new WebSocket(getWsUrl())
     wsRef.current = ws
 
     ws.onmessage = (event) => {

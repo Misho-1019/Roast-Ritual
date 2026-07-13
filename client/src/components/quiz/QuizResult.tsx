@@ -1,6 +1,8 @@
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../stores/authStore'
 import { useCartStore } from '../../stores/cartStore'
+import { api } from '../../lib/api'
 import type { ProductMatch } from '../../data/quizQuestions'
 
 const flavorIcons: Record<string, string> = {
@@ -34,23 +36,20 @@ export default function QuizResult({ product, onRestart, otherProducts = [] }: Q
   const navigate = useNavigate()
   const { isAuthenticated } = useAuthStore()
   const addItem = useCartStore((s) => s.addItem)
+  const [btnStatus, setBtnStatus] = useState<'idle' | 'added'>('idle')
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!isAuthenticated) {
       navigate(`/login?redirect=/quiz`)
       return
     }
-    addItem(product.slug)
-    const btn = document.getElementById('add-to-ritual-btn')
-    if (btn) {
-      btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Added to Cart'
-      btn.classList.remove('bg-primary-container', 'text-on-primary-container')
-      btn.classList.add('bg-green-800', 'text-white')
-      setTimeout(() => {
-        btn.innerHTML = '<span class="material-symbols-outlined">shopping_cart</span> Add to Ritual'
-        btn.classList.remove('bg-green-800', 'text-white')
-        btn.classList.add('bg-primary-container', 'text-on-primary-container')
-      }, 2000)
+    try {
+      const resolved = await api.get<{ id: string }>(`/products/${product.slug}`)
+      await addItem(resolved.id)
+      setBtnStatus('added')
+      setTimeout(() => setBtnStatus('idle'), 2000)
+    } catch (err) {
+      console.error('Add to cart failed:', err)
     }
   }
 
@@ -109,12 +108,11 @@ export default function QuizResult({ product, onRestart, otherProducts = [] }: Q
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <button
-              id="add-to-ritual-btn"
               onClick={handleAddToCart}
-              className="bg-primary-container text-on-primary-container px-10 py-4 rounded-lg font-bold text-body hover:brightness-110 active:scale-95 transition-all duration-200 flex items-center justify-center gap-3"
+              className={`px-10 py-4 rounded-lg font-bold text-body hover:brightness-110 active:scale-95 transition-all duration-200 flex items-center justify-center gap-3 ${btnStatus === 'added' ? 'bg-green-800 text-white' : 'bg-primary-container text-on-primary-container'}`}
             >
-              <span className="material-symbols-outlined">shopping_cart</span>
-              Add to Ritual
+              <span className="material-symbols-outlined">{btnStatus === 'added' ? 'check_circle' : 'shopping_cart'}</span>
+              {btnStatus === 'added' ? 'Added to Cart' : 'Add to Ritual'}
             </button>
             <button
               onClick={onRestart}
@@ -134,16 +132,16 @@ export default function QuizResult({ product, onRestart, otherProducts = [] }: Q
               <p className="text-xs uppercase tracking-widest text-mocha-text font-medium">Broaden your palate</p>
               <h2 className="text-h2 text-on-surface">You might also enjoy</h2>
             </div>
-            <a href="/shop" className="text-primary font-bold flex items-center gap-2 group">
+            <Link to="/shop" className="text-primary font-bold flex items-center gap-2 group">
               Explore all beans
               <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-            </a>
+            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {otherProducts.slice(0, 3).map((rec) => (
-              <a
+              <Link
                 key={rec.slug}
-                href={`/product/${rec.slug}`}
+                to={`/product/${rec.slug}`}
                 className="bg-espresso border border-outline-variant p-6 rounded-xl hover:border-primary transition-colors group"
               >
                 <div className="aspect-[4/5] bg-surface-container mb-6 overflow-hidden rounded-lg">
@@ -158,7 +156,7 @@ export default function QuizResult({ product, onRestart, otherProducts = [] }: Q
                 <h3 className="font-bold text-on-surface mb-2">{rec.name}</h3>
                 <p className="text-mocha-text font-small text-sm mb-4">{rec.roastLevel} &bull; {rec.origin}</p>
                 <span className="text-primary font-bold">${Number(rec.price).toFixed(2)}</span>
-              </a>
+              </Link>
             ))}
           </div>
         </section>
