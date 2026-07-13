@@ -70,16 +70,24 @@ The system was built to simulate **real production e-commerce requirements** —
 > Screenshots will be added here. Recommended order:
 
 ```
-![Home Page](screenshots/home.png)
-![Shop Page](screenshots/shop.png)
-![Product Detail with Flavor Radar](screenshots/product-detail.png)
-![Coffee Quiz](screenshots/quiz.png)
-![Brew Guide with Timer](screenshots/brew-guide.png)
-![Cart & Checkout](screenshots/checkout.png)
-![Admin Dashboard](screenshots/admin-dashboard.png)
-![Admin Analytics](screenshots/admin-analytics.png)
-![Admin Orders](screenshots/admin-orders.png)
-![Origin Map](screenshots/origin-map.png)
+![Home Page](screenshots/Screenshot%202026-07-13%20181107.png)
+![Home Page](screenshots/Screenshot%202026-07-13%20181217.png)
+![Shop Page](screenshots/Screenshot%202026-07-13%20181304.png)
+![Shop Page](screenshots/Screenshot%202026-07-13%20181317.png)
+![Product Detail with Flavor Radar](screenshots/Screenshot%202026-07-13%20181413.png)
+![Product Detail with Flavor Radar](screenshots/Screenshot%202026-07-13%20181453.png)
+![Coffee Quiz](screenshots/Screenshot%202026-07-13%20181603.png)
+![Brew Guide with Timer](screenshots/Screenshot%202026-07-13%20181655.png)
+![Brew Guide with Timer](screenshots/Screenshot%202026-07-13%20181707.png)
+![Cart & Checkout](screenshots/Screenshot%202026-07-13%20181913.png)
+![Cart & Checkout](screenshots/Screenshot%202026-07-13%20181945.png)
+![Admin Dashboard](screenshots/Screenshot%202026-07-13%20182107.png)
+![Admin Analytics](screenshots/Screenshot%202026-07-13%20182142.png)
+![Admin Orders](screenshots/Screenshot%202026-07-13%20182216.png)
+![Our Story](screenshots/Screenshot%202026-07-13%20182357.png)
+![About Page](screenshots/Screenshot%202026-07-13%20182410.png)
+![The Process](screenshots/Screenshot%202026-07-13%20182417.png)
+![Origin Map](screenshots/Screenshot%202026-07-13%20182428.png)
 ```
 
 ---
