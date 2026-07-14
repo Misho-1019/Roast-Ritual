@@ -6,6 +6,8 @@ const BASE_URL = import.meta.env.VITE_API_URL || (
     : '/api'
 )
 
+// production API server
+
 export class ApiError extends Error {
   statusCode: number
   constructor(statusCode: number, message: string) {
