@@ -15,7 +15,13 @@ import { handleWebhook } from './controllers/stripe-webhook.js'
 const app = express()
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin(origin, callback) {
+    if (!origin || origin.includes('localhost') || origin.includes('vercel.app') || origin.includes('run.app')) {
+      callback(null, true)
+    } else {
+      callback(null, process.env.CLIENT_URL || 'http://localhost:5173')
+    }
+  },
   credentials: true,
 }))
 app.use(helmet())
