@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { api } from '../../lib/api'
 import EditStockModal from '../../components/admin/EditStockModal'
 
 interface Product {
@@ -28,8 +29,7 @@ export default function AdminProducts() {
   }, [products, search])
 
   useEffect(() => {
-    fetch('/api/products?pageSize=50')
-      .then((res) => res.json())
+    api.get<{ data: Product[] }>('/products?pageSize=50')
       .then((data) => setProducts(data.data || []))
       .catch(console.error)
       .finally(() => setIsLoading(false))

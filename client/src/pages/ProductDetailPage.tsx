@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { api } from '../lib/api'
 import ProductImages from '../components/product/ProductImages'
 import ProductInfo from '../components/product/ProductInfo'
 import FlavorRadar from '../components/product/FlavorRadar'
@@ -31,8 +32,7 @@ export default function ProductDetailPage() {
     const fetchProduct = async () => {
       setIsLoading(true)
       try {
-        const res = await fetch(`/api/products/${slug}`, { credentials: 'include' })
-        const data = await res.json()
+        const data = await api.get<any>(`/products/${slug}`)
 
         const mock = mockReviewsBySlug[slug] || []
         const realTotalRating = (data.avgRating || 0) * (data.reviewCount || 0)

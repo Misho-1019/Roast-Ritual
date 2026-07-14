@@ -37,7 +37,7 @@ export default function AdminCreateOrder() {
 
   useEffect(() => {
     api.get<Customer[]>('/admin/customers').then(setCustomers).catch(console.error)
-    fetch('/api/products?pageSize=50').then((r) => r.json()).then((d) => setProducts(d.data || [])).catch(console.error)
+    api.get<{ data: any[] }>('/products?pageSize=50').then((d) => setProducts(d.data || [])).catch(console.error)
   }, [])
 
   const addProduct = () => {

@@ -1,4 +1,4 @@
-const CLOUD_RUN_URL = 'https://roast-ritual-186322592106.us-central1.run.app'
+const CLOUD_RUN_URL = 'https://roast-ritual-186322592106.us-central1.run.app/api'
 
 const BASE_URL = import.meta.env.VITE_API_URL || (
   typeof window !== 'undefined' && window.location.hostname !== 'localhost'

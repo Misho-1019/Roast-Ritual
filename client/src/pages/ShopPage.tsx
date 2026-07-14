@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { api } from '../lib/api'
 import SearchFilters from '../components/shop/SearchFilters'
 import ProductGrid from '../components/shop/ProductGrid'
 
@@ -30,8 +31,7 @@ export default function ShopPage() {
         if (roastLevel) params.set('roastLevel', roastLevel.toUpperCase())
         if (sortBy) params.set('sortBy', sortBy)
 
-        const res = await fetch(`/api/products?${params}`, { credentials: 'include' })
-        const data = await res.json()
+        const data = await api.get<{ data: Product[] }>(`/products?${params}`)
         setProducts(data.data || [])
       } catch (err) {
         console.error('Failed to fetch products:', err)

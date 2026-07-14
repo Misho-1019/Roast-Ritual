@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { api } from '../../lib/api'
 
 interface ProductItem {
   id: string
@@ -16,8 +17,7 @@ export default function ProductsTable() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/products?pageSize=10')
-      .then((res) => res.json())
+    api.get<{ data: ProductItem[] }>('/products?pageSize=10')
       .then((data) => setProducts(data.data || []))
       .catch(console.error)
       .finally(() => setIsLoading(false))
