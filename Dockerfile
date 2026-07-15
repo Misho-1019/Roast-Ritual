@@ -14,7 +14,7 @@ RUN npm run build -w server
 RUN cp -r server/src/generated server/dist/
 
 # Pre-download the Xenova embedding model so cold starts are instant
-RUN node -e "const {pipeline}=require('@xenova/transformers');pipeline('feature-extraction','Xenova/all-MiniLM-L6-v2')" 2>&1
+RUN node -e "const m=async()=>{const{pipeline}=require('@xenova/transformers');await pipeline('feature-extraction','Xenova/all-MiniLM-L6-v2')};m()"
 
 EXPOSE 4000
 CMD ["node", "server/dist/index.js"]

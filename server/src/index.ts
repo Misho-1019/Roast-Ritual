@@ -12,6 +12,10 @@ for (const key of REQUIRED_ENV_VARS) {
   }
 }
 
+if (!process.env.ANTHROPIC_API_KEY) {
+  console.warn('[rag] ANTHROPIC_API_KEY not set — coffee Q&A will not work')
+}
+
 const server = http.createServer(app)
 const PORT = process.env.PORT || 4000
 
