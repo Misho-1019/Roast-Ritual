@@ -13,6 +13,7 @@ import QuizPage from './pages/QuizPage'
 import BrewGuidesPage from './pages/BrewGuidesPage'
 import BrewMethodPage from './pages/BrewMethodPage'
 import OriginMapPage from './pages/OriginMapPage'
+import CoffeeAskPage from './pages/CoffeeAskPage'
 import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
 import OrderHistoryPage from './pages/OrderHistoryPage'
@@ -60,6 +61,7 @@ function App() {
           <Route path="/brew-guides" element={<BrewGuidesPage />} />
           <Route path="/brew-guides/:id" element={<BrewMethodPage />} />
           <Route path="/origins" element={<OriginMapPage />} />
+          <Route path="/coffee-ask" element={<CoffeeAskPage />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/product/:slug" element={<ProductDetailPage />} />
           <Route path="/cart" element={<CartPage />} />

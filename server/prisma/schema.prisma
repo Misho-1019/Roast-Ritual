@@ -160,6 +160,15 @@ model CartItem {
   @@index([productId])
 }
 
+model CoffeeKnowledge {
+  id        String   @id @default(uuid())
+  content   String
+  category  String
+  createdAt DateTime @default(now())
+
+  @@index([category])
+}
+
 model Coupon {
   id        String     @id @default(uuid())
   code      String     @unique

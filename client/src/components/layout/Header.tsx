@@ -7,6 +7,7 @@ const navLinks = [
   { label: 'Shop', to: '/shop' },
   { label: 'Quiz', to: '/quiz' },
   { label: 'Brew Guides', to: '/brew-guides' },
+  { label: 'Ask AI', to: '/coffee-ask' },
   { label: 'About', to: '/about' },
 ]
 

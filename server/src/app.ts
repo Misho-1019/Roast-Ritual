@@ -10,6 +10,7 @@ import checkoutRoutes from './routes/checkout.js'
 import orderRoutes from './routes/order.js'
 import adminRoutes from './routes/admin.js'
 import reviewRoutes from './routes/review.js'
+import ragRoutes from './routes/rag.js'
 import { handleWebhook } from './controllers/stripe-webhook.js'
 
 const app = express()
@@ -43,6 +44,7 @@ app.use('/api/checkout', checkoutRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/reviews', reviewRoutes)
+app.use('/api/rag', ragRoutes)
 
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error('Unhandled error:', err)
