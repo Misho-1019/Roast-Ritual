@@ -43,7 +43,7 @@ export async function answerQuestion(question: string) {
 
   if (chunks.length === 0) {
     const res = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 500,
       messages: [{ role: 'user', content: question }],
     })
@@ -54,7 +54,7 @@ export async function answerQuestion(question: string) {
   const context = chunks.map((c) => `[${c.category}] ${c.content}`).join('\n\n')
 
   const res = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 700,
     system: `You are a coffee expert assistant for Roast & Ritual. Answer the user's question based ONLY on the provided knowledge context. If the context doesn't contain enough information, say so. Be concise and helpful.`,
     messages: [
