@@ -2,7 +2,11 @@ import { useEffect, useRef, useCallback } from 'react'
 
 function getWsUrl() {
   if (typeof window !== 'undefined') {
-    return import.meta.env.VITE_WS_URL || `ws://${window.location.hostname}:4000`
+    return import.meta.env.VITE_WS_URL || (
+      window.location.hostname !== 'localhost'
+        ? 'wss://roast-ritual-186322592106.us-central1.run.app'
+        : `ws://${window.location.hostname}:4000`
+    )
   }
   return 'ws://localhost:4000'
 }
