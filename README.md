@@ -47,6 +47,17 @@ The system was built to simulate **real production e-commerce requirements** —
 - **Coupon Manager** — create, activate/deactivate, and delete promotional codes
 - **Admin Order Creation** — manually place orders for any customer with atomic stock decrement
 
+### AI Coffee Assistant
+- **Coffee Q&A** — ask questions about origins, brewing methods, roasts, and pairings at `/coffee-ask`
+- **RAG architecture** — semantic search finds relevant knowledge, Claude API generates grounded answers
+- **Local embeddings** — free Xenova transformer model (runs on-server, no external API needed for search)
+- **pgvector search** — vector similarity search in PostgreSQL for accurate content retrieval
+
+### CRM Integration
+- **HubSpot sync** — new user registrations automatically create HubSpot contacts
+- **Deal tracking** — successful Stripe payments create HubSpot deals (order ID, amount, status)
+- **Fire-and-forget** — CRM failures don't block user registration or checkout
+
 ### Authentication & Security
 - **JWT with refresh rotation** — 15-minute access tokens + 7-day httpOnly refresh cookies
 - **Role-based access** — CUSTOMER / ADMIN with middleware-enforced authorization
@@ -61,7 +72,8 @@ The system was built to simulate **real production e-commerce requirements** —
 
 ## 🌐 Live Demo
 
-*Coming soon — deploy instructions below to run locally.*
+- **Client:** [https://roast-ritual-client.vercel.app](https://roast-ritual-client.vercel.app)
+- **API Server:** [https://roast-ritual-186322592106.us-central1.run.app](https://roast-ritual-186322592106.us-central1.run.app)
 
 ---
 
@@ -137,13 +149,16 @@ The application follows a classic client–server architecture with a monorepo w
 │              Express 5 + TypeScript              │
 │   Routes → Controllers → Services → Prisma      │
 │    JWT Auth Middleware + Admin Role Guard        │
-└───┬───────────────────────┬────────────────────┘
-    │                       │
-┌───▼───────────┐   ┌──────▼─────────────┐
-│   Neon        │   │   WebSocket (ws)    │
-│   PostgreSQL  │   │   Real-time stock   │
-│   (Prisma)    │   │   updates           │
-└───────────────┘   └────────────────────┘
+├────────────────┬───────────────┬────────────────┤
+│                │               │                │
+┌──▼──────────┐ ┌▼────────┐ ┌───▼──────┐  ┌─────▼─────┐
+│  Neon +    │ │ Claude  │ │ Xenova   │  │ WebSocket │
+│  pgvector  │ │ API     │ │ (local)  │  │ (stock)   │
+│  (DB + RAG)│ │(answers)│ │(embeddings│ │           │
+└─────┬──────┘ └─────────┘ └────┬──────┘  └───────────┘
+      │                         │
+      └─────── HubSpot ─────────┘
+              CRM (contacts + deals)
 ```
 
 ### Key Layers
@@ -195,6 +210,8 @@ The application follows a classic client–server architecture with a monorepo w
 | Recharts 3 | Interactive charts (radar, line, bar, pie) |
 | Leaflet + react-leaflet | Interactive origin map |
 | Stripe JS | Payment element integration |
+| Anthropic Claude | AI answer generation (coffee Q&A) |
+| HubSpot API | CRM integration (contacts, deals) |
 | oxlint | Linting |
 
 ### Backend
@@ -212,6 +229,9 @@ The application follows a classic client–server architecture with a monorepo w
 | ws | WebSocket server for real-time updates |
 | node-cron | Scheduled background jobs |
 | nodemailer | Email sending (abandoned cart recovery) |
+| @xenova/transformers | Local embedding model for RAG semantic search |
+| @anthropic-ai/sdk | Claude API client for AI-powered answers |
+| pgvector | Vector similarity search in PostgreSQL |
 
 ### Testing
 
@@ -346,6 +366,8 @@ Open `http://localhost:5173` — the app is fully functional.
 | `SMTP_USER` | No | — | SMTP username |
 | `SMTP_PASS` | No | — | SMTP password |
 | `EMAIL_FROM` | No | — | From address for emails |
+| `ANTHROPIC_API_KEY` | No | — | Claude API key for AI coffee Q&A |
+| `HUBSPOT_API_KEY` | No | — | HubSpot API key for CRM sync |
 
 ### Client (`client/.env`)
 
@@ -353,6 +375,7 @@ Open `http://localhost:5173` — the app is fully functional.
 |----------|:--------:|---------|-------------|
 | `VITE_STRIPE_PUBLISHABLE_KEY` | Yes | — | Stripe publishable key (test mode) |
 | `VITE_WS_URL` | No | `ws://hostname:4000` | WebSocket server URL |
+| `VITE_API_URL` | No | auto-detected | API server URL (auto-detects Cloud Run in production) |
 
 ---
 
