@@ -89,6 +89,7 @@ export default function CoffeeAskPage() {
                   )}
                 </div>
               </div>
+            ))}
             <div ref={messagesEndRef} />
             {isLoading && (
               <div className="flex justify-start">
