@@ -18,10 +18,10 @@ export default function CoffeeAskPage() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const bottomRef = useRef<HTMLDivElement>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [messages])
 
   const handleAsk = async (question?: string) => {
@@ -44,7 +44,7 @@ export default function CoffeeAskPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="max-w-3xl mx-auto w-full px-6 py-12 flex-1 flex flex-col">
+      <div className="max-w-3xl mx-auto w-full px-6 pt-20 pb-32 flex-1 flex flex-col">
         <div className="text-center mb-8">
           <h1 className="text-h1 text-primary font-display mb-2">Ask About Coffee</h1>
           <p className="text-mocha-text">Questions about brewing, origins, roasts, or pairings?</p>
@@ -89,7 +89,7 @@ export default function CoffeeAskPage() {
                   )}
                 </div>
               </div>
-            ))}
+            <div ref={messagesEndRef} />
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-espresso border border-outline-variant/30 rounded-2xl px-5 py-4">
@@ -97,7 +97,6 @@ export default function CoffeeAskPage() {
                 </div>
               </div>
             )}
-            <div ref={bottomRef} />
           </div>
         )}
 
