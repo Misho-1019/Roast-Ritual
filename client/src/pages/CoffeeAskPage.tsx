@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { api } from '../lib/api'
 
 interface Message {
@@ -18,11 +18,6 @@ export default function CoffeeAskPage() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }, [messages])
 
   const handleAsk = async (question?: string) => {
     const q = (question || input).trim()
@@ -90,7 +85,6 @@ export default function CoffeeAskPage() {
                 </div>
               </div>
             ))}
-            <div ref={messagesEndRef} />
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-espresso border border-outline-variant/30 rounded-2xl px-5 py-4">
