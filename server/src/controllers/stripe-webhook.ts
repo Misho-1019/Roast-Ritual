@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express'
 import { prisma } from '../lib/db.js'
+import { syncDeal } from '../services/hubspot.js'
 
 import Stripe from 'stripe'
 let _stripe: Stripe | null = null
@@ -69,7 +70,7 @@ export async function handleWebhook(req: Request, res: Response) {
         const discountAmount = discountCents ? Number(discountCents) / 100 : 0
         const total = Math.max(0, subtotal - discountAmount)
 
-        await tx.order.create({
+        const order = await tx.order.create({
           data: {
             userId,
             status: 'PAID',
@@ -87,6 +88,8 @@ export async function handleWebhook(req: Request, res: Response) {
             },
           },
         })
+
+        syncDeal({ id: order.id, total: Number(order.total), userId: order.userId, status: order.status }).catch(() => {})
 
         if (couponId) {
           await tx.coupon.update({

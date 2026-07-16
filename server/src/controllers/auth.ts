@@ -1,6 +1,7 @@
 import { Response, CookieOptions } from 'express'
 import { prisma } from '../lib/db.js'
 import { hashPassword, comparePassword, generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../services/auth.js'
+import { syncContact } from '../services/hubspot.js'
 import { AuthRequest } from '../middleware/auth.js'
 
 const REFRESH_COOKIE = 'refresh_token'
@@ -54,6 +55,7 @@ export async function register(req: AuthRequest, res: Response) {
 
     setRefreshCookie(res, refreshToken)
     res.status(201).json({ user: sanitizeUser(user), accessToken })
+    syncContact(user).catch(() => {})
   } catch (error) {
     console.error('Register error:', error)
     res.status(500).json({ message: 'Internal server error' })
